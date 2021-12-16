@@ -8,6 +8,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 */
 html {
     font-size: 1rem;
+    font-family: arial;
 }
 
 .z_index{
@@ -26,4 +27,11 @@ html {
 .b_color{
     background-color: rgb(12, 213, 172);
     color:black;
+}
+
+/*no sirve la clase consejo*/
+.consejo{
+    padding-top: 10px;
+    border-width: 3px;
+    border-bottom-color: black;
 }
