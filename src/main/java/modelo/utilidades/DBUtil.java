@@ -23,6 +23,7 @@ public class DBUtil {
         // en localhost; es decir, en esta máquina
         String url = "jdbc:oracle:thin:@192.168.1.52:1521:xe";
         
+        
         // Este método conecta la aplicación con la base de datos y retorna el objeto conexion
         conexion = DriverManager.getConnection(url, nombreUsuario, password);
         System.out.println("Conexión establecida satisfactoriamente");
