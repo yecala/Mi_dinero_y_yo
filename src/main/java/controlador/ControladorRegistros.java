@@ -45,6 +45,7 @@ public class ControladorRegistros extends HttpServlet {
              
          }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

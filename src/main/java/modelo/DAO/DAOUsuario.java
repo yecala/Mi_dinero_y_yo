@@ -7,6 +7,8 @@ package modelo.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.POJO.Registro;
 import modelo.utilidades.DBUtil;
 
@@ -15,28 +17,32 @@ import modelo.utilidades.DBUtil;
  * @author Usuario
  */
 public class DAOUsuario {
-    private Connection conexion;
 
-    public DAOUsuario(Connection conexion) throws SQLException, ClassNotFoundException {
-        conexion =  DBUtil.getConexion();
-    }
+ 
 
     public DAOUsuario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
      public void guardarUsuario(Registro usuario) throws SQLException {
-        String sql = "INSERT INTO USUARIOS "
-                + "(NOMBRE_COMPLETO, CORREO, PASSWORD, PRESUPUESTO_TOTAL)"
-                + "VALUES(?,?,?,?)";
-
-        PreparedStatement ps = conexion.prepareStatement(sql);
-        ps.setString(1, usuario.getNombre());
-        ps.setString(2, usuario.getCorreo());
-        ps.setString(3, usuario.getContraseña());
-        ps.setLong(4, usuario.getPresupuesto());
-        
-        ps.executeUpdate();
+        try {
+            String sql = "INSERT INTO US_DINERO.USUARIO"
+                    + "(NOMBRE_COMPLETO, CORREO, PASSWORD, PRESUPUESTO_TOTAL)"
+                    + "VALUES(?,?,?,?)";
+            Connection conexion =  DBUtil.getConexion();
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, usuario.getNombre());
+            ps.setString(2, usuario.getCorreo());
+            ps.setString(3, usuario.getContraseña());
+            ps.setLong(4, usuario.getPresupuesto());
+            
+            int respuesta=ps.executeUpdate();
+            System.out.println("inserto "+respuesta); //1 inserto 0 no inserto
+            
+            ps.close();
+            conexion.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
     
 }

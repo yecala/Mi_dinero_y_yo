@@ -21,7 +21,7 @@ public class DBUtil {
         
         // Este es el string de conexion para conectarse con el Oracle express que esta almacenado
         // en localhost; es decir, en esta máquina
-        String url = "jdbc:oracle:thin:@192.168.1.52:1521:xe";
+        String url = "jdbc:oracle:thin:@localhost:1521:xe";
         
         
         // Este método conecta la aplicación con la base de datos y retorna el objeto conexion
