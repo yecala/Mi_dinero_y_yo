@@ -25,7 +25,7 @@ public class DAOUsuario {
     
      public void guardarUsuario(Registro usuario) throws SQLException {
         try {
-            String sql = "INSERT INTO US_DINERO.USUARIO"
+            String sql = "INSERT INTO US_DINERO.USUARIOS"
                     + "(NOMBRE_COMPLETO, CORREO, PASSWORD, PRESUPUESTO_TOTAL)"
                     + "VALUES(?,?,?,?)";
             Connection conexion =  DBUtil.getConexion();
