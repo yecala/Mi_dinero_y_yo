@@ -47,9 +47,11 @@ public class UsuarioDAO {
         return lista;
     }
 
-    public Usuario ListarId(String id) {
-        String sql = "select * from usuarios where id=" + id;
-        Usuario u = new Usuario();
+    
+    public Usuario ListarId(String id){
+        String sql="select * from usuarios where id_usuario="+id;
+        Usuario u=new Usuario();
+
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
@@ -70,12 +72,15 @@ public class UsuarioDAO {
         int r = 0;
         String sql = "update usuarios set nombre_completo=?, correo=?,password=?, presupuesto_total=? where id_usuario=?";
         try {
+
             con = c.conectar();
             ps = con.prepareStatement(sql);
+
             ps.setString(1, u.getNombre_completo());
             ps.setString(2, u.getCorreo());
             ps.setString(3, u.getPassword());
             ps.setLong(4, u.getPresupuesto_total());
+
             ps.setInt(3, u.getId_usuario());
 
             r = ps.executeUpdate();
@@ -85,7 +90,9 @@ public class UsuarioDAO {
                 r = 0;
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            e.toString();
+
         }
         return r;
 
@@ -107,12 +114,15 @@ public class UsuarioDAO {
         try{
             con=c.conectar();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, p.getId_usuario());
+            
             ps.setString(2, p.getNombre_completo());
             ps.setString(3, p.getCorreo());
             ps.setString(4, p.getPassword());
             ps.setLong(5, p.getPresupuesto_total());
             r= ps.executeUpdate();
+
+            ps.setInt(5, p.getId_usuario());
+
             
             if(r==1){
                 r=1;
@@ -120,7 +130,10 @@ public class UsuarioDAO {
             }else{
                 r=0;
             }
+
         }catch (Exception e){
+
+            
         }
         return r;
         }
