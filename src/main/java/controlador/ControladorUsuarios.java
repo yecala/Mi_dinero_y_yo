@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.DAO.UsuarioDAO;
 import modelo.POJO.Usuario;
 
@@ -78,10 +79,36 @@ public class ControladorUsuarios extends HttpServlet {
         String accion = request.getParameter("accion");
         switch (accion) {
             case "Listar":
-                
+               
                 List<Usuario>datos=dao.listar();
                 request.setAttribute("datos", datos);
                 request.getRequestDispatcher("adminUsuarios.jsp").forward(request, response);
+                break;
+                
+            case "Editar":
+                String ide=request.getParameter("id");
+                Usuario u = dao.ListarId(ide);
+                request.setAttribute("usuario", u);
+                request.getRequestDispatcher("edit.jsp").forward(request, response);
+                break;
+                
+            case "Actualizar":
+                String id1=request.getParameter("txtid");
+                String nom1=request.getParameter("txtnom");
+                String correo1=request.getParameter("txtcorreo");
+                String password1=request.getParameter("txtcontrasena");
+                String presupuesto1=request.getParameter("txtpresupuesto");
+                
+                int idint= Integer.parseInt(id1);
+                long presupuestlolong= Long.parseLong(presupuesto1);
+                
+                us.setId_usuario(idint);
+                us.setNombre_completo(nom1);
+                us.setCorreo(correo1);
+                us.setPassword(password1);
+                us.setPresupuesto_total(presupuestlolong);
+                dao.actualizar(us);
+                request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
                 break;
             default:
                 throw new AssertionError();
