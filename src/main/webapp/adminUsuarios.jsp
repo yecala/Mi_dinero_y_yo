@@ -113,6 +113,7 @@
                         <input type="hidden" name="id" value="${dato.getId_usuario()}">
                         <input type="submit" name="accion" value="Editar">
                         <input type="submit" name="accion" value="Delete">
+                        <input type="submit" name="accion" value="Nuevo">
                     </form>
                 </td>
                 </tr>
