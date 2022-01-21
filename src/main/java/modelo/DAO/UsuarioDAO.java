@@ -100,4 +100,29 @@ public class UsuarioDAO {
         } catch (Exception e) {
         }
     }
-}
+    
+    public int agregar(Usuario p){
+        int r=0;
+        String sql="insert into usuarios (id_usuario,nombre_completo,correo,password,presupuesto_total) values(?,?,?,?,?)";
+        try{
+            con=c.conectar();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, p.getId_usuario());
+            ps.setString(2, p.getNombre_completo());
+            ps.setString(3, p.getCorreo());
+            ps.setString(4, p.getPassword());
+            ps.setLong(5, p.getPresupuesto_total());
+            r= ps.executeUpdate();
+            
+            if(r==1){
+                r=1;
+             
+            }else{
+                r=0;
+            }
+        }catch (Exception e){
+        }
+        return r;
+        }
+    }
+
