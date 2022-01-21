@@ -4,8 +4,13 @@
     Author     : Usuario
 --%>
 
-<%-- <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>--%>
+<%@page import="java.util.List"%>
+<%@page import="modelo.POJO.Usuario"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%--<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>--%>
+
+
 <!DOCTYPE html>
 <html> 
     <head><!--
@@ -80,7 +85,7 @@
         <form action="ControladorUsuarios" method="POST">
             <input type="submit" name="accion" value="Listar">
         </form>
-    <br/>
+        <br/>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -92,26 +97,30 @@
                     <th scope="col">ACCIONES</th>
                 </tr>
             </thead>
-            <tbody>
-                <c:forEach var="dato" items="${datos}" >
+            
+            
+                
+            <c:forEach var="dato" items="${datos}">
                 <tr>
-                    <td>${dato.getId_usuario()}</td>
+                   <td>${dato.getId_usuario()}</td>
                     <td>${dato.getNombre_completo()}</td>
                     <td>${dato.getCorreo()}</td>
                     <td>${dato.getPassword()}</td>
                     <td>${dato.getPresupuesto_total()}</td>
-                    <td>
-                        <form>
-                            <input type="submit" value="Editar">
-                            <input type="submit" value="Delete">
-                        </form>
-                    </td>
+                    
+                <td>
+                    <form action="ControladorUsuarios" method="POST">
+                        <input type="hidden" name="id" value="${dato.getId_usuario()}">
+                        <input type="submit" name="accion" value="Editar">
+                        <input type="submit" name="accion" value="Delete">
+                    </form>
+                </td>
                 </tr>
-               </c:forEach>
-            </tbody>
-        </table>
+            </c:forEach>
+            
+      
 
-        
+
     </center>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
