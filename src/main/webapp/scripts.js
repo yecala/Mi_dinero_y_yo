@@ -7,20 +7,39 @@
 // Scripts
 // 
 
-window.addEventListener('DOMContentLoaded', event => {
+function Mostrar() {
+            document.getElementById("caja").style.display = "block";
+        }
+        function Ocultar() {
+            document.getElementById("caja").style.display = "none";
+        }
 
-    // Toggle the side navigation
-    const sidebarToggle = document.body.querySelector('#sidebarToggle');
-    if (sidebarToggle) {
-        // Uncomment Below to persist sidebar toggle between refreshes
-        // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
-        //     document.body.classList.toggle('sb-sidenav-toggled');
-        // }
-        sidebarToggle.addEventListener('click', event => {
-            event.preventDefault();
-            document.body.classList.toggle('sb-sidenav-toggled');
-            localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
-        });
-    }
+        function Mostrar_Ocultar() {
+            var caja = document.getElementById("caja");
 
-});
+            if (caja.style.display === "none") {
+                Mostrar();
+            } else {
+                Ocultar();
+            }
+        }
+
+        function Mostrar2() {
+            document.getElementById("caja2").style.display = "block";
+        }
+        function Ocultar2() {
+            document.getElementById("caja2").style.display = "none";
+        }
+        function Mostrar_Ocultar2() {
+            var caja2 = document.getElementById("caja2");
+
+            if (caja2.style.display === "none") {
+                Mostrar2();
+            } else {
+                Ocultar2();
+            }
+        }
+
+        function cerrarSesion() {
+            document.location.href = "index.html";
+        }
