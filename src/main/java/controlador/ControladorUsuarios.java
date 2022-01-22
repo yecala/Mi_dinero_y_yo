@@ -110,13 +110,13 @@ public class ControladorUsuarios extends HttpServlet {
                 dao.actualizar(us);
                 request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
                 break;
-            case "delete":
+            case "Delete":
                 String id2 = request.getParameter("id");
                 dao.delete(id2);
-                request.getRequestDispatcher("controlador?accion=Listar").forward(request, response);
+                request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
                 break;
 
-            case "nuevo":
+            case "Nuevo":
                 request.getRequestDispatcher("agregar.jsp").forward(request, response);
                 break;
                 
@@ -139,7 +139,7 @@ public class ControladorUsuarios extends HttpServlet {
                 us.setPresupuesto_total(presupuesto3);
                 
                 dao.agregar(us);
-                request.getRequestDispatcher("controlador?accion=Listar").forward(request, response);
+                request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
                 
                     
                     break;
