@@ -84,6 +84,7 @@
     <center>    
         <form action="ControladorUsuarios" method="POST">
             <input type="submit" name="accion" value="Listar">
+            <input type="submit" name="accion" value="Nuevo">
         </form>
         <br/>
         <table class="table">
@@ -113,7 +114,7 @@
                         <input type="hidden" name="id" value="${dato.getId_usuario()}">
                         <input type="submit" name="accion" value="Editar">
                         <input type="submit" name="accion" value="Delete">
-                        <input type="submit" name="accion" value="Nuevo">
+                        
                     </form>
                 </td>
                 </tr>

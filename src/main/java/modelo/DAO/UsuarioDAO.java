@@ -47,10 +47,9 @@ public class UsuarioDAO {
         return lista;
     }
 
-    
-    public Usuario ListarId(String id){
-        String sql="select * from usuarios where id_usuario="+id;
-        Usuario u=new Usuario();
+    public Usuario ListarId(String id) {
+        String sql = "select * from usuarios where id_usuario=" + id;
+        Usuario u = new Usuario();
 
         try {
             con = c.conectar();
@@ -69,6 +68,7 @@ public class UsuarioDAO {
     }
 
     public int actualizar(Usuario u) {
+
         int r = 0;
         String sql = "update usuarios set nombre_completo=?, correo=?,password=?, presupuesto_total=? where id_usuario=?";
         try {
@@ -81,7 +81,7 @@ public class UsuarioDAO {
             ps.setString(3, u.getPassword());
             ps.setLong(4, u.getPresupuesto_total());
 
-            ps.setInt(3, u.getId_usuario());
+            ps.setInt(5, u.getId_usuario());
 
             r = ps.executeUpdate();
             if (r == 1) {
@@ -99,7 +99,7 @@ public class UsuarioDAO {
     }
 
     public void delete(String id) {
-        String sql = "Eliminar al usuario con el id =" + id;
+        String sql = "delete from usuarios where id_usuario=" + id;
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
@@ -107,35 +107,31 @@ public class UsuarioDAO {
         } catch (Exception e) {
         }
     }
-    
-    public int agregar(Usuario p){
-        int r=0;
-        String sql="insert into usuarios (id_usuario,nombre_completo,correo,password,presupuesto_total) values(?,?,?,?,?)";
-        try{
-            con=c.conectar();
+
+    public int agregar(Usuario p) {
+        int r = 0;
+        String sql = "insert into usuarios (id_usuario,nombre_completo,correo,password,presupuesto_total) values(?,?,?,?,?)";
+        try {
+            con = c.conectar();
             ps = con.prepareStatement(sql);
-            
+
+            ps.setInt(1, p.getId_usuario());
             ps.setString(2, p.getNombre_completo());
             ps.setString(3, p.getCorreo());
             ps.setString(4, p.getPassword());
             ps.setLong(5, p.getPresupuesto_total());
-            r= ps.executeUpdate();
+            r = ps.executeUpdate();
 
-            ps.setInt(5, p.getId_usuario());
+            if (r == 1) {
+                r = 1;
 
-            
-            if(r==1){
-                r=1;
-             
-            }else{
-                r=0;
+            } else {
+                r = 0;
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
-            
         }
         return r;
-        }
     }
-
+}
