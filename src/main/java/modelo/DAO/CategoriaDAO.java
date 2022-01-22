@@ -79,7 +79,7 @@ public class CategoriaDAO {
             ps.setLong(2, cat.getPresupuesto_categoria());
             ps.setLong(3, cat.getGasto_categoria());
 
-            ps.setInt(5, cat.getId_categoria());
+            ps.setInt(4, cat.getId_categoria());
 
             r = ps.executeUpdate();
             if (r == 1) {
