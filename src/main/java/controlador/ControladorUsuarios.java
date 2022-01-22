@@ -110,12 +110,39 @@ public class ControladorUsuarios extends HttpServlet {
                 dao.actualizar(us);
                 request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
                 break;
-            case "delete":
+            case "Delete":
                 String id2 = request.getParameter("id");
                 dao.delete(id2);
-                request.getRequestDispatcher("controlador?accion=Listar").forward(request, response);
+                request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
                 break;
 
+            case "Nuevo":
+                request.getRequestDispatcher("agregar.jsp").forward(request, response);
+                break;
+                
+                
+            case "submit":
+                
+                String id = request.getParameter("txtid");
+                String nombres = request.getParameter("txtnombres");
+                String correo = request.getParameter("txtcorreo");
+                String password = request.getParameter("txtpassword");
+                String presupuesto = request.getParameter("txtpresupuesto");
+                
+                int id3 = Integer.parseInt(id);
+                long presupuesto3 = Long.parseLong(presupuesto);
+                
+                us.setId_usuario(id3);
+                us.setNombre_completo(nombres);
+                us.setCorreo(correo);
+                us.setPassword(password);
+                us.setPresupuesto_total(presupuesto3);
+                
+                dao.agregar(us);
+                request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
+                
+                    
+                    break;
             default:
                 throw new AssertionError();
         }

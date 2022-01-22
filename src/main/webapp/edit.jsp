@@ -3,7 +3,7 @@
     Created on : 21 ene. 2022, 10:15:23
     Author     : Usuario
 --%>
-
+<%@page import="modelo.POJO.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,9 +16,9 @@
         <div>
             <h3></h3>
         </div>
-        <hr><!-- comment -->
+        <hr><!-- comment --> 
         <div>
-            <form action="Controlador" method="POST" >
+            <form action="ControladorUsuarios" method="POST" >
                 ID USUARIO:<br>
                 <input type="text" name="txtid" value="${usuario.getId_usuario()}"><br>
                 Nombre:<br>
