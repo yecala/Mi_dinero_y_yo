@@ -6,10 +6,12 @@ package modelo.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.POJO.Registro;
+import modelo.POJO.Usuario;
 import modelo.utilidades.DBUtil;
 
 /**
@@ -17,7 +19,7 @@ import modelo.utilidades.DBUtil;
  * @author Usuario
  */
 public class DAOUsuario {
-
+    private Connection conexion;
  
 
     public DAOUsuario() {
@@ -43,6 +45,35 @@ public class DAOUsuario {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+     
+      public Usuario obtenerUsuarioPorEmail(String email) throws SQLException {
+        String sql = "SELECT ID_USUARIO,NOMBRE_COMPLETO, CORREO,"
+                + " PASSWORD, PRESUPUESTO_TOTAL, ESTADO"
+                +" WHERE CORREO=?";
+
+        // Se asigna el parámetro email a instrucción de SQL
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ps.setString(1, email);
+
+        // El resultado de la consulta queda en una tabla en memoria conocida
+        // como ResultSet
+        ResultSet rs = ps.executeQuery();
+
+        // El método next hace avanzar el cursor del ResultSet al siguiente registro
+        if (rs.next()) {
+            int id_usuario = rs.getInt("id_usuario");
+            String nombre_completo = rs.getString("nombre_completo");
+            String correo = rs.getString("correo");
+            String password = rs.getString("password");
+            long presupuesto_total = rs.getLong("presupuesto_total");
+            
+            
+            Usuario u = new Usuario(id_usuario, nombre_completo, correo, password, presupuesto_total);
+            return u;
+        }
+
+        return null;
     }
     
 }

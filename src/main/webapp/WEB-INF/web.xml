@@ -12,6 +12,10 @@
         <servlet-name>ControladorCategorias</servlet-name>
         <servlet-class>controlador.ControladorCategorias</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControladorLogin</servlet-name>
+        <servlet-class>controlador.ControladorLogin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControladorRegistros</servlet-name>
         <url-pattern>/ControladorRegistros</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>ControladorCategorias</servlet-name>
         <url-pattern>/ControladorCategorias</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorLogin</servlet-name>
+        <url-pattern>/ControladorLogin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
