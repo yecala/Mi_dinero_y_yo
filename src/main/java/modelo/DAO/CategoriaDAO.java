@@ -10,35 +10,35 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.POJO.Usuario;
+import modelo.POJO.Categoria;
 import modelo.utilidades.Conexion;
 
 /**
  *
  * @author Usuario
  */
-public class UsuarioDAO {
-
+public class CategoriaDAO {
+    
     PreparedStatement ps;
     ResultSet rs;
     Conexion c = new Conexion();
     Connection con;
 
     public List listar() {
-        List<Usuario> lista = new ArrayList<>();
-        String sql = "select * from usuarios";
+        List<Categoria> lista = new ArrayList<>();
+        String sql = "select * from categorias";
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Usuario us = new Usuario();
-                us.setId_usuario(rs.getInt(1));
-                us.setNombre_completo(rs.getString(2));
-                us.setCorreo(rs.getString(3));
-                us.setPassword(rs.getString(4));
-                us.setPresupuesto_total(rs.getLong(5));
-                lista.add(us);
+                Categoria cat = new Categoria();
+                cat.setId_categoria(rs.getInt(1));
+                cat.setNombre_categoria(rs.getString(2));
+                cat.setPresupuesto_categoria(rs.getLong(3));
+                cat.setGasto_categoria(rs.getLong(4));
+                
+                lista.add(cat);
             }
 
         } catch (SQLException e) {
@@ -47,41 +47,39 @@ public class UsuarioDAO {
         return lista;
     }
 
-    public Usuario ListarId(String id) {
-        String sql = "select * from usuarios where id_usuario=" + id;
-        Usuario u = new Usuario();
+    public Categoria ListarId(String id) {
+        String sql = "select * from categorias where id_categoria=" + id;
+        Categoria cat = new Categoria();
 
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                u.setId_usuario(rs.getInt(1));
-                u.setNombre_completo(rs.getString(2));
-                u.setCorreo(rs.getString(3));
-                u.setPassword(rs.getString(4));
-                u.setPresupuesto_total(rs.getLong(5));
+                cat.setId_categoria(rs.getInt(1));
+                cat.setNombre_categoria(rs.getString(2));
+                cat.setPresupuesto_categoria(rs.getLong(3));
+                cat.setGasto_categoria(rs.getLong(4));
             }
         } catch (SQLException e) {
         }
-        return u;
+        return cat;
     }
 
-    public int actualizar(Usuario u) {
+    public int actualizar(Categoria cat) {
 
         int r = 0;
-        String sql = "update usuarios set nombre_completo=?, correo=?,password=?, presupuesto_total=? where id_usuario=?";
+        String sql = "update categorias set nombre_categoria=?, presupuesto_categoria=?, gasto_categoria=? where id_categoria=?";
         try {
 
             con = c.conectar();
             ps = con.prepareStatement(sql);
 
-            ps.setString(1, u.getNombre_completo());
-            ps.setString(2, u.getCorreo());
-            ps.setString(3, u.getPassword());
-            ps.setLong(4, u.getPresupuesto_total());
+            ps.setString(1, cat.getNombre_categoria());
+            ps.setLong(2, cat.getPresupuesto_categoria());
+            ps.setLong(3, cat.getGasto_categoria());
 
-            ps.setInt(5, u.getId_usuario());
+            ps.setInt(4, cat.getId_categoria());
 
             r = ps.executeUpdate();
             if (r == 1) {
@@ -99,7 +97,7 @@ public class UsuarioDAO {
     }
 
     public void delete(String id) {
-        String sql = "delete from usuarios where id_usuario=" + id;
+        String sql = "delete from categorias where id_categoria=" + id;
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
@@ -108,18 +106,18 @@ public class UsuarioDAO {
         }
     }
 
-    public int agregar(Usuario p) {
+    public int agregar(Categoria cat) {
         int r = 0;
-        String sql = "insert into usuarios (id_usuario,nombre_completo,correo,password,presupuesto_total) values(?,?,?,?,?)";
+        String sql = "insert into categorias (id_categoria,nombre_categoria,presupuesto_categoria,gasto_categoria) values(?,?,?,?)";
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
 
-            ps.setInt(1, p.getId_usuario());
-            ps.setString(2, p.getNombre_completo());
-            ps.setString(3, p.getCorreo());
-            ps.setString(4, p.getPassword());
-            ps.setLong(5, p.getPresupuesto_total());
+            ps.setInt(1, cat.getId_categoria());
+            ps.setString(2, cat.getNombre_categoria());
+            ps.setLong(3, cat.getPresupuesto_categoria());
+            ps.setLong(4, cat.getGasto_categoria());
+            
             r = ps.executeUpdate();
 
             if (r == 1) {

@@ -1,10 +1,19 @@
+<%-- 
+    Document   : adminUsuarios
+    Created on : 20 ene. 2022, 21:00:52
+    Author     : Usuario
+--%>
+
+<%@page import="java.util.List"%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
+
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
-<html>
-    <head>
+<html> 
+    <head><!--
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +22,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link href="EstilosBolsillos.css" rel="stylesheet" type="text/css"/>
-        <title>CATEGORIAS</title>
+        <title>Administrar categorias</title>
         <link href="EstilosMenu.css" rel="stylesheet" type="text/css"/>
         <script src="scripts.js" type="text/javascript"></script>
     </head>
@@ -33,20 +42,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active fw-bold fs-4" aria-current="page" href="administrador.html">INICIO</a>
-
+                           
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="adminUsuarios.jsp">USUARIOS</a>
+                            
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="administrarUsuarios.html">USUARIOS</a>
-
+                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">CATEGORIAS</a>
+                           
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="administrarCategorias.html">CATEGORIAS</a>
-
-                        </li>
-
+                        
                     </ul>
 
-
+                    
                 </div>
             </div>
         </nav>
@@ -72,56 +82,46 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         </section>   
         <!--------------------------FIN barra de navegacion--------------------------------------->
         <br/><br/>
-    <center>
+    <center>    
+        <form action="ControladorCategorias" method="POST">
+            <input type="submit" name="accion" value="Listar">
+            <input type="submit" name="accion" value="Nuevo">
+        </form>
+        <br/>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">ID USUARIO</th>
-                    <th scope="col">NOMBRE</th>
-                    <th scope="col">CORREO</th>
-                    <th scope="col">CONTRASENA</th>
-                    <th scope="col">PRESUPUESTO TOTAL</th>
+                    <th scope="col">ID CATEGORIAS</th>
+                    <th scope="col">NOMBRE CATEGORIA</th>
+                    <th scope="col">PRESUPUESTO</th>
+                    <th scope="col">GASTO REAL</th>
                     <th scope="col">ACCIONES</th>
                 </tr>
             </thead>
-            <tbody>
+            
+            
+                
+            <c:forEach var="dato" items="${datos}">
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
+                   <td>${dato.getId_categoria()}</td>
+                    <td>${dato.getNombre_categoria()}</td>
+                    <td>${dato.getPresupuesto_categoria()}</td>
+                    <td>${dato.getGasto_categoria()}</td>
+                    
+                <td>
+                    <form action="ControladorCategorias" method="POST">
+                        <input type="hidden" name="id" value="${dato.getId_categoria()}">
+                        <input type="submit" name="accion" value="Editar">
+                        <input type="submit" name="accion" value="Delete">
+                        
+                    </form>
+                </td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-            </tbody>
-        </table>
+            </c:forEach>
+            
+      
 
-        
+
     </center>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -129,3 +129,4 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
 </body>
 </html>
+

@@ -1,18 +1,12 @@
 <%-- 
-    Document   : adminUsuarios
-    Created on : 20 ene. 2022, 21:00:52
+    Document   : edit
+    Created on : 21 ene. 2022, 10:15:23
     Author     : Usuario
 --%>
-
-<%@page import="java.util.List"%>
-<%@page import="modelo.POJO.Usuario"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="modelo.POJO.Categoria"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-
-
 <!DOCTYPE html>
-<html> 
+<html>
     <head><!--
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -22,7 +16,7 @@
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link href="EstilosBolsillos.css" rel="stylesheet" type="text/css"/>
-        <title>Administrar usuarios</title>
+        <title>Administrar categorias</title>
         <link href="EstilosMenu.css" rel="stylesheet" type="text/css"/>
         <script src="scripts.js" type="text/javascript"></script>
     </head>
@@ -42,21 +36,21 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active fw-bold fs-4" aria-current="page" href="administrador.html">INICIO</a>
-                           
+
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link active fw-bold fs-4" aria-current="page" href="adminUsuarios.jsp">USUARIOS</a>
-                            
+
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">CATEGORIAS</a>
-                           
+
                         </li>
-                        
+
                     </ul>
 
-                    
+
                 </div>
             </div>
         </nav>
@@ -81,54 +75,25 @@
             <h3 id="tituloNoti">Notificaciones</h3>
         </section>   
         <!--------------------------FIN barra de navegacion--------------------------------------->
-        <br/><br/>
-    <center>    
-        <form action="ControladorUsuarios" method="POST">
-            <input type="submit" name="accion" value="Listar">
-            <input type="submit" name="accion" value="Nuevo">
-        </form>
-        <br/>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">ID USUARIO</th>
-                    <th scope="col">NOMBRE</th>
-                    <th scope="col">CORREO</th>
-                    <th scope="col">CONTRASENA</th>
-                    <th scope="col">PRESUPUESTO TOTAL</th>
-                    <th scope="col">ACCIONES</th>
-                </tr>
-            </thead>
-            
-            
-                
-            <c:forEach var="dato" items="${datos}">
-                <tr>
-                   <td>${dato.getId_usuario()}</td>
-                    <td>${dato.getNombre_completo()}</td>
-                    <td>${dato.getCorreo()}</td>
-                    <td>${dato.getPassword()}</td>
-                    <td>${dato.getPresupuesto_total()}</td>
-                    
-                <td>
-                    <form action="ControladorUsuarios" method="POST">
-                        <input type="hidden" name="id" value="${dato.getId_usuario()}">
-                        <input type="submit" name="accion" value="Editar">
-                        <input type="submit" name="accion" value="Delete">
-                        
-                    </form>
-                </td>
-                </tr>
-            </c:forEach>
-            
-      
+    <center>
+        <div>
+            <h3></h3>
+        </div>
+        <hr><!-- comment --> 
+        <div>
+            <form action="ControladorCategorias" method="POST" >
+                ID categoria:<br>
+                <input type="text" name="txtid" value="${Categoria.getId_categoria()}"><br>
+                Nombre:<br>
+                <input type="text" name="txtnom" value="${Categoria.getNombre_categoria()}"><br>
+                presupuesto:<br>
+                <input type="text" name="txtpresupuesto" value="${Categoria.getPresupuesto_categoria()}"><br>
+                gasto:<br>
+                <input type="text" name="txtgasto" value="${Categoria.getGasto_categoria()}"><br>
 
-
+                <input type="submit" name="accion" value="Actualizar">
+            </form>
+        </div>
     </center>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
 </body>
 </html>
-
