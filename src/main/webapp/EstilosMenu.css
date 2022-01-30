@@ -26,10 +26,14 @@ html{
     color:#0CD5AC;
 }
 
-
+#iconos{
+    right:5px;
+    text-align: right;
+}
 .icono{
     width: 5%;
     margin-right: 30px;
+    
 }
 
 .caja{

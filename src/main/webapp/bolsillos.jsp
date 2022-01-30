@@ -1,5 +1,11 @@
-<!doctype html>
+<%-- 
+    Document   : bolsillos
+    Created on : 29 ene. 2022, 21:22:27
+    Author     : Usuario
+--%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <!-- Required meta tags -->
@@ -34,7 +40,7 @@
                             <a class="nav-link active fw-bold fs-4" aria-current="page" href="index.jsp">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="categorias.html">Categorias</a>
+                            <a class="nav-link fw-bold fs-4" href="categorias.jsp">Categorias</a>
 
                         </li>
                         <li class="nav-item">
