@@ -11,19 +11,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
-import modelo.DAO.CategoriaDAO;
-import modelo.POJO.Categoria;
+import modelo.DAO.BolsilloDAO;
+import modelo.POJO.Bolsillo;
 
 /**
  *
  * @author Usuario
  */
-public class ControladorCategorias extends HttpServlet {
+public class ControladorBolsillos extends HttpServlet {
 
-    CategoriaDAO dao = new CategoriaDAO();
-    Categoria cate = new Categoria();
-
+    BolsilloDAO dao = new BolsilloDAO();
+    Bolsillo bol = new Bolsillo();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,10 +39,10 @@ public class ControladorCategorias extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorCategorias</title>");
+            out.println("<title>Servlet ControladorBolsillos</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ControladorCategorias at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ControladorBolsillos at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,6 +60,7 @@ public class ControladorCategorias extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
@@ -79,70 +78,12 @@ public class ControladorCategorias extends HttpServlet {
         switch (accion) {
             case "Listar":
 
-                List<Categoria> datos = dao.listar();
+                List<Bolsillo> datos = dao.listar();
                 request.setAttribute("datos", datos);
-                request.getRequestDispatcher("adminCategorias.jsp").forward(request, response);
+                request.getRequestDispatcher("adminUsuarios.jsp").forward(request, response);
                 break;
-
-            case "Editar":
-                String ide = request.getParameter("id");
-                Categoria cat = dao.ListarId(ide);
-                request.setAttribute("Categoria", cat);
-                request.getRequestDispatcher("editCategoria.jsp").forward(request, response);
-                break;
-
-            case "Actualizar":
-                String id1 = request.getParameter("txtid");
-                String nom1 = request.getParameter("txtnom");
-
-                int idint = Integer.parseInt(id1);
-
-                cate.setId_categoria(idint);
-                cate.setNombre_categoria(nom1);
-
-                dao.actualizar(cate);
-                request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
-                break;
-            case "Delete":
-                String id2 = request.getParameter("id");
-                int num_bolsillos = dao.num_bolsillos(id2);
-                if (num_bolsillos > 0) {
-
-                    JOptionPane.showMessageDialog(null, "No se puede borrar debido a bolsillos asociados");
-                    System.out.println("No se puede borrar debido a bolsillos asociados");
-
-                } else {
-                    dao.delete(id2);
-                }
-
-                request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
-                break;
-
-            case "Nuevo":
-                request.getRequestDispatcher("agregarCategorias.jsp").forward(request, response);
-                break;
-
-            case "submit":
-
-                String id = request.getParameter("txtid");
-                String nombres = request.getParameter("txtnombres");
-
-                int id3 = Integer.parseInt(id);
-
-                cate.setId_categoria(id3);
-                cate.setNombre_categoria(nombres);
-
-                dao.agregar(cate);
-                request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
-
-                break;
-            default:
-                throw new AssertionError();
         }
-
     }
-
-   
 
     /**
      * Returns a short description of the servlet.

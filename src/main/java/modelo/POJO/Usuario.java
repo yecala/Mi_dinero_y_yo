@@ -15,17 +15,31 @@ public class Usuario {
         String correo;
         String password;
         long presupuesto_total;
+        int estado;
+        int bit_admin;
 
     public Usuario() {
     }
 
-    public Usuario(int id_usuario, String nombre_completo, String correo, String password, long presupuesto_total) {
+    public Usuario(int id_usuario, String nombre_completo, String correo, String password, long presupuesto_total, int estado, int bit_admin) {
         this.id_usuario = id_usuario;
         this.nombre_completo = nombre_completo;
         this.correo = correo;
         this.password = password;
         this.presupuesto_total = presupuesto_total;
+        this.estado = estado;
+        this.bit_admin = bit_admin;
     }
+
+    public int getBit_admin() {
+        return bit_admin;
+    }
+
+    public void setBit_admin(int bit_admin) {
+        this.bit_admin = bit_admin;
+    }
+
+  
 
     public int getId_usuario() {
         return id_usuario;
@@ -66,6 +80,14 @@ public class Usuario {
     public void setPresupuesto_total(long presupuesto_total) {
         this.presupuesto_total = presupuesto_total;
     }
-        
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+   
     
 }

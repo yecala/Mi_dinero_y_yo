@@ -1,9 +1,16 @@
+<%-- 
+    Document   : error
+    Created on : 29 ene. 2022, 15:24:17
+    Author     : Usuario
+--%>
+
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Proyecto Hotel</title>
+        <title>Mi dinero y yo</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="misEstilos.css" rel="stylesheet" type="text/css"/>
         <style>
@@ -20,7 +27,7 @@
             <%@include  file="loginLogout.jsp" %>
         </header>
         <div class="row">
-            <%@include file="navegacion.jsp" %> 
+            
             <main class="col-6 col-s-10">       
                 <h1 style="text-align: center">Uppps ocurrió una excepción en la aplicación</h1>
                 <h1 style="text-align: center">Estamos trabajando en la solución</h1>

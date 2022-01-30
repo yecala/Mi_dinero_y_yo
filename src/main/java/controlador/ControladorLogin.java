@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.DAO.DAOUsuario;
+import modelo.DAO.UsuarioDAO;
 import modelo.POJO.Usuario;
 
 /**
@@ -95,24 +96,13 @@ public class ControladorLogin extends HttpServlet {
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
 
-        if ((email.equalsIgnoreCase("admin") && pass.equals("123"))) {
-            //Crea una session para el administrador de la aplicación
-            HttpSession session = request.getSession();
-            // La session del administrador nunca expirará
-            session.setMaxInactiveInterval(0);
-
-            // Se coloca el tipo de usuario para que las páginas de la vista
-            // sepan que está logueao el administrador
-            session.setAttribute("nombreUsuario", "admin");
-            session.setAttribute("tipoUsuario", "admin");
-
-            // Invoca la página index
-            response.sendRedirect("index.jsp");
-        } else {
+        
             try {
                 // Busca si existe un usuario en la tabla Usuario con el email entrado 
                 // en la página login.jsp
-                DAOUsuario daoUsuario = new DAOUsuario();
+                //DAOUsuario daoUsuario = new DAOUsuario();
+                UsuarioDAO daoUsuario = new UsuarioDAO();
+                
                 Usuario usuario = daoUsuario.obtenerUsuarioPorEmail(email);
 
                 if ((usuario != null) && usuario.getPassword().equals(pass)) {
@@ -122,10 +112,10 @@ public class ControladorLogin extends HttpServlet {
 
                     // Almacena en las variables de sesión el nombre y el tipo de usuario
                     session.setAttribute("nombreUsuario", usuario.getNombre_completo());
-                    session.setAttribute("tipoUsuario", "usuario");
+                    session.setAttribute("tipoUsuario", usuario.getBit_admin()==1?"administrador" : "usuario");
 
                     // invoca la página index.jsp
-                    response.sendRedirect("index.html");
+                    response.sendRedirect("index.jsp");
                 } else {
                     // Trató de loguearse un usuario que no está regisrado
                     request.setAttribute("usuarioInvalido", "usuarioInvalido");
@@ -151,8 +141,8 @@ public class ControladorLogin extends HttpServlet {
                 RequestDispatcher vista = request.getRequestDispatcher("/error.jsp");
                 vista.forward(request, response);
                 //processRequest(request, response);
+            
             }
-        }
     }
 
     /**
