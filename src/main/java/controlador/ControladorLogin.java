@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import modelo.DAO.DAOUsuario;
+import modelo.DAO.RegistroDAO;
 import modelo.DAO.UsuarioDAO;
 import modelo.POJO.Usuario;
 
@@ -99,7 +99,7 @@ public class ControladorLogin extends HttpServlet {
         try {
             // Busca si existe un usuario en la tabla Usuario con el email entrado 
             // en la página login.jsp
-            //DAOUsuario daoUsuario = new DAOUsuario();
+            //DAOUsuario daoUsuario = new RegistroDAO();
             UsuarioDAO daoUsuario = new UsuarioDAO();
 
             Usuario usuario = daoUsuario.obtenerUsuarioPorEmail(email);
