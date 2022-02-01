@@ -38,6 +38,7 @@ public class UsuarioDAO {
                 us.setCorreo(rs.getString(3));
                 us.setPassword(rs.getString(4));
                 us.setPresupuesto_total(rs.getLong(5));
+                us.setEstado(rs.getInt(6));
                 lista.add(us);
             }
 
@@ -61,6 +62,7 @@ public class UsuarioDAO {
                 u.setCorreo(rs.getString(3));
                 u.setPassword(rs.getString(4));
                 u.setPresupuesto_total(rs.getLong(5));
+                u.setEstado(rs.getInt(6));
             }
         } catch (SQLException e) {
         }
@@ -70,7 +72,7 @@ public class UsuarioDAO {
     public int actualizar(Usuario u) {
 
         int r = 0;
-        String sql = "update usuarios set nombre_completo=?, correo=?,password=?, presupuesto_total=? where id_usuario=?";
+        String sql = "update usuarios set nombre_completo=?, correo=?,password=?, presupuesto_total=?, estado=? where id_usuario=?";
         try {
 
             con = c.conectar();
@@ -80,8 +82,9 @@ public class UsuarioDAO {
             ps.setString(2, u.getCorreo());
             ps.setString(3, u.getPassword());
             ps.setLong(4, u.getPresupuesto_total());
+            ps.setInt(5, u.getEstado());
 
-            ps.setInt(5, u.getId_usuario());
+            ps.setInt(6, u.getId_usuario());
 
             r = ps.executeUpdate();
             if (r == 1) {
@@ -98,19 +101,36 @@ public class UsuarioDAO {
 
     }
 
-    public void delete(String id) {
-        String sql = "delete from usuarios where id_usuario=" + id;
+    public void delete(Usuario u) {
+
+        int r = 0;
+        String sql = "update usuarios set estado=? where id_usuario=?";
         try {
+
             con = c.conectar();
             ps = con.prepareStatement(sql);
-            ps.executeUpdate();
-        } catch (Exception e) {
+
+            ps.setInt(1, 0);
+
+            ps.setInt(2, u.getId_usuario());
+
+            r = ps.executeUpdate();
+            if (r == 1) {
+                r = 1;
+            } else {
+                r = 0;
+            }
+
+        } catch (SQLException e) {
+            e.toString();
+
         }
+
     }
 
     public int agregar(Usuario p) {
         int r = 0;
-        String sql = "insert into usuarios (id_usuario,nombre_completo,correo,password,presupuesto_total) values(?,?,?,?,?)";
+        String sql = "insert into usuarios (id_usuario,nombre_completo,correo,password,presupuesto_total,estado) values(?,?,?,?,?,?)";
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
@@ -120,6 +140,7 @@ public class UsuarioDAO {
             ps.setString(3, p.getCorreo());
             ps.setString(4, p.getPassword());
             ps.setLong(5, p.getPresupuesto_total());
+            ps.setInt(6, p.getEstado());
             r = ps.executeUpdate();
 
             if (r == 1) {
@@ -133,5 +154,31 @@ public class UsuarioDAO {
 
         }
         return r;
+    }
+
+    public Usuario obtenerUsuarioPorEmail(String correo) {
+        String sql =String.format("select * from usuarios WHERE correo='%s'", correo) ;
+        Usuario u = new Usuario();
+
+        try {
+            con = c.conectar();
+            ps = con.prepareStatement(sql);
+
+            //ps.setString(1, correo);
+            
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                u.setId_usuario(rs.getInt(1));
+                u.setNombre_completo(rs.getString(2));
+                u.setCorreo(rs.getString(3));
+                u.setPassword(rs.getString(4));
+                u.setPresupuesto_total(rs.getLong(5));
+                u.setEstado(rs.getInt(6));
+                u.setBit_admin(rs.getInt(7));
+            }
+        } catch (SQLException e) {
+        }
+        return u;
     }
 }

@@ -98,21 +98,26 @@ public class ControladorUsuarios extends HttpServlet {
                 String correo1 = request.getParameter("txtcorreo");
                 String password1 = request.getParameter("txtcontrasena");
                 String presupuesto1 = request.getParameter("txtpresupuesto");
+                String estado1 = request.getParameter("txtestado");
 
                 int idint = Integer.parseInt(id1);
                 long presupuestlolong = Long.parseLong(presupuesto1);
+                int estado2 = Integer.parseInt(estado1);
 
                 us.setId_usuario(idint);
                 us.setNombre_completo(nom1);
                 us.setCorreo(correo1);
                 us.setPassword(password1);
                 us.setPresupuesto_total(presupuestlolong);
+                us.setEstado(estado2);
                 dao.actualizar(us);
                 request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
                 break;
             case "Delete":
                 String id2 = request.getParameter("id");
-                dao.delete(id2);
+                int id3 = Integer.parseInt(id2);
+                us.setId_usuario(id3);
+                dao.delete(us);
                 request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
                 break;
 
@@ -128,21 +133,23 @@ public class ControladorUsuarios extends HttpServlet {
                 String correo = request.getParameter("txtcorreo");
                 String password = request.getParameter("txtpassword");
                 String presupuesto = request.getParameter("txtpresupuesto");
+                String estado = request.getParameter("txtestado");
                 
-                int id3 = Integer.parseInt(id);
+                int id4 = Integer.parseInt(id);
                 long presupuesto3 = Long.parseLong(presupuesto);
+                int estado3 = Integer.parseInt(estado);
                 
-                us.setId_usuario(id3);
+                us.setId_usuario(id4);
                 us.setNombre_completo(nombres);
                 us.setCorreo(correo);
                 us.setPassword(password);
                 us.setPresupuesto_total(presupuesto3);
+                us.setEstado(estado3);
                 
                 dao.agregar(us);
                 request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
                 
-                    
-                    break;
+                break;
             default:
                 throw new AssertionError();
         }

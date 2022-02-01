@@ -35,16 +35,15 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                         <li class="nav-item">
-                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="index.html">Inicio</a>
+                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="index.jsp">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="categorias.html">Categorias</a>
+                            <a class="nav-link fw-bold fs-4" href="categorias.jsp">Categorias</a>
 
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fw-bold fs-4" href="#">Reportes</a>
                         </li>
-
 
                     </ul>
                     <form class="d-flex">
@@ -55,9 +54,9 @@
 
                                 if (tipoUsuario == null) {
                                     // El usuario que está navegando es anónimo
-                                    out.print("<a  href='login.jsp'>login</a>");
+                                    out.print("<a class='btn btn-dark b_color' href='login.jsp' role='button'>Iniciar sesion</a>");
                                     // Se invoca el método get del ControladorLogin con el parámetro registrese
-                                    out.print("      <a  href='registrarse.html'>Regístrese</a>");
+                                    out.print("  <a class='btn btn-dark margin-left b_color' href='registrarse.html' role='button'>Registrar</a>");
 
                                 } else {
                                     // El usuario que está navegando está registrado o es administrador
@@ -65,7 +64,7 @@
                                     out.print("Hola " + nombreUsuario );
                                 }
                             %>    
-                        </span>
+                        </span>  
 
                         <!--<a class="btn btn-dark b_color " href="IniciarSesion.html" role="button">Iniciar sesion</a> -->
                         <!--<a class="btn btn-dark margin-left b_color" href="registrarse.html" role="button">Registrar</a>-->
