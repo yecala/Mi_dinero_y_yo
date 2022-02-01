@@ -41,11 +41,11 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="adminUsuarios.jsp">USUARIOS</a>
+                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="adminUsuarios.jsp">Administrar usuarios</a>
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">CATEGORIAS</a>
+                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorias</a>
 
                         </li>
 
@@ -84,16 +84,11 @@
 
             <form action="ControladorCategorias" method="POST">
                 ID:<br>
-                <input type="text" name="txtid"><br>
+                <input type="text" name="txtid" id="idcat"><br>
                 NOMBRE:<br>
-                <input type="text" name="txtnombres"><br>
-                PRESUPUESTO:<br>
-                <input type="text" name="txtpresupuesto"><br>
-                GASTO REAL:<br>
-                <input type="text" name="txtgasto"><br>
-
-
-                <input type="submit" name="accion" value="submit">
+                <input type="text" name="txtnombres"id="nombre" ><br>
+                
+                <input type="submit" name="accion" value="submit" class="btn btn-outline-success" id="botonEnviar">
 
             </form>
         </div> 

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.DAO.DAOUsuario;
+import modelo.DAO.UsuarioDAO;
 import modelo.POJO.Usuario;
 
 /**
@@ -95,63 +96,61 @@ public class ControladorLogin extends HttpServlet {
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
 
-        if ((email.equalsIgnoreCase("admin") && pass.equals("123"))) {
-            //Crea una session para el administrador de la aplicación
-            HttpSession session = request.getSession();
-            // La session del administrador nunca expirará
-            session.setMaxInactiveInterval(0);
+        try {
+            // Busca si existe un usuario en la tabla Usuario con el email entrado 
+            // en la página login.jsp
+            //DAOUsuario daoUsuario = new DAOUsuario();
+            UsuarioDAO daoUsuario = new UsuarioDAO();
 
-            // Se coloca el tipo de usuario para que las páginas de la vista
-            // sepan que está logueao el administrador
-            session.setAttribute("nombreUsuario", "admin");
-            session.setAttribute("tipoUsuario", "admin");
+            Usuario usuario = daoUsuario.obtenerUsuarioPorEmail(email);
 
-            // Invoca la página index
-            response.sendRedirect("index.jsp");
-        } else {
-            try {
-                // Busca si existe un usuario en la tabla Usuario con el email entrado 
-                // en la página login.jsp
-                DAOUsuario daoUsuario = new DAOUsuario();
-                Usuario usuario = daoUsuario.obtenerUsuarioPorEmail(email);
+            if ((usuario != null) && usuario.getPassword().equals(pass)) {
+                // El usuario ya está registrado
+                // Crea la sesión para el usuario
+                HttpSession session = request.getSession();
 
-                if ((usuario != null) && usuario.getPassword().equals(pass)) {
-                    // El usuario ya está registrado
-                    // Crea la sesión para el usuario
-                    HttpSession session = request.getSession();
+                // Almacena en las variables de sesión el nombre y el tipo de usuario
+                session.setAttribute("nombreUsuario", usuario.getNombre_completo());
+                session.setAttribute("tipoUsuario", usuario.getBit_admin() == 1 ? "administrador" : "usuario");
+                session.setAttribute("idUsuario", usuario.getId_usuario());
+                
+                
+                if (session.getAttribute("tipoUsuario").equals("administrador")) {
 
-                    // Almacena en las variables de sesión el nombre y el tipo de usuario
-                    session.setAttribute("nombreUsuario", usuario.getNombre_completo());
-                    session.setAttribute("tipoUsuario", "usuario");
+                    response.sendRedirect("administrador.html");
 
-                    // invoca la página index.jsp
-                    response.sendRedirect("index.html");
                 } else {
-                    // Trató de loguearse un usuario que no está regisrado
-                    request.setAttribute("usuarioInvalido", "usuarioInvalido");
+                    // invoca la página index.jsp
+                    response.sendRedirect("index.jsp");
 
-                    // Se invoca la página login.jsp
-                    RequestDispatcher vista = request.getRequestDispatcher("/login.jsp");
-                    vista.forward(request, response);
                 }
-            } catch (Exception ex) {
-                // obtiene el mensaje de error del objecto excepcion ex
-                String mensage = ex.getMessage();
 
-                // La traza de la pila se lleva a la variable string trazaPila
-                StringWriter errors = new StringWriter();
-                ex.printStackTrace(new PrintWriter(errors));
-                String trazaPila = errors.toString();
+            } else {
+                // Trató de loguearse un usuario que no está regisrado
+                request.setAttribute("usuarioInvalido", "usuarioInvalido");
 
-                // Se almacena el mensaje de error y la traza de la pila en variables del objeto request
-                request.setAttribute("mensage", mensage);
-                request.setAttribute("trazaPila", trazaPila);
-
-                // Se invoca la página de error
-                RequestDispatcher vista = request.getRequestDispatcher("/error.jsp");
+                // Se invoca la página login.jsp
+                RequestDispatcher vista = request.getRequestDispatcher("/login.jsp");
                 vista.forward(request, response);
-                //processRequest(request, response);
             }
+        } catch (Exception ex) {
+            // obtiene el mensaje de error del objecto excepcion ex
+            String mensage = ex.getMessage();
+
+            // La traza de la pila se lleva a la variable string trazaPila
+            StringWriter errors = new StringWriter();
+            ex.printStackTrace(new PrintWriter(errors));
+            String trazaPila = errors.toString();
+
+            // Se almacena el mensaje de error y la traza de la pila en variables del objeto request
+            request.setAttribute("mensage", mensage);
+            request.setAttribute("trazaPila", trazaPila);
+
+            // Se invoca la página de error
+            RequestDispatcher vista = request.getRequestDispatcher("/error.jsp");
+            vista.forward(request, response);
+            //processRequest(request, response);
+
         }
     }
 

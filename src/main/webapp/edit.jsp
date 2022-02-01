@@ -40,11 +40,11 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="adminUsuarios.jsp">USUARIOS</a>
+                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="adminUsuarios.jsp">Administrar usuarios</a>
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">CATEGORIAS</a>
+                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorias</a>
 
                         </li>
 
@@ -83,16 +83,18 @@
         <div>
             <form action="ControladorUsuarios" method="POST" >
                 ID USUARIO:<br>
-                <input type="text" name="txtid" value="${usuario.getId_usuario()}"><br>
+                <input type="text" name="txtid" value="${usuario.getId_usuario()}" class="form-control col-2" id="idUs" required><br>
                 Nombre:<br>
-                <input type="text" name="txtnom" value="${usuario.getNombre_completo()}"><br>
+                <input type="text" name="txtnom" value="${usuario.getNombre_completo()}" class="form-control col-2" id="nombre" required><br>
                 Correo:<br>
-                <input type="email" name="txtcorreo" value="${usuario.getCorreo()}"><br>
+                <input type="email" name="txtcorreo" value="${usuario.getCorreo()}"  class="form-control col-2"id="correo"  required><br>
                 Contrasena:<br>
-                <input type="password" name="txtcontrasena" value="${usuario.getPassword()}"><br>
+                <input type="password" name="txtcontrasena" value="${usuario.getPassword()}"  class="form-control col-2" id="password" required><br>
                 Presupuesto total:<br>
-                <input type="text" name="txtpresupuesto" value="${usuario.getPresupuesto_total()}"><br><br>
-                <input type="submit" name="accion" value="Actualizar">
+                <input type="text" name="txtpresupuesto" value="${usuario.getPresupuesto_total()}"  class="form-control col-2" id="presupuesto" required><br><br>
+                Estado:<br>
+                <input type="text" name="txtestado" value="${usuario.getEstado()}"  class="form-control col-2" id="estado" required><br><br>
+                <input type="submit" name="accion" value="Actualizar" class="btn btn-outline-warning" id="botonEnviar">
             </form>
         </div>
     </center>

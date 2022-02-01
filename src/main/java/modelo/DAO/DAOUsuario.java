@@ -19,7 +19,7 @@ import modelo.utilidades.DBUtil;
  * @author Usuario
  */
 public class DAOUsuario {
-    private Connection conexion;
+    //private Connection conexion;
  
 
     public DAOUsuario() {
@@ -47,11 +47,12 @@ public class DAOUsuario {
         }
     }
      
-      public Usuario obtenerUsuarioPorEmail(String email) throws SQLException {
+      public Usuario obtenerUsuarioPorEmail(String email) throws SQLException, ClassNotFoundException {
         String sql = "SELECT ID_USUARIO,NOMBRE_COMPLETO, CORREO,"
-                + " PASSWORD, PRESUPUESTO_TOTAL, ESTADO"
-                +" WHERE CORREO=?";
+                + " PASSWORD, PRESUPUESTO_TOTAL, BIT_ADMIN"
+                +" WHERE CORREO=? AND ESTADO=1";
 
+        Connection conexion =  DBUtil.getConexion();
         // Se asigna el parámetro email a instrucción de SQL
         PreparedStatement ps = conexion.prepareStatement(sql);
         ps.setString(1, email);
@@ -67,9 +68,10 @@ public class DAOUsuario {
             String correo = rs.getString("correo");
             String password = rs.getString("password");
             long presupuesto_total = rs.getLong("presupuesto_total");
+            int bit_admin = rs.getInt("bit_admin");
+            int estado=1;
             
-            
-            Usuario u = new Usuario(id_usuario, nombre_completo, correo, password, presupuesto_total);
+            Usuario u = new Usuario(id_usuario, nombre_completo, correo, password, presupuesto_total,estado,bit_admin);
             return u;
         }
 
