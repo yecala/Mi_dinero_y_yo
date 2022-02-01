@@ -1,19 +1,25 @@
+<%-- 
+    Document   : login
+    Created on : 28 ene. 2022, 16:19:57
+    Author     : Usuario
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Mi dinero y yo</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link href="EstilosMenu.css" rel="stylesheet" type="text/css"/>
-        
         <link href="EstilosInicio.css" rel="stylesheet" type="text/css"/> 
     </head>
     <body>
+        <header class="col-12 col-s-12">
+            <%@include  file="loginLogout.jsp" %>
+        </header><!-- comment -->
         <nav class="navbar navbar-expand-lg navbar-light barra_color p-3">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"> 
@@ -49,17 +55,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <div class="col-12 col-s-12">
                 <h3>Iniciar sesion</h3>
             </div>
-            <form id="login_form">
+            <form id="login_form" action="ControladorLogin" method="POST">
                 <div class="field_container">
-                    <input type="email" placeholder="Correo Electronico" required>
+                    <input name="email" id="email" type="email" placeholder="Correo Electronico" required>
                 </div>
 
                 <div class="field_container">
-                    <input type="Password" placeholder="Password" required>
+                    <input  name="pass" id ="pass" type="Password" placeholder="Password" required>
                     
                 </div>
                 <div>
-                    <button id="sign_in_button">
+                    <button type="submit" value="Enviar" name="enviar" id="sign_in_button">
                         <span class="button_text">Ingresar</span>
                     </button>
                 </div>
@@ -70,9 +76,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     </a>
                 </div>
 
-                
+                <%//                        
+                        // Si el nombre de usuario o password es invalido muestra el siguiente mensaje
+                        String usuarioInvalido = (String) request.getAttribute("usuarioInvalido");
+                        if (usuarioInvalido != null) {
+                            out.print("<br/>");
+                            out.print("<center>");
+                            out.print("<span style='color:red'>Email o password incorrectos</span>");
+                            out.print("</center>");
+                        }
+                    %>
             </form>
         </div>
 
+        
     </body>
 </html>

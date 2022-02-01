@@ -1,4 +1,11 @@
-<!doctype html>
+<%-- 
+    Document   : index
+    Created on : 28 ene. 2022, 17:02:34
+    Author     : Usuario
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <!-- Required meta tags -->
@@ -32,25 +39,44 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fw-bold fs-4" href="categorias.html">Categorias</a>
-                            
+
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fw-bold fs-4" href="#">Reportes</a>
                         </li>
 
-                      
+
                     </ul>
                     <form class="d-flex">
-                        <a class="btn btn-dark b_color " href="IniciarSesion.html" role="button">Iniciar sesion</a>
-                        <a class="btn btn-dark margin-left b_color" href="registrarse.html" role="button">Registrar</a>
-                        
+                        <span id="loginLogoutRegistrese">
+                            <%
+                                // Recupera el tipo de usuario de las variables de session
+                                String tipoUsuario = (String) session.getAttribute("tipoUsuario");
+
+                                if (tipoUsuario == null) {
+                                    // El usuario que está navegando es anónimo
+                                    out.print("<a  href='login.jsp'>login</a>");
+                                    // Se invoca el método get del ControladorLogin con el parámetro registrese
+                                    out.print("      <a  href='registrarse.html'>Regístrese</a>");
+
+                                } else {
+                                    // El usuario que está navegando está registrado o es administrador
+                                    String nombreUsuario = (String) session.getAttribute("nombreUsuario");
+                                    out.print("Hola " + nombreUsuario );
+                                }
+                            %>    
+                        </span>
+
+                        <!--<a class="btn btn-dark b_color " href="IniciarSesion.html" role="button">Iniciar sesion</a> -->
+                        <!--<a class="btn btn-dark margin-left b_color" href="registrarse.html" role="button">Registrar</a>-->
+
                     </form>
                 </div>
             </div>
         </nav>
         <img  src="Img_index/pag1.png" class="img-fluid " alt="Responsive image"> 
 
-           
+
 
         <div class="  w-100 float-sm-start text-center fw-bold "><h2 class="consejo"> Consejo</h2></div>
         <div class="  w-100 float-sm-start text-center bg-light pt-5 pb-5">
