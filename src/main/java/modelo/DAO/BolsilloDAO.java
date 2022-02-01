@@ -23,9 +23,10 @@ public class BolsilloDAO {
     Conexion c = new Conexion();
     Connection con;
     
-    public List listar() {
+    
+    public List listar(int id_usuario, int id_categoria) {
         List<Bolsillo> lista = new ArrayList<>();
-        String sql = "select * from bolsillos";
+        String sql = "select * from bolsillos where id_usuario="+id_usuario+" AND id_categoria="+id_categoria;
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);

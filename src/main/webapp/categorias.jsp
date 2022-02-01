@@ -55,8 +55,8 @@
                                 String nombreUsuario = (String) session.getAttribute("nombreUsuario");
                                 out.print(nombreUsuario);
                         %>
-                        <img class="icono " src="Img_menu/usuario-de-perfil.png" alt="icono perfil" onclick="Mostrar_Ocultar()"/>
-                        <img class="icono " src="Img_menu/notificacion.png" alt="icono notificaciones" onclick="Mostrar_Ocultar2()" />
+                        <img id="perfil" class="icono " src="Img_menu/usuario-de-perfil.png" alt="icono perfil" onclick="Mostrar_Ocultar()" />
+                        <img id="notificaciones" class="icono " src="Img_menu/notificacion.png" alt="icono notificaciones" onclick="Mostrar_Ocultar2()" />
                         <%
                             }
 
@@ -77,22 +77,27 @@
             </div>
         </nav>
 
+        <!--<form method="get" action="ControladorLogin?registreseOcrear=logout">-->
+            <section id="caja" class="caja">     
+                <ul>
+                    <li><a  href='ControladorLogin?registreseOcrear=logout'>
+                            <button  id="cerrarSesion" onclick="cerrarSesion()"  >Cerrar sesion</button>
+                        </a>
+                    </li>
+                    <!--<li> <button type="submit" id="cerrarSesion" onclick="cerrarSesion()"  >Cerrar sesion</button></li>-->
 
-        <section id="caja" class="caja">     
-            <ul>
-                <li> <button id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesion</button></li>
-                <li><b>Nombre</b></li>
-                <li>Correo</li>
-                <li>  </li>
-                <li> Cambiar contraseña  <img class="editar" src="Img_menu/editar.png" alt="Editar"/> </li>
+                    <li><b>Nombre</b></li>
+                    <li>Correo</li>
+                    <li>  </li>
+                    <li> Cambiar contraseña  <img class="editar" src="Img_menu/editar.png" alt="Editar"/> </li>
 
-                <li> Presupuesto mensual <img class="editar" src="Img_menu/editar.png" alt="Editar"/></li>
-                <li> </li>
-                <li>Mis categorias</li>
+                    <li> Presupuesto mensual <img class="editar" src="Img_menu/editar.png" alt="Editar"/></li>
+                    <li> </li>
+                    <li>Mis categorias</li>
 
-            </ul>
-        </section>
-
+                </ul>
+            </section>
+        <!--</form>--->
 
         <section id="caja2" class="caja2"> 
             <h3 id="tituloNoti">Notificaciones</h3>
@@ -100,7 +105,18 @@
 
 
 
-        <a href="bolsillos.html">Bolsillos</a>
+        <a href="ControladorCategorias?idCategoria=1" id="hogar">Hogar</a>
+        <a href="ControladorCategorias?idCategoria=2" id="mascotas">Mascotas</a>
+        <a href="bolsillos.jsp" id="Ahorros">Ahorros</a><!-- comment -->
+        <a href="bolsillos.jsp" id="Salud">Salud</a>
+        <a href="bolsillos.jsp" id="Educacion">Educacion</a>
+        <a href="bolsillos.jsp" id="Transporte">Transporte</a>
+        
+        <br><!-- comment -->
+        
+        <br>
+        
+        
 
         <a href="administrador.html">Administrador</a>
 

@@ -18,7 +18,7 @@
     </head>
     <body>
         <header class="col-12 col-s-12">
-            <%@include  file="loginLogout.jsp" %>
+           
         </header><!-- comment -->
         <nav class="navbar navbar-expand-lg navbar-light barra_color p-3">
             <div class="container-fluid">

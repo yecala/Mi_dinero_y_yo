@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.DAO.BolsilloDAO;
 import modelo.POJO.Bolsillo;
 
@@ -22,6 +23,7 @@ public class ControladorBolsillos extends HttpServlet {
 
     BolsilloDAO dao = new BolsilloDAO();
     Bolsillo bol = new Bolsillo();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,7 +41,7 @@ public class ControladorBolsillos extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorBolsillos</title>");            
+            out.println("<title>Servlet ControladorBolsillos</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ControladorBolsillos at " + request.getContextPath() + "</h1>");
@@ -78,10 +80,19 @@ public class ControladorBolsillos extends HttpServlet {
         switch (accion) {
             case "Listar":
 
-                List<Bolsillo> datos = dao.listar();
+                HttpSession session = request.getSession(true);
+                
+                int id_usuario=(int) session.getAttribute("idUsuario");
+                int id_categoria=(int) session.getAttribute("categoria_actual");
+                
+                List<Bolsillo> datos = dao.listar(id_usuario,id_categoria);
+                
                 request.setAttribute("datos", datos);
-                request.getRequestDispatcher("adminUsuarios.jsp").forward(request, response);
+                request.getRequestDispatcher("bolsillos.jsp").forward(request, response);
                 break;
+
+            default:
+                throw new AssertionError();
         }
     }
 

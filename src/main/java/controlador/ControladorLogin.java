@@ -96,53 +96,62 @@ public class ControladorLogin extends HttpServlet {
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
 
-        
-            try {
-                // Busca si existe un usuario en la tabla Usuario con el email entrado 
-                // en la página login.jsp
-                //DAOUsuario daoUsuario = new DAOUsuario();
-                UsuarioDAO daoUsuario = new UsuarioDAO();
+        try {
+            // Busca si existe un usuario en la tabla Usuario con el email entrado 
+            // en la página login.jsp
+            //DAOUsuario daoUsuario = new DAOUsuario();
+            UsuarioDAO daoUsuario = new UsuarioDAO();
+
+            Usuario usuario = daoUsuario.obtenerUsuarioPorEmail(email);
+
+            if ((usuario != null) && usuario.getPassword().equals(pass)) {
+                // El usuario ya está registrado
+                // Crea la sesión para el usuario
+                HttpSession session = request.getSession();
+
+                // Almacena en las variables de sesión el nombre y el tipo de usuario
+                session.setAttribute("nombreUsuario", usuario.getNombre_completo());
+                session.setAttribute("tipoUsuario", usuario.getBit_admin() == 1 ? "administrador" : "usuario");
+                session.setAttribute("idUsuario", usuario.getId_usuario());
                 
-                Usuario usuario = daoUsuario.obtenerUsuarioPorEmail(email);
+                
+                if (session.getAttribute("tipoUsuario").equals("administrador")) {
 
-                if ((usuario != null) && usuario.getPassword().equals(pass)) {
-                    // El usuario ya está registrado
-                    // Crea la sesión para el usuario
-                    HttpSession session = request.getSession();
+                    response.sendRedirect("administrador.html");
 
-                    // Almacena en las variables de sesión el nombre y el tipo de usuario
-                    session.setAttribute("nombreUsuario", usuario.getNombre_completo());
-                    session.setAttribute("tipoUsuario", usuario.getBit_admin()==1?"administrador" : "usuario");
-
+                } else {
                     // invoca la página index.jsp
                     response.sendRedirect("index.jsp");
-                } else {
-                    // Trató de loguearse un usuario que no está regisrado
-                    request.setAttribute("usuarioInvalido", "usuarioInvalido");
 
-                    // Se invoca la página login.jsp
-                    RequestDispatcher vista = request.getRequestDispatcher("/login.jsp");
-                    vista.forward(request, response);
                 }
-            } catch (Exception ex) {
-                // obtiene el mensaje de error del objecto excepcion ex
-                String mensage = ex.getMessage();
 
-                // La traza de la pila se lleva a la variable string trazaPila
-                StringWriter errors = new StringWriter();
-                ex.printStackTrace(new PrintWriter(errors));
-                String trazaPila = errors.toString();
+            } else {
+                // Trató de loguearse un usuario que no está regisrado
+                request.setAttribute("usuarioInvalido", "usuarioInvalido");
 
-                // Se almacena el mensaje de error y la traza de la pila en variables del objeto request
-                request.setAttribute("mensage", mensage);
-                request.setAttribute("trazaPila", trazaPila);
-
-                // Se invoca la página de error
-                RequestDispatcher vista = request.getRequestDispatcher("/error.jsp");
+                // Se invoca la página login.jsp
+                RequestDispatcher vista = request.getRequestDispatcher("/login.jsp");
                 vista.forward(request, response);
-                //processRequest(request, response);
-            
             }
+        } catch (Exception ex) {
+            // obtiene el mensaje de error del objecto excepcion ex
+            String mensage = ex.getMessage();
+
+            // La traza de la pila se lleva a la variable string trazaPila
+            StringWriter errors = new StringWriter();
+            ex.printStackTrace(new PrintWriter(errors));
+            String trazaPila = errors.toString();
+
+            // Se almacena el mensaje de error y la traza de la pila en variables del objeto request
+            request.setAttribute("mensage", mensage);
+            request.setAttribute("trazaPila", trazaPila);
+
+            // Se invoca la página de error
+            RequestDispatcher vista = request.getRequestDispatcher("/error.jsp");
+            vista.forward(request, response);
+            //processRequest(request, response);
+
+        }
     }
 
     /**

@@ -63,8 +63,10 @@
 
 
         <section id="caja" class="caja">     
+            
+            
             <ul>
-                <li> <button id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesion</button></li>
+                <li> <button id="cerrarSesion" onclick="cerrarSesion() "  href='ControladorLogin?registreseOcrear=logout'>Cerrar sesion </button></li>
                 <li><b>Nombre</b></li>
                 <li>Correo</li>
                 <li>  </li>
