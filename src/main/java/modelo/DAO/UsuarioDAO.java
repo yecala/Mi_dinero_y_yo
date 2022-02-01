@@ -159,7 +159,7 @@ public class UsuarioDAO {
     public Usuario obtenerUsuarioPorEmail(String correo) {
         String sql =String.format("select * from usuarios WHERE correo='%s'", correo) ;
         Usuario u = new Usuario();
-
+        //esta es la linea que debes ver
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
