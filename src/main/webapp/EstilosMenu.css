@@ -26,10 +26,17 @@ html{
     color:#0CD5AC;
 }
 
-
+#iconos{
+    /*right:5px;
+    text-align: right;
+    width: 15%;
+    
+    float: right;*/
+}
 .icono{
-    width: 5%;
+    width: 15%;
     margin-right: 30px;
+    float: right;
 }
 
 .caja{

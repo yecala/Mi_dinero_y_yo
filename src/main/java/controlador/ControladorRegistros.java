@@ -10,7 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.DAO.DAOUsuario;
+import modelo.DAO.RegistroDAO;
 import modelo.POJO.Registro;
 
 @WebServlet(name = "ControladorRegistros", urlPatterns = {"/ControladorRegistros"})
@@ -35,12 +35,14 @@ public class ControladorRegistros extends HttpServlet {
         try {
             if (registro.getContraseña().equals(registro.getConfirmarContraseña())) {
              
-                DAOUsuario usuario = new DAOUsuario();
+                RegistroDAO usuario = new RegistroDAO();
              
             try {
                 usuario.guardarUsuario(registro);
+                response.sendRedirect("login.jsp");
             } catch (SQLException ex) {
                 Logger.getLogger(ControladorRegistros.class.getName()).log(Level.SEVERE, null, ex);
+                
             }
              
          }

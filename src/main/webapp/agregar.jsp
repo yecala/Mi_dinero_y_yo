@@ -20,6 +20,7 @@
         <title>Administrar categorias</title>
         <link href="EstilosMenu.css" rel="stylesheet" type="text/css"/>
         <script src="scripts.js" type="text/javascript"></script>
+        <script defer src="ScriptValidacionesUsuarios.js" type="text/javascript"></script>
     </head>
     <body>
         <!--------------------------barra de navegacion--------------------------------------->
@@ -41,11 +42,11 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="adminUsuarios.jsp">USUARIOS</a>
+                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="adminUsuarios.jsp">Administrar usuarios</a>
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">CATEGORIAS</a>
+                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorias</a>
 
                         </li>
 
@@ -84,17 +85,19 @@
 
             <form action="ControladorUsuarios" method="POST">
                 ID:<br>
-                <input type="text" name="txtid"><br>
+                <input type="text" name="txtid"  class="form-control col-2" id="idUs"><br>
                 NOMBRES:<br>
-                <input type="text" name="txtnombres"><br>
+                <input type="text" name="txtnombres"  class="form-control col-2" id="nombre"><br>
                 CORREO:<br>
-                <input type="email" name="txtcorreo"><br>
+                <input type="email" name="txtcorreo"  class="form-control col-2" id="correo"><br>
                 PASSWORD:<br>
-                <input type="password" name="txtpassword"><br>
+                <input type="password" name="txtpassword"  class="form-control col-2" id="password"><br>
                 PRESUPUESTO:<br>
-                <input type="text" name="txtpresupuesto"><br>
+                <input type="text" name="txtpresupuesto"  class="form-control col-2" id="presupuesto"><br>
+                ESTADO:<br>
+                <input type="text" name="txtestado"  class="form-control col-2" id="estado"><br>
 
-                <input type="submit" name="accion" value="submit">
+                <input type="submit" name="accion" value="submit" class="btn btn-outline-success" id="botonEnviar">
 
             </form>
         </div> 

@@ -14,6 +14,7 @@ public class Registro {
     private String contraseña;
     private String ConfirmarContraseña;
     private long presupuesto;
+    
 
     public String getNombre() {
         return nombre;
