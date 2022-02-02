@@ -25,65 +25,11 @@
 
     </head>
 
-    <!--------------------------barra de navegacion--------------------------------------->
-    <nav class="navbar navbar-expand-lg navbar-light barra_color p-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"> 
-                <span class="T_color fs-2 fw-bold ">Mi dinero y yo </span>
-                <img class="img-fluid col-3" src="Img_menu/mano.png" alt=""/>
-            </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active fw-bold fs-4" aria-current="page" href="index.jsp">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fw-bold fs-4" href="categorias.jsp">Categorias</a>
-
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fw-bold fs-4" href="#">Reportes</a>
-                    </li>
-                </ul>
-
-                <!-- Menu desplegable perfil -->
-
-
-                <img class="icono" src="Img_menu/usuario-de-perfil.png" alt="icono perfil" onclick="Mostrar_Ocultar()"/>
-                <img class="icono" src="Img_menu/notificacion.png" alt="icono notificaciones" onclick="Mostrar_Ocultar2()" />
-
-                <!-- Fin Menu desplegable perfil -->
-            </div>
-        </div>
-    </nav>
-
-
-    <section id="caja" class="caja">     
-        <ul>
-            <li> <button id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesion</button></li>
-            <li><b>Nombre</b></li>
-            <li>Correo</li>
-            <li>  </li>
-            <li> Cambiar contraseña  <img class="editar"  src="Img_menu/editar.png" alt="Editar"/> </li>
-
-            <li> Presupuesto mensual <img class="editar" src="Img_menu/editar.png" alt="Editar"/></li>
-            <li> </li>
-            <li>Mis categorias</li>
-
-        </ul>
-    </section>
-
-    <section id="caja2" class="caja2"> 
-        <h3 id="tituloNoti">Notificaciones</h3>
-    </section>   
-    <!--------------------------FIN barra de navegacion--------------------------------------->
-
+    <body>
+        <%@include file="navegacion.jsp" %>
+        
     <!-------------------------- barra de PRESUPUESTO--------------------------------------->
-    <center>
+    <center>.
         <div class="p-1 mt-2 barraPresupuesto h-50" >
             <table >
                 <tr class=" table-active">
@@ -132,9 +78,9 @@
 
     <%
         // Recupera el tipo de usuario de las variables de session
-        String tipoUsuario = (String) session.getAttribute("tipoUsuario");
+        String tipoUsu = (String) session.getAttribute("tipoUsuario");
 
-        if (tipoUsuario == null) {
+        if (tipoUsu == null) {
     %>
     <!--------------------------BOLSILLO--------------------------------------->
     <center>
@@ -250,5 +196,5 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-
+    </body>
 </html>
