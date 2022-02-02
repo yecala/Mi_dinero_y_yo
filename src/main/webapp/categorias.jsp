@@ -105,8 +105,16 @@
 
 
 
-        <a href="ControladorCategorias?idCategoria=1" id="hogar">Hogar</a>
-        <a href="ControladorCategorias?idCategoria=2" id="mascotas">Mascotas</a>
+        <a href="ControladorCategorias?idCategoria=1&nomCate=Hogar" id="hogar">
+            
+            Hogar
+        
+        </a>
+        
+        
+        
+        <a href="ControladorCategorias?idCategoria=2&nomCate=Mascotas" id="mascotas">Mascotas</a>
+        
         <a href="bolsillos.jsp" id="Ahorros">Ahorros</a><!-- comment -->
         <a href="bolsillos.jsp" id="Salud">Salud</a>
         <a href="bolsillos.jsp" id="Educacion">Educacion</a>

@@ -76,7 +76,7 @@ public class ControladorBolsillos extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         int id_usuario = 0;
         int id_categoria = 0;
 
@@ -94,24 +94,34 @@ public class ControladorBolsillos extends HttpServlet {
                 request.setAttribute("datos", datos);
                 request.getRequestDispatcher("bolsillos.jsp").forward(request, response);
                 break;
+                
+            case "Nuevo":
+                request.getRequestDispatcher("agregarBolsillosjsp").forward(request, response);
+                break;
 
             case "submit":
+                
+                String idbolsillos = request.getParameter("id");
 
-                String nombres = request.getParameter("txtnombre");
-                String presu = request.getParameter("txtpresupuesto");
-                String gasto = request.getParameter("txtgasto");
+                while (idbolsillos == null) {
+                    String nombres = request.getParameter("txtnombre");
+                    String presu = request.getParameter("txtpresupuesto");
+                    String gasto = request.getParameter("txtgasto");
 
-                long presupuesto = Long.parseLong(presu);
-                long gastoReal = Long.parseLong(gasto);
+                    long presupuesto = Long.parseLong(presu);
+                    long gastoReal = Long.parseLong(gasto);
 
-                bol.setNombre_bolsillo(nombres);
-                bol.setPresupuesto_bolsillo(presupuesto);
-                bol.setGasto_bolsillo(gastoReal);
-                bol.setId_categoria(id_categoria);
-                bol.setId_usuario(id_usuario);
+                    bol.setNombre_bolsillo(nombres);
+                    bol.setPresupuesto_bolsillo(presupuesto);
+                    bol.setGasto_bolsillo(gastoReal);
+                    bol.setId_categoria(id_categoria);
+                    bol.setId_usuario(id_usuario);
 
-                dao.agregar(bol);
-                request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
+                    dao.agregar(bol);
+                    request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
+                    
+                    idbolsillos = request.getParameter("id");
+                }
 
                 break;
 
