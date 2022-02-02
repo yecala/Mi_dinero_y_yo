@@ -29,8 +29,8 @@ public class RegistroDAO {
        
         try {
             String sql = "INSERT INTO US_DINERO.USUARIOS"
-                    + "(ID_USUARIO=1,NOMBRE_COMPLETO, CORREO, PASSWORD, PRESUPUESTO_TOTAL,ESTADO=1,BIT_ADMIN=0)"
-                    + "VALUES(?,?,?,?)";
+                    + "(ID_USUARIO,NOMBRE_COMPLETO, CORREO, PASSWORD, PRESUPUESTO_TOTAL,ESTADO,BIT_ADMIN)"
+                    + "VALUES(1,?,?,?,?,1,0)";
             Connection conexion =  DBUtil.getConexion();
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, usuario.getNombre());
