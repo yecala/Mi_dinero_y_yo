@@ -63,12 +63,16 @@ public class ControladorCategorias extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
         int id_categorias = Integer.parseInt(request.getParameter("idCategoria"));
+        String nom_cate = request.getParameter("nomCate");
         
         HttpSession session =request.getSession();
         session.setAttribute("categoria_actual", id_categorias);
+        session.setAttribute("nom_categoria", nom_cate);
         
-        response.sendRedirect("bolsillos.jsp");
+        response.sendRedirect("tablaBolsillos.jsp");
     
         
     }
@@ -84,12 +88,7 @@ public class ControladorCategorias extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id_categorias = Integer.parseInt(request.getParameter("idCategoria"));
-        
-        HttpSession session =request.getSession();
-        session.setAttribute("categoria_actual", id_categorias);
-        
-        response.sendRedirect("bolsillos.jsp");
+     
         
         String accion = request.getParameter("accion");
         switch (accion) {
