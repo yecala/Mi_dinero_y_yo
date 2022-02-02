@@ -20,8 +20,8 @@
         <title>Bolsillos</title>
         <script src="jquery-3.6.0.min.js" type="text/javascript"></script>
         <link href="EstilosMenu.css" rel="stylesheet" type="text/css"/>
-        <script src="scripts.js" type="text/javascript"></script>
-        <script src="bolsillos.js" type="text/javascript"></script>
+        <!--<script src="scripts.js" type="text/javascript"></script>-->
+        <script defer src="bolsillos.js" type="text/javascript"></script>
 
     </head>
 
@@ -71,7 +71,7 @@
         </table>
 
         <div class="p-3 mb-3 ">
-            <button type="button" class="btn btn-outline-primary" id="btnAgregar"> Crear bolsillo</button>
+            <button type="button" class="btn btn-outline-primary" id="btnAgregar" onclick="crearBolsillo()" > Crear bolsillo</button>
 
         </div>
     </center>
@@ -86,6 +86,13 @@
         <div class="p-1 mb-1  h-50" >
             <table id="tablaBolsillo" class="table-bordered bg-secondary  bg-opacity-10">
                 <tr class=" table-active">
+                    <td >
+                        <div class="p-4">
+
+                            <input hidden="" name="idBolsillo" class="form-control"  type="text"  disabled="">
+                        </div>
+
+                    </td>
 
                     <td class="col-6" >
                         <div class="p-4 col-xs-4">
@@ -124,26 +131,38 @@
             <center>
                 <div class="p-1 mb-1  h-50" >
                     <table id="tablaBolsillo" class="table-bordered bg-secondary  bg-opacity-10">
-                        <tr class=" table-active">
+                        <tr class=" table-active" id="fila">
 
-                            <td class="col-6" >
+                            <td >
+                                <div class="p-4">
+
+                                    <input hidden="" name="idBolsillo" class="form-control"  type="text" value="${dato.getId_bolsillo()}" disabled="">
+                                </div>
+
+                            </td>
+
+
+                            <td  >
                                 <div class="p-4 col-xs-4">
                                     <label for="ex3">Nombre bolsillo</label>
-                                    <input name="txtnombre" class="form-control" id="ex3" type="text" value="${dato.getNombre_bolsillo()}">
+                                    <input name="txtnombre" class="form-control col-3" id="ex3" type="text" value="${dato.getNombre_bolsillo()}">
                                 </div>
 
                             </td>
                             <td>
                                 <div class=" p-4 col-xs-3">
                                     <label for="ex2">Presupuesto</label>
-                                    <input name="txtpresupuesto" class="form-control" id="ex2" type="text" value="${dato.getPresupuesto_bolsillo()}">
+                                    <input name="txtpresupuesto" class="form-control" id="inputpresu" type="text" value="${dato.getPresupuesto_bolsillo()}">
                                 </div>
                             </td>
                             <td>
                                 <div class="p-4 col-xs-3">
                                     <label for="ex2">Gasto real</label>
-                                    <input name="txtgasto" class="form-control" id="ex2" type="text" value="${dato.getGasto_bolsillo()}">
+                                    <input name="txtgasto" class="form-control" id="inputgasto" type="text" value="${dato.getGasto_bolsillo()}">
                                 </div>
+                            </td>
+                            <td>
+                                <button type='submit' name='accion' class='btn btn-outline-success' id='btnDelete' value='Delete'>Delete</button>
                             </td>
 
                         </tr>
@@ -157,7 +176,7 @@
         }
     %>   
 
-    <!--------------------------BOLSILLO--------------------------------------->
+    <!--------------------------BOLSILLO-------------------------------------
     <center>
         <div class="p-1 mb-1  h-50" >
             <table id="tablaBolsillo" class="table-bordered bg-secondary  bg-opacity-10">
