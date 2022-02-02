@@ -27,8 +27,8 @@
 
     <body>
         <%@include file="navegacion.jsp" %>
-        
-    <!-------------------------- barra de PRESUPUESTO--------------------------------------->
+
+        <!-------------------------- barra de PRESUPUESTO--------------------------------------->
     <center>.
         <div class="p-1 mt-2 barraPresupuesto h-50" >
             <table >
@@ -76,8 +76,7 @@
         </div>
     </center>
 
-    <%
-        // Recupera el tipo de usuario de las variables de session
+    <%        // Recupera el tipo de usuario de las variables de session
         String tipoUsu = (String) session.getAttribute("tipoUsuario");
 
         if (tipoUsu == null) {
@@ -91,20 +90,20 @@
                     <td class="col-6" >
                         <div class="p-4 col-xs-4">
                             <label for="ex3">Nombre bolsillo</label>
-                            <input class="form-control" id="ex3" type="text">
+                            <input class="form-control"  id="ex3" type="text">
                         </div>
 
                     </td>
                     <td>
                         <div class=" p-4 col-xs-3">
                             <label for="ex2">Presupuesto</label>
-                            <input class="form-control" id="ex2" type="text">
+                            <input class="form-control"  id="ex2" type="text">
                         </div>
                     </td>
                     <td>
                         <div class="p-4 col-xs-3">
                             <label for="ex2">Gasto real</label>
-                            <input class="form-control" id="ex2" type="text">
+                            <input class="form-control"  id="ex2" type="text">
                         </div>
                     </td>
 
@@ -119,42 +118,41 @@
     %>
     <form action="ControladorBolsillos" method="POST">
         <button type="submit" name="accion" class="btn btn-outline-success" id="btnListar" value="Listar">Ver mis bolsillos</button><!-- comment -->
-        <button type="submit" name="accion" class="btn btn-outline-success" id="btnGuardar" >Guardar</button>
+        <button type="submit" name="accion" class="btn btn-outline-success" id="btnGuardar" value="submit">submit</button>
+        <br/>
+        <c:forEach var="dato" items="${datos}">
+            <center>
+                <div class="p-1 mb-1  h-50" >
+                    <table id="tablaBolsillo" class="table-bordered bg-secondary  bg-opacity-10">
+                        <tr class=" table-active">
+
+                            <td class="col-6" >
+                                <div class="p-4 col-xs-4">
+                                    <label for="ex3">Nombre bolsillo</label>
+                                    <input name="txtnombre" class="form-control" id="ex3" type="text" value="${dato.getNombre_bolsillo()}">
+                                </div>
+
+                            </td>
+                            <td>
+                                <div class=" p-4 col-xs-3">
+                                    <label for="ex2">Presupuesto</label>
+                                    <input name="txtpresupuesto" class="form-control" id="ex2" type="text" value="${dato.getPresupuesto_bolsillo()}">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="p-4 col-xs-3">
+                                    <label for="ex2">Gasto real</label>
+                                    <input name="txtgasto" class="form-control" id="ex2" type="text" value="${dato.getGasto_bolsillo()}">
+                                </div>
+                            </td>
+
+                        </tr>
+
+                    </table>
+                </div>
+            </center>
+        </c:forEach>
     </form>
-    <br/>
-    <c:forEach var="dato" items="${datos}">
-        <center>
-            <div class="p-1 mb-1  h-50" >
-                <table id="tablaBolsillo" class="table-bordered bg-secondary  bg-opacity-10">
-                    <tr class=" table-active">
-
-                        <td class="col-6" >
-                            <div class="p-4 col-xs-4">
-                                <label for="ex3">Nombre bolsillo</label>
-                                <input class="form-control" id="ex3" type="text" value="${dato.getNombre_bolsillo()}">
-                            </div>
-
-                        </td>
-                        <td>
-                            <div class=" p-4 col-xs-3">
-                                <label for="ex2">Presupuesto</label>
-                                <input class="form-control" id="ex2" type="text" value="${dato.getPresupuesto_bolsillo()}">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="p-4 col-xs-3">
-                                <label for="ex2">Gasto real</label>
-                                <input class="form-control" id="ex2" type="text" value="${dato.getGasto_bolsillo()}">
-                            </div>
-                        </td>
-
-                    </tr>
-
-                </table>
-            </div>
-        </center>
-    </c:forEach>
-
     <%
         }
     %>   
@@ -196,5 +194,5 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-    </body>
+</body>
 </html>
