@@ -86,7 +86,7 @@
                 ID:<br>
                 <input type="text" name="txtid" id="idcat"><br>
                 NOMBRE:<br>
-                <input type="text" name="txtnombres"id="nombre" ><br>
+                <input type="text" name="txtnombres" id="nombre" ><br>
                 
                 <input type="submit" name="accion" value="submit" class="btn btn-outline-success" id="botonEnviar">
 

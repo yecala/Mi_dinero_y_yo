@@ -76,19 +76,43 @@ public class ControladorBolsillos extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        int id_usuario = 0;
+        int id_categoria = 0;
+
         String accion = request.getParameter("accion");
         switch (accion) {
             case "Listar":
 
                 HttpSession session = request.getSession(true);
-                
-                int id_usuario=(int) session.getAttribute("idUsuario");
-                int id_categoria=(int) session.getAttribute("categoria_actual");
-                
-                List<Bolsillo> datos = dao.listar(id_usuario,id_categoria);
-                
+
+                id_usuario = (int) session.getAttribute("idUsuario");
+                id_categoria = (int) session.getAttribute("categoria_actual");
+
+                List<Bolsillo> datos = dao.listar(id_usuario, id_categoria);
+
                 request.setAttribute("datos", datos);
                 request.getRequestDispatcher("bolsillos.jsp").forward(request, response);
+                break;
+
+            case "submit":
+
+                String nombres = request.getParameter("txtnombre");
+                String presu = request.getParameter("txtpresupuesto");
+                String gasto = request.getParameter("txtgasto");
+
+                long presupuesto = Long.parseLong(presu);
+                long gastoReal = Long.parseLong(gasto);
+
+                bol.setNombre_bolsillo(nombres);
+                bol.setPresupuesto_bolsillo(presupuesto);
+                bol.setGasto_bolsillo(gastoReal);
+                bol.setId_categoria(id_categoria);
+                bol.setId_usuario(id_usuario);
+
+                dao.agregar(bol);
+                request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
+
                 break;
 
             default:
