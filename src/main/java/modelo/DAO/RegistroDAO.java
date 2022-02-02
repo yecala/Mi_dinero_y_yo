@@ -18,17 +18,18 @@ import modelo.utilidades.DBUtil;
  *
  * @author Usuario
  */
-public class DAOUsuario {
+public class RegistroDAO {
     //private Connection conexion;
  
 
-    public DAOUsuario() {
+    public RegistroDAO() {
     }
     
      public void guardarUsuario(Registro usuario) throws SQLException {
+       
         try {
             String sql = "INSERT INTO US_DINERO.USUARIOS"
-                    + "(NOMBRE_COMPLETO, CORREO, PASSWORD, PRESUPUESTO_TOTAL)"
+                    + "(ID_USUARIO=1,NOMBRE_COMPLETO, CORREO, PASSWORD, PRESUPUESTO_TOTAL,ESTADO=1,BIT_ADMIN=0)"
                     + "VALUES(?,?,?,?)";
             Connection conexion =  DBUtil.getConexion();
             PreparedStatement ps = conexion.prepareStatement(sql);
