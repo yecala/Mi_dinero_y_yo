@@ -106,7 +106,7 @@
                 
             <c:forEach var="dato" items="${datos}">
                 <tr>
-                   <td>${dato.getId_categoria()}</td>
+                   <td >${dato.getId_categoria()}</td>
                     <td>${dato.getNombre_categoria()}</td>
                     
                     
