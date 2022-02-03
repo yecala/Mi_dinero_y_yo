@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.POJO.Bolsillo;
+import modelo.POJO.Categoria;
 import modelo.utilidades.Conexion;
 
 /**
@@ -148,4 +149,25 @@ public class BolsilloDAO {
         }
 
     }
+
+    public Categoria sumarPresupuesto(int id_usuario, int id_categoria) {
+        String sql = "select id_categoria,sum(presupuesto_bolsillo) from bolsillos where id_usuario=" + id_usuario + " AND id_categoria=" + id_categoria + " group by id_categoria";
+        Categoria cat = new Categoria();
+
+        try {
+            con = c.conectar();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                cat.setId_categoria(rs.getInt(1));
+
+                cat.setPresupuesto_categoria(rs.getLong(3));
+
+            }
+        } catch (SQLException e) {
+        }
+        return cat;
+    }
 }
+

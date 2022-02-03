@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 import modelo.DAO.BolsilloDAO;
 import modelo.POJO.Bolsillo;
+import modelo.POJO.Categoria;
 
 /**
  *
@@ -84,6 +85,11 @@ public class ControladorBolsillos extends HttpServlet {
         id_usuario = (int) session.getAttribute("idUsuario");
         id_categoria = (int) session.getAttribute("categoria_actual");
         
+        Categoria cat = new Categoria();
+        cat = dao.sumarPresupuesto(id_usuario,id_categoria); 
+        request.setAttribute("Categoria", cat);
+
+        request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
         
        
         String accion = request.getParameter("accion");
