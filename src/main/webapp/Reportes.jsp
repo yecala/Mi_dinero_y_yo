@@ -52,6 +52,10 @@
             
             
             <input type="submit" name="accion" value="Ver detalles" class="btn btn-outline-primary">
+            <a href="reportes2.jsp"></a>
+             
+            
+            
         </form>
         <br/>
         <table class="table ">
