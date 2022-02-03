@@ -23,14 +23,15 @@
                     <td class="col-6" >
                         <div class="col-xs-2">
                             <label for="ex1">Presupuesto total</label>
-                            <input class="form-control" id="ex1" type="text" disabled="">
+                            
+                            <input class="form-control" id="ex1" type="text" value="${Usuario.getPresupuesto_total()}" disabled="">
                         </div>
 
                     </td>
                     <td class="col-6" >
                         <div class="p-4 col-xs-4">
                             Presupuesto disponible
-                            <input class="form-control" type="text" disabled="">
+                            <input class="form-control" type="text" value="${Usuario.getPresupuesto_disponible()}" disabled="">
                         </div>
 
                     </td>
@@ -60,9 +61,11 @@
                         <label for="ex1">Presupuesto 
                             <%            out.println(nomCate);
                             %> 
-                            
+
                         </label>
-                        <input class="form-control" id="ex1" type="text" value="${Categoria.getPresupuesto_categoria()}" disabled="">
+                        <form action="ControladorBolsillos" method="POST">   
+                            <input class="form-control" id="ex1" type="text" value="${Categoria.getPresupuesto_categoria()}" disabled="">
+                        </form> 
                     </div>
                 </td>
             </tr>
@@ -83,8 +86,6 @@
                     <div class="p-1 mb-1  h-50" >
                         <table id="tablaBolsillo" class="table-bordered bg-secondary  bg-opacity-10">
                             <tr class=" table-active" id="fila">
-
-
 
                                 <td  >
                                     <div class="p-4 col-xs-4">

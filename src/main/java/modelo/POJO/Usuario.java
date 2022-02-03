@@ -17,6 +17,9 @@ public class Usuario {
         long presupuesto_total;
         int estado;
         int bit_admin;
+        long presupuesto_disponible;
+
+    
 
     public Usuario() {
     }
@@ -29,6 +32,13 @@ public class Usuario {
         this.presupuesto_total = presupuesto_total;
         this.estado = estado;
         this.bit_admin = bit_admin;
+    }
+    public long getPresupuesto_disponible() {
+        return presupuesto_disponible;
+    }
+
+    public void setPresupuesto_disponible(long presupuesto_disponible) {
+        this.presupuesto_disponible = presupuesto_disponible;
     }
 
     public int getBit_admin() {

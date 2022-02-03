@@ -36,16 +36,8 @@
     </head>
     <body>
         <%@include file="navegacion.jsp" %>
-         <nav>
-                <ul>
-                    <li><a  href='ControladorLogin?registreseOcrear=logout'>
-                            <button  id="cerrarSesion" onclick="cerrarSesion()"  >Cerrar sesion</button>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        
-       
+        <br><!-- comment -->
+       <br>
       <center>    
         <h1 style="color: rgb(12, 213, 172)">Reporte de gastos</h1><br>
         <form action="ControladorCategorias" method="POST">
