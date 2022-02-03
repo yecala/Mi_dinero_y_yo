@@ -10,11 +10,11 @@ package modelo.POJO;
  */
 public class Usuario {
     
-        int id_usuario;
-        String nombre_completo;
-        String correo;
-        String password;
-        long presupuesto_total;
+        int id_usuario=0;
+        String nombre_completo="";
+        String correo="";
+        String password="";
+        long presupuesto_total=0;
         int estado;
         int bit_admin;
         long presupuesto_disponible;

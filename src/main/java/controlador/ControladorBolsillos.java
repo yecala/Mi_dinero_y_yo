@@ -75,6 +75,7 @@ public class ControladorBolsillos extends HttpServlet {
         session.setAttribute("categoria_actual", id_categorias);
         session.setAttribute("nom_categoria", nom_cate);*/
         HttpSession session = request.getSession();
+
         int id_usuario = (int) session.getAttribute("idUsuario");
         int id_categoria = (int) session.getAttribute("categoria_actual");
 
@@ -108,40 +109,58 @@ public class ControladorBolsillos extends HttpServlet {
 
         int id_usuario = 0;
         int id_categoria = 0;
+
         HttpSession session = request.getSession();
-        id_usuario = (int) session.getAttribute("idUsuario");
-        id_categoria = (int) session.getAttribute("categoria_actual");
 
         Categoria cat = new Categoria();
-        cat = daoCAT.sumarPresupuesto(id_usuario, id_categoria);
-
         Usuario usu = new Usuario();
-        usu = daoCAT.presupuestoDisponible(id_usuario);
+        if (session.getAttribute("idUsuario") != null) {
 
-        long presupuesto_disponible = usu.getPresupuesto_total() - usu.getPresupuesto_disponible();
+            id_usuario = (int) session.getAttribute("idUsuario");
+            id_categoria = (int) session.getAttribute("categoria_actual");
 
-        usu.setPresupuesto_disponible(presupuesto_disponible);
+            cat = daoCAT.sumarPresupuesto(id_usuario, id_categoria);
 
-        request.setAttribute("Usuario", usu);
-        request.setAttribute("Categoria", cat);
+            usu = daoCAT.presupuestoDisponible(id_usuario);
+
+            long presupuesto_disponible = usu.getPresupuesto_total() - usu.getPresupuesto_disponible();
+
+            usu.setPresupuesto_disponible(presupuesto_disponible);
+
+            request.setAttribute("Usuario", usu);
+            request.setAttribute("Categoria", cat);
+
+        }
 
         //request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
-
         String accion = request.getParameter("accion");
         switch (accion) {
             case "Listar":
 
-                List<Bolsillo> datos = dao.listar(id_usuario, id_categoria);
+                if (session.getAttribute("idUsuario") != null) {
+                    id_usuario = (int) session.getAttribute("idUsuario");
+                    id_categoria = (int) session.getAttribute("categoria_actual");
 
-                request.setAttribute("Usuario", usu);
-                request.setAttribute("Categoria", cat);
-                request.setAttribute("datos", datos);
+                    List<Bolsillo> datos = dao.listar(id_usuario, id_categoria);
 
-                request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
+                    request.setAttribute("Usuario", usu);
+                    request.setAttribute("Categoria", cat);
+                    request.setAttribute("datos", datos);
+                    
+                    request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
+                }else{
+                    
+                    String error = "Debe registrarse para crear y ver bolsillos";
+                    request.setAttribute("error",error);
+                    request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
+                
+                }
+
 
                 break;
 
             case "Nuevo":
+
                 request.setAttribute("Usuario", usu);
                 request.setAttribute("Categoria", cat);
                 request.getRequestDispatcher("agregarBolsillos.jsp").forward(request, response);
