@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 import modelo.DAO.CategoriaDAO;
 import modelo.POJO.Categoria;
+import modelo.POJO.Usuario;
 
 /**
  *
@@ -72,7 +73,27 @@ public class ControladorCategorias extends HttpServlet {
         session.setAttribute("categoria_actual", id_categorias);
         session.setAttribute("nom_categoria", nom_cate);
         
-        response.sendRedirect("tablaBolsillos.jsp");
+        int id_usuario = (int) session.getAttribute("idUsuario");
+        int id_categoria = (int) session.getAttribute("categoria_actual");
+        
+        Categoria cat = new Categoria();
+        cat = dao.sumarPresupuesto(id_usuario,id_categoria); 
+        
+        
+        Usuario usu = new Usuario();
+        usu= dao.presupuestoDisponible(id_usuario);
+        
+        long presupuesto_disponible= usu.getPresupuesto_total()-usu.getPresupuesto_disponible();
+        
+        usu.setPresupuesto_disponible(presupuesto_disponible);
+        
+        request.setAttribute("Usuario", usu);
+        request.setAttribute("Categoria", cat);
+
+        
+        request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
+        
+        //response.sendRedirect("tablaBolsillos.jsp");
     
         
     }
