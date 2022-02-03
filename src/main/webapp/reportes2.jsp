@@ -14,9 +14,25 @@
 
     </head>
     <body>
+        <%@include file="navegacion.jsp" %>
+
+        <%                // Recupera el tipo de usuario de las variables de session
+            String tipoU = (String) session.getAttribute("tipoUsuario");
+
+            if (tipoUsuario == null) {
+
+        %>
+
+        <h3>Para ver los reportes debes iniciar sesion</h3>
+        <%        } else {
+        %> 
+
         <h1>Hello World!</h1>
         <canvas id="myChart"></canvas>
     </body>
-    
-    
+
+        <%
+            }
+        %>
+
 </html>
