@@ -42,8 +42,9 @@
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="#">Reportes</a>
+                            <a class="nav-link fw-bold fs-4" href="Reportes.jsp">Reportes</a>
                         </li>
+                        
 
                     </ul>
                     <form class="d-flex">
