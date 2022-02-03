@@ -101,7 +101,7 @@ public class BolsilloDAO {
     public int actualizar(Bolsillo bol) {
 
         int r = 0;
-        String sql = "update bolsillos set nombre_bolsillo=?, presupuesto_bolsillo=?, gasto_bolsillo=?, id_categoria=?, id_usuario=? where id_bolsillo=?";
+        String sql = "update bolsillos set nombre_bolsillo=?, presupuesto_bolsillo=?, gasto_bolsillo=? where id_bolsillo=?";
         try {
 
             con = c.conectar();
@@ -110,9 +110,7 @@ public class BolsilloDAO {
             ps.setString(1, bol.getNombre_bolsillo());
             ps.setLong(2, bol.getPresupuesto_bolsillo());
             ps.setLong(3, bol.getGasto_bolsillo());
-            ps.setInt(4, bol.getId_categoria());
-            ps.setInt(6, bol.getId_usuario());
-            ps.setInt(7, bol.getId_bolsillo());
+            ps.setInt(4, bol.getId_bolsillo());
 
             r = ps.executeUpdate();
             if (r == 1) {
