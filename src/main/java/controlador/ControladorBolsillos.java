@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 import modelo.DAO.BolsilloDAO;
+import modelo.DAO.CategoriaDAO;
 import modelo.POJO.Bolsillo;
 import modelo.POJO.Categoria;
+import modelo.POJO.Usuario;
 
 /**
  *
@@ -24,6 +26,7 @@ import modelo.POJO.Categoria;
 public class ControladorBolsillos extends HttpServlet {
 
     BolsilloDAO dao = new BolsilloDAO();
+    CategoriaDAO daoCAT = new CategoriaDAO();
     Bolsillo bol = new Bolsillo();
 
     /**
@@ -64,7 +67,31 @@ public class ControladorBolsillos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        /*
+        int id_categorias = Integer.parseInt(request.getParameter("idCategoria"));
+        String nom_cate = request.getParameter("nomCate");
+        
+        HttpSession session =request.getSession();
+        session.setAttribute("categoria_actual", id_categorias);
+        session.setAttribute("nom_categoria", nom_cate);*/
+        HttpSession session = request.getSession();
+        int id_usuario = (int) session.getAttribute("idUsuario");
+        int id_categoria = (int) session.getAttribute("categoria_actual");
+
+        Categoria cat = new Categoria();
+        cat = daoCAT.sumarPresupuesto(id_usuario, id_categoria);
+
+        Usuario usu = new Usuario();
+        usu = daoCAT.presupuestoDisponible(id_usuario);
+
+        long presupuesto_disponible = usu.getPresupuesto_total() - usu.getPresupuesto_disponible();
+
+        usu.setPresupuesto_disponible(presupuesto_disponible);
+
+        request.setAttribute("Usuario", usu);
+        request.setAttribute("Categoria", cat);
+
+        request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
     }
 
     /**
@@ -84,25 +111,39 @@ public class ControladorBolsillos extends HttpServlet {
         HttpSession session = request.getSession();
         id_usuario = (int) session.getAttribute("idUsuario");
         id_categoria = (int) session.getAttribute("categoria_actual");
-        
-        
-       
+
+        Categoria cat = new Categoria();
+        cat = daoCAT.sumarPresupuesto(id_usuario, id_categoria);
+
+        Usuario usu = new Usuario();
+        usu = daoCAT.presupuestoDisponible(id_usuario);
+
+        long presupuesto_disponible = usu.getPresupuesto_total() - usu.getPresupuesto_disponible();
+
+        usu.setPresupuesto_disponible(presupuesto_disponible);
+
+        request.setAttribute("Usuario", usu);
+        request.setAttribute("Categoria", cat);
+
+        //request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
+
         String accion = request.getParameter("accion");
         switch (accion) {
             case "Listar":
 
                 List<Bolsillo> datos = dao.listar(id_usuario, id_categoria);
-                
-                long sumabolsillos;
-                
-                
-                        
+
+                request.setAttribute("Usuario", usu);
+                request.setAttribute("Categoria", cat);
                 request.setAttribute("datos", datos);
-                
+
                 request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
+
                 break;
 
             case "Nuevo":
+                request.setAttribute("Usuario", usu);
+                request.setAttribute("Categoria", cat);
                 request.getRequestDispatcher("agregarBolsillos.jsp").forward(request, response);
                 break;
 
@@ -122,24 +163,24 @@ public class ControladorBolsillos extends HttpServlet {
                 bol.setId_usuario(id_usuario);
 
                 dao.agregar(bol);
-                
+
                 request.getRequestDispatcher("ControladorBolsillos?accion=Listar").forward(request, response);
 
                 break;
-                
-                
+
             case "Editar":
                 String ide = request.getParameter("id");
                 Bolsillo bolsi = dao.ListarId(ide);
-                
+
                 request.setAttribute("Bolsillo", bolsi);
-                
+                request.setAttribute("Usuario", usu);
+                request.setAttribute("Categoria", cat);
+
                 request.getRequestDispatcher("editarBolsillo.jsp").forward(request, response);
                 break;
-                
-                
+
             case "Actualizar":
-               
+
                 String nombres1 = request.getParameter("txtnombre");
                 String presu1 = request.getParameter("txtpresupuesto");
                 String gasto1 = request.getParameter("txtgasto");
@@ -162,7 +203,7 @@ public class ControladorBolsillos extends HttpServlet {
             case "Delete":
                 String id2 = request.getParameter("id");
                 int id3 = Integer.parseInt(id2);
-                
+
                 dao.delete(id3);
                 request.getRequestDispatcher("ControladorBolsillos?accion=Listar").forward(request, response);
                 break;
