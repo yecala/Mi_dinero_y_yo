@@ -50,7 +50,7 @@
         <%            out.println(nomCate);
         %> 
     </h1>
-    
+
     <center>
         <table >
             <tr class=" table-active">
@@ -71,8 +71,8 @@
     <!-------------------------------------------->
     <center>
         <form action="ControladorBolsillos" method="POST">
-            <button type="submit" name="accion" class="btn btn-outline-success" id="btnListar" value="Listar">Ver mis bolsillos</button><!-- comment -->
-            <button type="submit" name="accion" class="btn btn-outline-success" id="btnGuardar" value="submit">submit</button>
+            <button type="submit" name="accion" class="btn btn-outline-primary" id="btnListar" value="Listar">Ver mis bolsillos</button><!-- comment -->
+            <button type="submit" name="accion" class="btn btn-outline-primary" id="btnGuardar" value="Nuevo">Nuevo</button>
             <br/>
             <c:forEach var="dato" items="${datos}">
                 <center>
@@ -80,36 +80,33 @@
                         <table id="tablaBolsillo" class="table-bordered bg-secondary  bg-opacity-10">
                             <tr class=" table-active" id="fila">
 
-                                <td >
-                                    <div class="p-4">
-
-                                        <input hidden="" name="idBolsillo" class="form-control"  type="text" value="${dato.getId_bolsillo()}" disabled="">
-                                    </div>
-
-                                </td>
 
 
                                 <td  >
                                     <div class="p-4 col-xs-4">
                                         <label for="ex3">Nombre bolsillo</label>
-                                        <input name="txtnombre" class="form-control col-3" id="ex3" type="text" value="${dato.getNombre_bolsillo()}">
+                                        <input name="txtnombre" class="form-control col-3" id="ex3" type="text" value="${dato.getNombre_bolsillo()}" disabled="">
                                     </div>
 
                                 </td>
                                 <td>
                                     <div class=" p-4 col-xs-3">
                                         <label for="ex2">Presupuesto</label>
-                                        <input name="txtpresupuesto" class="form-control" id="inputpresu" type="text" value="${dato.getPresupuesto_bolsillo()}">
+                                        <input name="txtpresupuesto" class="form-control" id="inputpresu" type="text" value="${dato.getPresupuesto_bolsillo()}" disabled="">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="p-4 col-xs-3">
                                         <label for="ex2">Gasto real</label>
-                                        <input name="txtgasto" class="form-control" id="inputgasto" type="text" value="${dato.getGasto_bolsillo()}">
+                                        <input name="txtgasto" class="form-control" id="inputgasto" type="text" value="${dato.getGasto_bolsillo()}" disabled="">
                                     </div>
                                 </td>
                                 <td>
-                                    <button type='submit' name='accion' class='btn btn-outline-success' id='btnDelete' value='Delete'>Delete</button>
+                                    <form action="ControladorBolsillos" method="POST">
+                                        <input type="hidden" name="id" value="${dato.getId_bolsillo()}">
+                                        <input type="submit" name="accion" value="Editar" class="btn btn-outline-warning">
+                                        <input type="submit" name="accion" value="Delete" class="btn btn-outline-danger">
+                                    </form>
                                 </td>
 
                             </tr>

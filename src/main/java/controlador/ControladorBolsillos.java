@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 import modelo.DAO.BolsilloDAO;
 import modelo.POJO.Bolsillo;
 
@@ -79,52 +80,91 @@ public class ControladorBolsillos extends HttpServlet {
 
         int id_usuario = 0;
         int id_categoria = 0;
-
+        HttpSession session = request.getSession();
+        id_usuario = (int) session.getAttribute("idUsuario");
+        id_categoria = (int) session.getAttribute("categoria_actual");
+        
+        
+       
         String accion = request.getParameter("accion");
         switch (accion) {
             case "Listar":
 
-                HttpSession session = request.getSession(true);
-
-                id_usuario = (int) session.getAttribute("idUsuario");
-                id_categoria = (int) session.getAttribute("categoria_actual");
-
                 List<Bolsillo> datos = dao.listar(id_usuario, id_categoria);
-
+                
+                long sumabolsillos;
+                
+                
+                        
                 request.setAttribute("datos", datos);
-                request.getRequestDispatcher("bolsillos.jsp").forward(request, response);
-                break;
                 
+                request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
+                break;
+
             case "Nuevo":
-                request.getRequestDispatcher("agregarBolsillosjsp").forward(request, response);
+                request.getRequestDispatcher("agregarBolsillos.jsp").forward(request, response);
                 break;
 
-            case "submit":
+            case "Guardar":
+
+                String nombres = request.getParameter("txtnombre");
+                String presu = request.getParameter("txtpresupuesto");
+                String gasto = request.getParameter("txtgasto");
+
+                long presupuesto = Long.parseLong(presu);
+                long gastoReal = Long.parseLong(gasto);
+
+                bol.setNombre_bolsillo(nombres);
+                bol.setPresupuesto_bolsillo(presupuesto);
+                bol.setGasto_bolsillo(gastoReal);
+                bol.setId_categoria(id_categoria);
+                bol.setId_usuario(id_usuario);
+
+                dao.agregar(bol);
                 
-                String idbolsillos = request.getParameter("id");
-
-                while (idbolsillos == null) {
-                    String nombres = request.getParameter("txtnombre");
-                    String presu = request.getParameter("txtpresupuesto");
-                    String gasto = request.getParameter("txtgasto");
-
-                    long presupuesto = Long.parseLong(presu);
-                    long gastoReal = Long.parseLong(gasto);
-
-                    bol.setNombre_bolsillo(nombres);
-                    bol.setPresupuesto_bolsillo(presupuesto);
-                    bol.setGasto_bolsillo(gastoReal);
-                    bol.setId_categoria(id_categoria);
-                    bol.setId_usuario(id_usuario);
-
-                    dao.agregar(bol);
-                    request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
-                    
-                    idbolsillos = request.getParameter("id");
-                }
+                request.getRequestDispatcher("ControladorBolsillos?accion=Listar").forward(request, response);
 
                 break;
+                
+                
+            case "Editar":
+                String ide = request.getParameter("id");
+                Bolsillo bolsi = dao.ListarId(ide);
+                
+                request.setAttribute("Bolsillo", bolsi);
+                
+                request.getRequestDispatcher("editarBolsillo.jsp").forward(request, response);
+                break;
+                
+                
+            case "Actualizar":
+               
+                String nombres1 = request.getParameter("txtnombre");
+                String presu1 = request.getParameter("txtpresupuesto");
+                String gasto1 = request.getParameter("txtgasto");
+                String idBolsi = request.getParameter("id");
+                int idbol = Integer.parseInt(idBolsi);
+                long presupuesto1 = Long.parseLong(presu1);
+                long gastoReal1 = Long.parseLong(gasto1);
 
+                bol.setId_bolsillo(idbol);
+                bol.setNombre_bolsillo(nombres1);
+                bol.setPresupuesto_bolsillo(presupuesto1);
+                bol.setGasto_bolsillo(gastoReal1);
+                bol.setId_categoria(id_categoria);
+                bol.setId_usuario(id_usuario);
+
+                dao.actualizar(bol);
+                request.getRequestDispatcher("ControladorBolsillos?accion=Listar").forward(request, response);
+                break;
+
+            case "Delete":
+                String id2 = request.getParameter("id");
+                int id3 = Integer.parseInt(id2);
+                
+                dao.delete(id3);
+                request.getRequestDispatcher("ControladorBolsillos?accion=Listar").forward(request, response);
+                break;
             default:
                 throw new AssertionError();
         }

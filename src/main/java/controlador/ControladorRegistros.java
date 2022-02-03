@@ -26,7 +26,6 @@ public class ControladorRegistros extends HttpServlet {
         registro.setCorreo((String) request.getParameter("exampleInputEmail1"));
         registro.setContraseña((String) request.getParameter("exampleInputPassword1"));
         registro.setConfirmarContraseña((String) request.getParameter("confirmPass"));
-        
         String presupuesto = request.getParameter("budget");
         
         registro.setPresupuesto((Long.parseLong(presupuesto)));
