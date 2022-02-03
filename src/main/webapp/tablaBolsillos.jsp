@@ -79,8 +79,14 @@
     <center>
         <form action="ControladorBolsillos" method="POST">
             <button type="submit" name="accion" class="btn btn-outline-primary" id="btnListar" value="Listar">Ver mis bolsillos</button><!-- comment -->
+            
             <button type="submit" name="accion" class="btn btn-outline-primary" id="btnGuardar" value="Nuevo">Nuevo</button>
-            <br/>
+            <br>
+            <br>
+            <input class="col-5 text-center text-danger bg-white border-0" type="text" value="${error}" disabled="" ></input>
+            <br>
+            <br>
+            <br><!-- comment -->
             <c:forEach var="dato" items="${datos}">
                 <center>
                     <div class="p-1 mb-1  h-50" >
