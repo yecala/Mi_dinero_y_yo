@@ -87,8 +87,6 @@
                         <table id="tablaBolsillo" class="table-bordered bg-secondary  bg-opacity-10">
                             <tr class=" table-active" id="fila">
 
-
-
                                 <td  >
                                     <div class="p-4 col-xs-4">
                                         <label for="ex3">Nombre bolsillo</label>
