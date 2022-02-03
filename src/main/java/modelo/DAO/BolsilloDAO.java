@@ -47,6 +47,28 @@ public class BolsilloDAO {
         }
         return lista;
     }
+    
+    public Bolsillo ListarId(String id) {
+        String sql = "select id_bolsillo, nombre_bolsillo, presupuesto_bolsillo, gasto_bolsillo from bolsillos where id_bolsillo=" + id;
+        Bolsillo bol = new Bolsillo();
+
+        try {
+            con = c.conectar();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                
+                bol.setId_bolsillo(rs.getInt(1));
+                bol.setNombre_bolsillo(rs.getString(2));
+                bol.setPresupuesto_bolsillo(rs.getLong(3));
+                bol.setGasto_bolsillo(rs.getLong(4));
+                
+               
+            }
+        } catch (SQLException e) {
+        }
+        return bol;
+    }
 
     public int agregar(Bolsillo bol) {
         int r = 0;
@@ -60,7 +82,7 @@ public class BolsilloDAO {
             ps.setLong(3, bol.getGasto_bolsillo());
             ps.setInt(4, bol.getId_categoria());
             ps.setInt(5, bol.getId_usuario());
-            
+
             r = ps.executeUpdate();
 
             if (r == 1) {
@@ -74,5 +96,58 @@ public class BolsilloDAO {
 
         }
         return r;
+    }
+
+    public int actualizar(Bolsillo bol) {
+
+        int r = 0;
+        String sql = "update bolsillos set nombre_bolsillo=?, presupuesto_bolsillo=?, gasto_bolsillo=?, id_categoria=?, id_usuario=? where id_bolsillo=?";
+        try {
+
+            con = c.conectar();
+            ps = con.prepareStatement(sql);
+
+            ps.setString(1, bol.getNombre_bolsillo());
+            ps.setLong(2, bol.getPresupuesto_bolsillo());
+            ps.setLong(3, bol.getGasto_bolsillo());
+            ps.setInt(4, bol.getId_categoria());
+            ps.setInt(6, bol.getId_usuario());
+            ps.setInt(7, bol.getId_bolsillo());
+
+            r = ps.executeUpdate();
+            if (r == 1) {
+                r = 1;
+            } else {
+                r = 0;
+            }
+
+        } catch (SQLException e) {
+            e.toString();
+
+        }
+        return r;
+
+    }
+    
+     public void delete(int id) {
+
+        int r = 0;
+        String sql = "DELETE FROM bolsillos WHERE id_bolsillo="+id;
+        try {
+
+            con = c.conectar();
+            ps = con.prepareStatement(sql);
+            r = ps.executeUpdate();
+            if (r == 1) {
+                r = 1;
+            } else {
+                r = 0;
+            }
+
+        } catch (SQLException e) {
+            e.toString();
+
+        }
+
     }
 }

@@ -13,7 +13,7 @@
     </head>
 
     <body>
-        <%@include file="navegacion.jsp" %>
+        <%@include file="navegacion.jsp"%>
 
         <!-------------------------- barra de PRESUPUESTO--------------------------------------->
     <center>.
@@ -67,7 +67,10 @@
                 </td>
             </tr>
         </table>
+        <br><!-- comment -->
+        <br>
         <!--------------------------BOLSILLO------------------------------------->
+        <form action="ControladorBolsillos" method="POST">
         <center>
             <div class="p-1 mb-1  h-50" >
                 <table id="tablaBolsillo" class="table-bordered bg-secondary  bg-opacity-10">
@@ -76,20 +79,20 @@
                         <td class="col-6" >
                             <div class="p-4 col-xs-4">
                                 <label for="ex3">Nombre bolsillo</label>
-                                <input class="form-control" id="ex3" type="text">
+                                <input name="txtnombre" class="form-control" id="ex3" type="text">
                             </div>
 
                         </td>
                         <td>
                             <div class=" p-4 col-xs-3">
                                 <label for="ex2">Presupuesto</label>
-                                <input class="form-control" id="ex2" type="text">
+                                <input name="txtpresupuesto" class="form-control" id="ex2" type="text">
                             </div>
                         </td>
                         <td>
                             <div class="p-4 col-xs-3">
                                 <label for="ex2">Gasto real</label>
-                                <input class="form-control" id="ex2" type="text">
+                                <input name="txtgasto" class="form-control" id="ex2" type="text">
                             </div>
                         </td>
 
@@ -104,7 +107,7 @@
 
             if (tipoUsu != null) {
         %>
-        <button type="submit" name="accion" class="btn btn-outline-success" id="btnGuardar" value="submit">submit</button><!-- comment -->
+        <button type="submit" name="accion" class="btn btn-outline-success" id="btnGuardar" value="Guardar">Guardar</button><!-- comment -->
         <%
         } else {
         %>
@@ -113,5 +116,7 @@
             }
 
         %>
+    </form>
+    
     </body>
 </html>
