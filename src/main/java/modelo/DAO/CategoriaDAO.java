@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.POJO.Categoria;
+import modelo.POJO.Usuario;
 import modelo.utilidades.Conexion;
 
 /**
@@ -18,12 +19,13 @@ import modelo.utilidades.Conexion;
  * @author Usuario
  */
 public class CategoriaDAO {
-    
+
     PreparedStatement ps;
     ResultSet rs;
     Conexion c = new Conexion();
     Connection con;
 
+//select id_categoria,sum(presupuesto_bolsillo) total from bolsillos where id_usuario=44 AND id_categoria=1 group by id_categoria;
     public List listar() {
         List<Categoria> lista = new ArrayList<>();
         String sql = "select id_categoria, nombre_categoria from categorias";
@@ -35,7 +37,7 @@ public class CategoriaDAO {
                 Categoria cat = new Categoria();
                 cat.setId_categoria(rs.getInt(1));
                 cat.setNombre_categoria(rs.getString(2));
-               
+
                 lista.add(cat);
             }
 
@@ -56,7 +58,7 @@ public class CategoriaDAO {
             while (rs.next()) {
                 cat.setId_categoria(rs.getInt(1));
                 cat.setNombre_categoria(rs.getString(2));
-               
+
             }
         } catch (SQLException e) {
         }
@@ -73,7 +75,7 @@ public class CategoriaDAO {
             ps = con.prepareStatement(sql);
 
             ps.setString(1, cat.getNombre_categoria());
-          
+
             ps.setInt(2, cat.getId_categoria());
 
             r = ps.executeUpdate();
@@ -90,37 +92,33 @@ public class CategoriaDAO {
         return r;
 
     }
-    
-    
-    
-    public int num_bolsillos(String id){
+
+    public int num_bolsillos(String id) {
         String sql = "select id_bolsillo from bolsillos where id_categoria=" + id;
         Categoria cat = new Categoria();
-        int num=0;
+        int num = 0;
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                
-               num=rs.getInt(1);
+
+                num = rs.getInt(1);
             }
         } catch (SQLException e) {
         }
         return num;
-    
-    
+
     }
-    
 
     public void delete(String id) {
-        
+
         String sql = "delete from categorias where id_categoria=" + id;
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
-            
+
         } catch (Exception e) {
         }
     }
@@ -148,5 +146,53 @@ public class CategoriaDAO {
 
         }
         return r;
+    }
+
+    public Categoria sumarPresupuesto(int id_usuario, int id_categoria) {
+        String sql = "select id_categoria,sum(presupuesto_bolsillo) from bolsillos where id_usuario=" + id_usuario + " AND id_categoria=" + id_categoria + " group by id_categoria";
+        Categoria cat = new Categoria();
+
+        try {
+            con = c.conectar();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                cat.setId_categoria(rs.getInt(1));
+
+                cat.setPresupuesto_categoria(rs.getLong(2));
+
+            }
+        } catch (SQLException e) {
+        }
+        return cat;
+    }
+
+    public Usuario presupuestoDisponible(int id_usuario) {
+        String sql = "SELECT usuarios.id_usuario, usuarios.presupuesto_total, nvl(sum(presupuesto_bolsillo),0) FROM bolsillos \n"
+                + "RIGHT JOIN usuarios \n"
+                + "ON bolsillos.id_usuario = usuarios.id_usuario \n"
+                + "WHERE usuarios.id_usuario="+ id_usuario+"\n" 
+                + "GROUP BY usuarios.id_usuario,usuarios.presupuesto_total";
+        
+        Usuario usu = new Usuario();
+
+        try {
+            con = c.conectar();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                usu.setId_usuario(rs.getInt(1));
+
+                usu.setPresupuesto_total(rs.getLong(2));
+                
+                usu.setPresupuesto_disponible(rs.getLong(3));
+
+            }
+        } catch (SQLException e) {
+        }
+        return usu;
+
     }
 }
