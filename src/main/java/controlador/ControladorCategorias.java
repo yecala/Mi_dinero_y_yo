@@ -64,38 +64,41 @@ public class ControladorCategorias extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
+
         int id_categorias = Integer.parseInt(request.getParameter("idCategoria"));
         String nom_cate = request.getParameter("nomCate");
-        
-        HttpSession session =request.getSession();
+
+        HttpSession session = request.getSession();
         session.setAttribute("categoria_actual", id_categorias);
         session.setAttribute("nom_categoria", nom_cate);
-        
-        int id_usuario = (int) session.getAttribute("idUsuario");
-        int id_categoria = (int) session.getAttribute("categoria_actual");
-        
-        Categoria cat = new Categoria();
-        cat = dao.sumarPresupuesto(id_usuario,id_categoria); 
-        
-        
-        Usuario usu = new Usuario();
-        usu= dao.presupuestoDisponible(id_usuario);
-        
-        long presupuesto_disponible= usu.getPresupuesto_total()-usu.getPresupuesto_disponible();
-        
-        usu.setPresupuesto_disponible(presupuesto_disponible);
-        
-        request.setAttribute("Usuario", usu);
-        request.setAttribute("Categoria", cat);
 
-        
-        request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
-        
+        if (session.getAttribute("idUsuario") == null) {
+            response.sendRedirect("tablaBolsillos.jsp");
+
+        } else {
+
+            int id_usuario = (int) session.getAttribute("idUsuario");
+
+            int id_categoria = (int) session.getAttribute("categoria_actual");
+
+            Categoria cat = new Categoria();
+            cat = dao.sumarPresupuesto(id_usuario, id_categoria);
+
+            Usuario usu = new Usuario();
+            usu = dao.presupuestoDisponible(id_usuario);
+
+            long presupuesto_disponible = usu.getPresupuesto_total() - usu.getPresupuesto_disponible();
+
+            usu.setPresupuesto_disponible(presupuesto_disponible);
+
+            request.setAttribute("Usuario", usu);
+            request.setAttribute("Categoria", cat);
+
+            request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
+
+        }
+
         //response.sendRedirect("tablaBolsillos.jsp");
-    
-        
     }
 
     /**
@@ -109,8 +112,7 @@ public class ControladorCategorias extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     
-        
+
         String accion = request.getParameter("accion");
         switch (accion) {
             case "Listar":
@@ -123,7 +125,7 @@ public class ControladorCategorias extends HttpServlet {
             case "Editar":
                 String ide = request.getParameter("id");
                 Categoria cat = dao.ListarId(ide);
-                
+
                 request.setAttribute("Categoria", cat);
                 request.getRequestDispatcher("editCategoria.jsp").forward(request, response);
                 break;
@@ -178,8 +180,6 @@ public class ControladorCategorias extends HttpServlet {
         }
 
     }
-
-   
 
     /**
      * Returns a short description of the servlet.
