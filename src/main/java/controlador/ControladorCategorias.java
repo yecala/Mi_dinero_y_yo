@@ -102,6 +102,7 @@ public class ControladorCategorias extends HttpServlet {
             case "Editar":
                 String ide = request.getParameter("id");
                 Categoria cat = dao.ListarId(ide);
+                
                 request.setAttribute("Categoria", cat);
                 request.getRequestDispatcher("editCategoria.jsp").forward(request, response);
                 break;
