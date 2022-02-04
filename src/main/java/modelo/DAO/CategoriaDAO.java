@@ -149,7 +149,10 @@ public class CategoriaDAO {
     }
 
     public Categoria sumarPresupuestoGasto(int id_usuario, int id_categoria) {
-        String sql = "select id_categoria,nombre_categoria,sum(presupuesto_bolsillo),nvl(sum(gasto_bolsillo),0) from bolsillos where id_usuario=" + id_usuario + " AND id_categoria=" + id_categoria + " group by id_categoria";
+        String sql = "select categorias.id_categoria,categorias.nombre_categoria,sum(presupuesto_bolsillo)sumapre,nvl(sum(gasto_bolsillo),0)sumagasto from bolsillos\n"
+                + "right join categorias on bolsillos.id_categoria=categorias.id_categoria\n"
+                + "where bolsillos.id_usuario="+id_usuario+" AND bolsillos.id_categoria="+id_categoria+" \n"
+                + "group by categorias.id_categoria,categorias.nombre_categoria";
         Categoria cat = new Categoria();
 
         try {
@@ -159,10 +162,9 @@ public class CategoriaDAO {
             while (rs.next()) {
 
                 cat.setId_categoria(rs.getInt(1));
-
-                cat.setPresupuesto_categoria(rs.getLong(2));
-                
-                cat.setGasto_categoria(rs.getLong(3));
+                cat.setNombre_categoria(rs.getString(2));
+                cat.setPresupuesto_categoria(rs.getLong(3));
+                cat.setGasto_categoria(rs.getLong(4));
 
             }
         } catch (SQLException e) {
@@ -174,9 +176,9 @@ public class CategoriaDAO {
         String sql = "SELECT usuarios.id_usuario, usuarios.presupuesto_total, nvl(sum(presupuesto_bolsillo),0) FROM bolsillos \n"
                 + "RIGHT JOIN usuarios \n"
                 + "ON bolsillos.id_usuario = usuarios.id_usuario \n"
-                + "WHERE usuarios.id_usuario="+ id_usuario+"\n" 
+                + "WHERE usuarios.id_usuario=" + id_usuario + "\n"
                 + "GROUP BY usuarios.id_usuario,usuarios.presupuesto_total";
-        
+
         Usuario usu = new Usuario();
 
         try {
@@ -188,7 +190,7 @@ public class CategoriaDAO {
                 usu.setId_usuario(rs.getInt(1));
 
                 usu.setPresupuesto_total(rs.getLong(2));
-                
+
                 usu.setPresupuesto_disponible(rs.getLong(3));
 
             }
@@ -198,5 +200,4 @@ public class CategoriaDAO {
 
     }
 
-    
 }

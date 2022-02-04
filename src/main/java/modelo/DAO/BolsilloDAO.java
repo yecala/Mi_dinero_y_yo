@@ -73,16 +73,17 @@ public class BolsilloDAO {
 
     public int agregar(Bolsillo bol) {
         int r = 0;
-        String sql = "insert into bolsillos (nombre_bolsillo,presupuesto_bolsillo, gasto_bolsillo, id_categoria, id_usuario) values(?,?,?,?,?)";
+        String sql = "insert into bolsillos (id_bolsillo, nombre_bolsillo,presupuesto_bolsillo, gasto_bolsillo, id_categoria, id_usuario) values(?,?,?,?,?,?)";
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
 
-            ps.setString(1, bol.getNombre_bolsillo());
-            ps.setLong(2, bol.getPresupuesto_bolsillo());
-            ps.setLong(3, bol.getGasto_bolsillo());
-            ps.setInt(4, bol.getId_categoria());
-            ps.setInt(5, bol.getId_usuario());
+            ps.setInt(1,1);
+            ps.setString(2, bol.getNombre_bolsillo());
+            ps.setLong(3, bol.getPresupuesto_bolsillo());
+            ps.setLong(4, bol.getGasto_bolsillo());
+            ps.setInt(5, bol.getId_categoria());
+            ps.setInt(6, bol.getId_usuario());
 
             r = ps.executeUpdate();
 
