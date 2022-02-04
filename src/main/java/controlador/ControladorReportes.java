@@ -91,19 +91,41 @@ public class ControladorReportes extends HttpServlet {
                 long totalPresu = 0;
                 long totalGasto = 0;
                 for (Categoria presu : datos) {
-                    totalPresu = totalPresu+presu.getPresupuesto_categoria();
-                    totalGasto = totalGasto+presu.getGasto_categoria();
+                    totalPresu = totalPresu + presu.getPresupuesto_categoria();
+                    totalGasto = totalGasto + presu.getGasto_categoria();
+                }
+
+                long presuTotal = dao.PresupuestoTotal(id_usuario);
+                long ahorroEsperado = presuTotal - totalPresu;
+                long ahorroReal = presuTotal - totalGasto;
+
+                if (ahorroEsperado < 0) {
+                    String NotificacionMala="Tu presupuesto esta bajo ceros";
+                    session.setAttribute("Notificacion",NotificacionMala);
+
+                }else{
+                    String NotificacionBuena="Esta planeando ahorros sigue asi";
+                    session.setAttribute("Notificacion",NotificacionBuena);
+                
+                }
+                if (ahorroReal < 0) {
+                    String NotificacionMala="Has gastado mas de lo que abarca tu presupuesto!";
+                    session.setAttribute("Notificacion",NotificacionMala);
+
+                }else{
+                    String NotificacionBuena="Estas ahorrando mucho sigue asi!";
+                    session.setAttribute("Notificacion",NotificacionBuena);
+                
                 }
                 
-                
-                long presuTotal=dao.PresupuestoTotal(id_usuario);
-                
+
                 request.setAttribute("datos", datos);
                 request.setAttribute("totalPresu", totalPresu);
                 request.setAttribute("totalGasto", totalGasto);
                 request.setAttribute("presuTotal", presuTotal);
-                
-                
+                request.setAttribute("ahorroEsperado", ahorroEsperado);
+                request.setAttribute("ahorroReal", ahorroReal);
+
                 request.getRequestDispatcher("Reportes.jsp").forward(request, response);
                 break;
 

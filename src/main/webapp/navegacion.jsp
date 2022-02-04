@@ -110,7 +110,14 @@
         <!--</form>--->
 
         <section id="caja2" class="caja2"> 
+            
+            
             <h3 id="tituloNoti">Notificaciones</h3>
+            
+            <% 
+                String Notificacion=(String) session.getAttribute("Notificacion");
+                out.print(Notificacion);
+            %>
         </section> 
 
 

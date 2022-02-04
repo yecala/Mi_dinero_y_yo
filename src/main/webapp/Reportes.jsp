@@ -55,43 +55,51 @@
             </a>
         </form> 
         <br/>
-        <table class="table ">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">CATEGORIAS</th> 
-                    <th scope="col">PRESUPUESTO</th> 
-                    <th scope="col">GASTO REAL  </th>
-                </tr>
+        <center>
+            <table class="table col-8" style="border-collapse: separate;">
+                <thead class="thead-light">
 
-                <c:forEach var="dato" items="${datos}">
                     <tr>
-                        <td>${dato.getNombre_categoria()}</td>
-                        <td>${dato.getPresupuesto_categoria()}</td>
-                        <td>${dato.getGasto_categoria()}</td>
+                        <th scope="col">CATEGORIAS</th> 
+                        <th scope="col">PRESUPUESTO</th> 
+                        <th scope="col">GASTO REAL  </th>
                     </tr>
-                </c:forEach>
+
+                    <c:forEach var="dato" items="${datos}">
+                        <tr>
+                            <td>${dato.getNombre_categoria()}</td>
+                            <td>${dato.getPresupuesto_categoria()}</td>
+                            <td>${dato.getGasto_categoria()}</td>
+                        </tr>
+                    </c:forEach>
 
 
-                <tr class="table-primary">
-                    <td scope="col">Total</td> 
-                    <td scope="col">${totalPresu}</td> 
-                    <td scope="col">${totalGasto}</td>
-                </tr>
+                    <tr class="table-primary">
+                        <td class="font-weight-bold" scope="col">Total</td> 
+                        <td scope="col">${totalPresu}</td> 
+                        <td scope="col">${totalGasto}</td>
+                    </tr>
 
-                <tr class="table-info">
-                    <td scope="col">Presupuesto total</td> 
-                    <td scope="col">${presuTotal}</td> 
-                    <td scope="col"></td>
-                </tr>
+                    <tr class="table-info">
+                        <td class="font-weight-bold" scope="col">Presupuesto total</td> 
+                        <td colspan="2" scope="col" class="text-center">${presuTotal}</td> 
 
-                <tr style="background-color:#96F990">
-                    <td scope="col">Ahorro</td> 
-                    <td scope="col"></td> 
-                    <td scope="col"></td>
-                </tr>
+                    </tr>
 
-            </thead>
-        </table>
+                    <tr style="background-color:#96F990">
+                        <td rowspan="2" class="font-weight-bold align-middle" scope="col">Ahorro</td> 
+                        <td class="font-weight-bold" scope="col">Ahorro esperado</td> 
+                        <td class="font-weight-bold" scope="col">Ahorro real  </td>
+                    </tr>
+                    <tr style="background-color:#96F990">
+                        <td scope="col"> ${ahorroEsperado} </td> 
+                        <td scope="col"> ${ahorroReal} </td> 
+
+                    </tr>
+
+                </thead>
+            </table>
+        </center>
         <%
             }
         %>
