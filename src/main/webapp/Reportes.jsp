@@ -30,72 +30,77 @@
         <script src="scripts.js" type="text/javascript"></script>
     </head>
     <body>
-            <%@include file="navegacion.jsp" %>
+        <%@include file="navegacion.jsp" %>
 
-            <%                // Recupera el tipo de usuario de las variables de session
-                String tipoU = (String) session.getAttribute("tipoUsuario");
+        <%                // Recupera el tipo de usuario de las variables de session
+            String tipoU = (String) session.getAttribute("tipoUsuario");
 
-                if (tipoUsuario == null) {
+            if (tipoUsuario == null) {
 
-            %>
+        %>
 
-            <h3>Para ver los reportes debes iniciar sesion</h3>
-            <%        } else {
-            %> 
-            <br>
-        <center>    
-            <h1 style="color: rgb(12, 213, 172)">Reporte de gastos</h1><br>
-            
-                <a href="reportes2.jsp">
-                    <input type="submit" name="accion" value="Ver detalles" class="btn btn-outline-primary">
-                </a>
-           
-            <br/>
-            <table class="table ">
-                <thead class="thead-light">
+        <h3>Para ver los reportes debes iniciar sesion</h3>
+        <%        } else {
+        %> 
+        <br>
+    <center>    
+        <h1 style="color: rgb(12, 213, 172)">Reporte de gastos</h1><br>
+
+        <form action="ControladorReportes" method="POST">
+
+            <input type="submit" name="accion" value="Listar" class="btn btn-outline-primary">
+
+            <a href="reportes2.jsp">
+                <input type="submit" name="accion" value="Ver detalles" class="btn btn-outline-primary">
+            </a>
+        </form> 
+        <br/>
+        <table class="table ">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">CATEGORIAS</th> 
+                    <th scope="col">PRESUPUESTO</th> 
+                    <th scope="col">GASTO REAL  </th>
+                </tr>
+
+                <c:forEach var="dato" items="${datos}">
                     <tr>
-                        <th scope="col">CATEGORIAS</th> 
-                        <th scope="col">PRESUPUESTO</th> 
-                        <th scope="col">GASTO REAL  </th>
+                        <td>${dato.getNombre_categoria()}</td>
+                        <td>${dato.getPresupuesto_categoria()}</td>
+                        <td>${dato.getGasto_categoria()}</td>
                     </tr>
-
-                    <c:forEach var="dato" items="${datos}">
-                        <tr>
-                            <td>${dato.getId_categoria()}</td>
-                            <td>${dato.getNombre_categoria()}</td>
-                        </tr>
-                    </c:forEach>
+                </c:forEach>
 
 
-                    <tr class="table-primary">
-                        <td scope="col">Total</td> 
-                        <td scope="col"></td> 
-                        <td scope="col"></td>
-                    </tr>
+                <tr class="table-primary">
+                    <td scope="col">Total</td> 
+                    <td scope="col">${totalPresu}</td> 
+                    <td scope="col">${totalGasto}</td>
+                </tr>
 
-                    <tr class="table-info">
-                        <td scope="col">Presupuesto total</td> 
-                        <td scope="col"></td> 
-                        <td scope="col"></td>
-                    </tr>
+                <tr class="table-info">
+                    <td scope="col">Presupuesto total</td> 
+                    <td scope="col">${presuTotal}</td> 
+                    <td scope="col"></td>
+                </tr>
 
-                    <tr style="background-color:#96F990">
-                        <td scope="col">Ahorro</td> 
-                        <td scope="col"></td> 
-                        <td scope="col"></td>
-                    </tr>
+                <tr style="background-color:#96F990">
+                    <td scope="col">Ahorro</td> 
+                    <td scope="col"></td> 
+                    <td scope="col"></td>
+                </tr>
 
-                </thead>
-            </table>
-            <%
-                }
-            %>
+            </thead>
+        </table>
+        <%
+            }
+        %>
 
-        </center>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </center>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    </body>
+</body>
 </html>
 

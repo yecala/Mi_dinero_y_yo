@@ -149,7 +149,7 @@ public class CategoriaDAO {
     }
 
     public Categoria sumarPresupuestoGasto(int id_usuario, int id_categoria) {
-        String sql = "select id_categoria,sum(presupuesto_bolsillo),nvl(sum(gasto_bolsillo),0) from bolsillos where id_usuario=" + id_usuario + " AND id_categoria=" + id_categoria + " group by id_categoria";
+        String sql = "select id_categoria,nombre_categoria,sum(presupuesto_bolsillo),nvl(sum(gasto_bolsillo),0) from bolsillos where id_usuario=" + id_usuario + " AND id_categoria=" + id_categoria + " group by id_categoria";
         Categoria cat = new Categoria();
 
         try {
