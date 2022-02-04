@@ -148,8 +148,8 @@ public class CategoriaDAO {
         return r;
     }
 
-    public Categoria sumarPresupuesto(int id_usuario, int id_categoria) {
-        String sql = "select id_categoria,sum(presupuesto_bolsillo) from bolsillos where id_usuario=" + id_usuario + " AND id_categoria=" + id_categoria + " group by id_categoria";
+    public Categoria sumarPresupuestoGasto(int id_usuario, int id_categoria) {
+        String sql = "select id_categoria,sum(presupuesto_bolsillo),nvl(sum(gasto_bolsillo),0) from bolsillos where id_usuario=" + id_usuario + " AND id_categoria=" + id_categoria + " group by id_categoria";
         Categoria cat = new Categoria();
 
         try {
@@ -161,6 +161,8 @@ public class CategoriaDAO {
                 cat.setId_categoria(rs.getInt(1));
 
                 cat.setPresupuesto_categoria(rs.getLong(2));
+                
+                cat.setGasto_categoria(rs.getLong(3));
 
             }
         } catch (SQLException e) {
@@ -195,4 +197,6 @@ public class CategoriaDAO {
         return usu;
 
     }
+
+    
 }

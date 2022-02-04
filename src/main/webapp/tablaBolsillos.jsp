@@ -56,7 +56,7 @@
         <table >
             <tr class=" table-active">
 
-                <td class="col-8" >
+                <td class="col-6" >
                     <div class="col-xs-2">
                         <label for="ex1">Presupuesto 
                             <%            out.println(nomCate);
@@ -65,6 +65,18 @@
                         </label>
                         <form action="ControladorBolsillos" method="POST">   
                             <input class="form-control" id="ex1" type="text" value="${Categoria.getPresupuesto_categoria()}" disabled="">
+                        </form> 
+                    </div>
+                </td>
+                <td class="col-6" >
+                    <div class="col-xs-2">
+                        <label for="ex1">Gasto 
+                            <%            out.println(nomCate);
+                            %> 
+
+                        </label>
+                        <form action="ControladorBolsillos" method="POST">   
+                            <input class="form-control" id="ex1" type="text" value="${Categoria.getGasto_categoria()}" disabled="">
                         </form> 
                     </div>
                 </td>

@@ -45,11 +45,11 @@
             <br>
         <center>    
             <h1 style="color: rgb(12, 213, 172)">Reporte de gastos</h1><br>
-            <form action="ControladorCategorias" method="POST">
+            
                 <a href="reportes2.jsp">
                     <input type="submit" name="accion" value="Ver detalles" class="btn btn-outline-primary">
                 </a>
-            </form>
+           
             <br/>
             <table class="table ">
                 <thead class="thead-light">
@@ -63,9 +63,6 @@
                         <tr>
                             <td>${dato.getId_categoria()}</td>
                             <td>${dato.getNombre_categoria()}</td>
-
-
-
                         </tr>
                     </c:forEach>
 
