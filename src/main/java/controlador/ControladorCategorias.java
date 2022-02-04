@@ -78,12 +78,12 @@ public class ControladorCategorias extends HttpServlet {
         } else {
 
             int id_usuario = (int) session.getAttribute("idUsuario");
-
             int id_categoria = (int) session.getAttribute("categoria_actual");
 
             Categoria cat = new Categoria();
-            cat = dao.sumarPresupuesto(id_usuario, id_categoria);
+            cat = dao.sumarPresupuestoGasto(id_usuario, id_categoria);
 
+            
             Usuario usu = new Usuario();
             usu = dao.presupuestoDisponible(id_usuario);
 
