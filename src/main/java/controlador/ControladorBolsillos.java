@@ -80,7 +80,7 @@ public class ControladorBolsillos extends HttpServlet {
         int id_categoria = (int) session.getAttribute("categoria_actual");
 
         Categoria cat = new Categoria();
-        cat = daoCAT.sumarPresupuesto(id_usuario, id_categoria);
+        cat = daoCAT.sumarPresupuestoGasto(id_usuario, id_categoria);
 
         Usuario usu = new Usuario();
         usu = daoCAT.presupuestoDisponible(id_usuario);
@@ -119,7 +119,7 @@ public class ControladorBolsillos extends HttpServlet {
             id_usuario = (int) session.getAttribute("idUsuario");
             id_categoria = (int) session.getAttribute("categoria_actual");
 
-            cat = daoCAT.sumarPresupuesto(id_usuario, id_categoria);
+            cat = daoCAT.sumarPresupuestoGasto(id_usuario, id_categoria);
 
             usu = daoCAT.presupuestoDisponible(id_usuario);
 
