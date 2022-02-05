@@ -11,7 +11,7 @@ package modelo.POJO;
 public class Usuario {
     
         int id_usuario=0;
-        String nombre_completo="";
+        String nombre_usuario="";
         String correo="";
         String password="";
         long presupuesto_total=0;
@@ -24,9 +24,9 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(int id_usuario, String nombre_completo, String correo, String password, long presupuesto_total, int estado, int bit_admin) {
+    public Usuario(int id_usuario, String nombre_usuario, String correo, String password, long presupuesto_total, int estado, int bit_admin) {
         this.id_usuario = id_usuario;
-        this.nombre_completo = nombre_completo;
+        this.nombre_usuario = nombre_usuario;
         this.correo = correo;
         this.password = password;
         this.presupuesto_total = presupuesto_total;
@@ -59,12 +59,12 @@ public class Usuario {
         this.id_usuario = id_usuario;
     }
 
-    public String getNombre_completo() {
-        return nombre_completo;
+    public String getNombre_usuario() {
+        return nombre_usuario;
     }
 
-    public void setNombre_completo(String nombre_completo) {
-        this.nombre_completo = nombre_completo;
+    public void setNombre_usuario(String nombre_usuario) {
+        this.nombre_usuario = nombre_usuario;
     }
 
     public String getCorreo() {
