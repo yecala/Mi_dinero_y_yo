@@ -29,7 +29,7 @@ public class RegistroDAO {
        
         try {
             String sql = "INSERT INTO US_DINERO.USUARIOS"
-                    + "(ID_USUARIO,NOMBRE_COMPLETO, CORREO, PASSWORD, PRESUPUESTO_TOTAL,ESTADO,BIT_ADMIN)"
+                    + "(ID_USUARIO,NOMBRE_USUARIO, CORREO, PASSWORD, PRESUPUESTO_TOTAL,ESTADO,BIT_ADMIN)"
                     + "VALUES(1,?,?,?,?,1,0)";
             Connection conexion =  DBUtil.getConexion();
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -49,7 +49,7 @@ public class RegistroDAO {
     }
      
       public Usuario obtenerUsuarioPorEmail(String email) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT ID_USUARIO,NOMBRE_COMPLETO, CORREO,"
+        String sql = "SELECT ID_USUARIO,NOMBRE_USUARIO, CORREO,"
                 + " PASSWORD, PRESUPUESTO_TOTAL, BIT_ADMIN"
                 +" WHERE CORREO=? AND ESTADO=1";
 
@@ -65,14 +65,14 @@ public class RegistroDAO {
         // El método next hace avanzar el cursor del ResultSet al siguiente registro
         if (rs.next()) {
             int id_usuario = rs.getInt("id_usuario");
-            String nombre_completo = rs.getString("nombre_completo");
+            String nombre_usuario = rs.getString("nombre_usuario");
             String correo = rs.getString("correo");
             String password = rs.getString("password");
             long presupuesto_total = rs.getLong("presupuesto_total");
             int bit_admin = rs.getInt("bit_admin");
             int estado=1;
             
-            Usuario u = new Usuario(id_usuario, nombre_completo, correo, password, presupuesto_total,estado,bit_admin);
+            Usuario u = new Usuario(id_usuario, nombre_usuario, correo, password, presupuesto_total,estado,bit_admin);
             return u;
         }
 

@@ -34,7 +34,7 @@ public class UsuarioDAO {
             while (rs.next()) {
                 Usuario us = new Usuario();
                 us.setId_usuario(rs.getInt(1));
-                us.setNombre_completo(rs.getString(2));
+                us.setNombre_usuario(rs.getString(2));
                 us.setCorreo(rs.getString(3));
                 us.setPassword(rs.getString(4));
                 us.setPresupuesto_total(rs.getLong(5));
@@ -59,7 +59,7 @@ public class UsuarioDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 u.setId_usuario(rs.getInt(1));
-                u.setNombre_completo(rs.getString(2));
+                u.setNombre_usuario(rs.getString(2));
                 u.setCorreo(rs.getString(3));
                 u.setPassword(rs.getString(4));
                 u.setPresupuesto_total(rs.getLong(5));
@@ -74,13 +74,13 @@ public class UsuarioDAO {
     public int actualizar(Usuario u) {
 
         int r = 0;
-        String sql = "update usuarios set nombre_completo=?, correo=?,password=?, presupuesto_total=?, estado=?, bit_admin=? where id_usuario=?";
+        String sql = "update usuarios set nombre_usuario=?, correo=?,password=?, presupuesto_total=?, estado=?, bit_admin=? where id_usuario=?";
         try {
 
             con = c.conectar();
             ps = con.prepareStatement(sql);
 
-            ps.setString(1, u.getNombre_completo());
+            ps.setString(1, u.getNombre_usuario());
             ps.setString(2, u.getCorreo());
             ps.setString(3, u.getPassword());
             ps.setLong(4, u.getPresupuesto_total());
@@ -133,13 +133,13 @@ public class UsuarioDAO {
 
     public int agregar(Usuario p) {
         int r = 0;
-        String sql = "insert into usuarios (id_usuario,nombre_completo,correo,password,presupuesto_total,estado,bit_admin) values(?,?,?,?,?,?)";
+        String sql = "insert into usuarios (id_usuario,nombre_usuario,correo,password,presupuesto_total,estado,bit_admin) values(?,?,?,?,?,?,?)";
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
 
             ps.setInt(1, p.getId_usuario());
-            ps.setString(2, p.getNombre_completo());
+            ps.setString(2, p.getNombre_usuario());
             ps.setString(3, p.getCorreo());
             ps.setString(4, p.getPassword());
             ps.setLong(5, p.getPresupuesto_total());
@@ -175,7 +175,7 @@ public class UsuarioDAO {
 
             while (rs.next()) {
                 u.setId_usuario(rs.getInt(1));
-                u.setNombre_completo(rs.getString(2));
+                u.setNombre_usuario(rs.getString(2));
                 u.setCorreo(rs.getString(3));
                 u.setPassword(rs.getString(4));
                 u.setPresupuesto_total(rs.getLong(5));

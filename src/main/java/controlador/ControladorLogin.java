@@ -110,7 +110,7 @@ public class ControladorLogin extends HttpServlet {
                 HttpSession session = request.getSession();
 
                 // Almacena en las variables de sesión el nombre y el tipo de usuario
-                session.setAttribute("nombreUsuario", usuario.getNombre_completo());
+                session.setAttribute("nombreUsuario", usuario.getNombre_usuario());
                 session.setAttribute("tipoUsuario", usuario.getBit_admin() == 1 ? "administrador" : "usuario");
                 session.setAttribute("idUsuario", usuario.getId_usuario());
                 

@@ -108,7 +108,7 @@ public class ControladorUsuarios extends HttpServlet {
                 int estado2 = Integer.parseInt(estado1);
 
                 us.setId_usuario(idint);
-                us.setNombre_completo(nom1);
+                us.setNombre_usuario(nom1);
                 us.setCorreo(correo1);
                 us.setPassword(password1);
                 us.setPresupuesto_total(presupuestlolong);
@@ -145,7 +145,7 @@ public class ControladorUsuarios extends HttpServlet {
                 int estado3 = Integer.parseInt(estado);
                 
                 us.setId_usuario(id4);
-                us.setNombre_completo(nombres);
+                us.setNombre_usuario(nombres);
                 us.setCorreo(correo);
                 us.setPassword(password);
                 us.setPresupuesto_total(presupuesto3);
