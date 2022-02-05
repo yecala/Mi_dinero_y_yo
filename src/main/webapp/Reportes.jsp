@@ -30,7 +30,7 @@
         <script src="scripts.js" type="text/javascript"></script>
     </head>
     <body>
-        <%@include file="navegacion.jsp" %>
+        <%@include file="navegacion.jsp"%>
 
         <%                // Recupera el tipo de usuario de las variables de session
             String tipoU = (String) session.getAttribute("tipoUsuario");
