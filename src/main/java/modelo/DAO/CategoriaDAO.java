@@ -28,7 +28,7 @@ public class CategoriaDAO {
 //select id_categoria,sum(presupuesto_bolsillo) total from bolsillos where id_usuario=44 AND id_categoria=1 group by id_categoria;
     public List listar() {
         List<Categoria> lista = new ArrayList<>();
-        String sql = "select id_categoria, nombre_categoria from categorias";
+        String sql = "select id_categoria, nombre_categoria from categorias order by id_categoria";
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
