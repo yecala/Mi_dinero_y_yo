@@ -42,20 +42,21 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active fw-bold fs-4" aria-current="page" href="administrador.html">INICIO</a>
-
+                           
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="adminUsuarios.jsp">Administrar usuarios</a>
+                            
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="administrarUsuarios.html">USUARIOS</a>
-
+                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorias</a>
+                           
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="administrarCategorias.html">CATEGORIAS</a>
-
-                        </li>
-
+                        
                     </ul>
 
-
+                    
                 </div>
             </div>
         </nav>
@@ -81,10 +82,12 @@
         </section>   
         <!--------------------------FIN barra de navegacion--------------------------------------->
         <br/><br/>
+        
     <center>    
+        <h1 style="color: rgb(12, 213, 172)">Administrar usuarios</h1><br>
         <form action="ControladorUsuarios" method="POST">
-            <input type="submit" name="accion" value="Listar">
-            <input type="submit" name="accion" value="Nuevo">
+            <input type="submit" name="accion" value="Listar" class="btn btn-outline-primary">
+            <input type="submit" name="accion" value="Nuevo" class="btn btn-outline-primary">
         </form>
         <br/>
         <table class="table">
@@ -95,6 +98,7 @@
                     <th scope="col">CORREO</th>
                     <th scope="col">CONTRASENA</th>
                     <th scope="col">PRESUPUESTO TOTAL</th>
+                    <th scope="col">ESTADO</th>
                     <th scope="col">ACCIONES</th>
                 </tr>
             </thead>
@@ -108,12 +112,13 @@
                     <td>${dato.getCorreo()}</td>
                     <td>${dato.getPassword()}</td>
                     <td>${dato.getPresupuesto_total()}</td>
+                    <td>${dato.getEstado()}</td>
                     
                 <td>
                     <form action="ControladorUsuarios" method="POST">
                         <input type="hidden" name="id" value="${dato.getId_usuario()}">
-                        <input type="submit" name="accion" value="Editar">
-                        <input type="submit" name="accion" value="Delete">
+                        <input type="submit" name="accion" value="Editar" class="btn btn-outline-warning">
+                        <input type="submit" name="accion" value="Delete" class="btn btn-outline-danger">
                         
                     </form>
                 </td>

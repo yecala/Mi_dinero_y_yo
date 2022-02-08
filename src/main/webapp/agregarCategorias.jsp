@@ -1,20 +1,29 @@
-<!doctype html>
-<html lang="en">
-    <head>
+<%-- 
+    Document   : agregar.jsp
+    Created on : 21/01/2022, 04:51:05 PM
+    Author     : pipe_
+--%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+    <head><!--
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        
-        <link href="EstilosCategorias.css" rel="stylesheet" type="text/css"/>
-        <title>Categorias</title>
+        <link href="EstilosBolsillos.css" rel="stylesheet" type="text/css"/>
+        <title>Administrar categorias</title>
         <link href="EstilosMenu.css" rel="stylesheet" type="text/css"/>
         <script src="scripts.js" type="text/javascript"></script>
     </head>
     <body>
-       <nav class="navbar navbar-expand-lg navbar-light barra_color p-3">
+        <!--------------------------barra de navegacion--------------------------------------->
+        <nav class="navbar navbar-expand-lg navbar-light barra_color p-3">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"> 
                     <span class="T_color fs-2 fw-bold ">Mi dinero y yo </span>
@@ -27,53 +36,63 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="index.html">Inicio</a>
+                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="administrador.html">INICIO</a>
+
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="categorias.html">Categorias</a>
+                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="adminUsuarios.jsp">Administrar usuarios</a>
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="#">Reportes</a>
+                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorias</a>
+
                         </li>
+
                     </ul>
 
 
-
-                    <!-- Menu desplegable perfil -->
-
-
-                    <img class="icono" src="Img_menu/usuario-de-perfil.png" alt="icono perfil" onclick="Mostrar_Ocultar()"/>
-                    <img class="icono" src="Img_menu/notificacion.png" alt="icono notificaciones" onclick="Mostrar_Ocultar2()" />
-
-                    <!-- Fin Menu desplegable perfil -->
                 </div>
             </div>
         </nav>
 
-        
+
         <section id="caja" class="caja">     
             <ul>
                 <li> <button id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesion</button></li>
                 <li><b>Nombre</b></li>
                 <li>Correo</li>
                 <li>  </li>
-                <li> Cambiar contraseña  <img class="editar" src="Img_menu/editar.png" alt="Editar"/> </li>
-                
+                <li> Cambiar contraseña  <img class="editar"  src="Img_menu/editar.png" alt="Editar"/> </li>
+
                 <li> Presupuesto mensual <img class="editar" src="Img_menu/editar.png" alt="Editar"/></li>
                 <li> </li>
                 <li>Mis categorias</li>
 
             </ul>
         </section>
-        
+
         <section id="caja2" class="caja2"> 
             <h3 id="tituloNoti">Notificaciones</h3>
-        </section> 
-        <a href="bolsillos.html">Bolsillos</a>
-        <a href="adminUsuarios.jsp">adminusuarios</a>
-        <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        
-    </body>
+        </section>   
+        <!--------------------------FIN barra de navegacion--------------------------------------->
+    <center>
+        <div>
+            <div>
+
+            </div>
+
+            <form action="ControladorCategorias" method="POST">
+                ID:<br>
+                <input type="text" name="txtid" id="idcat"><br>
+                NOMBRE:<br>
+                <input type="text" name="txtnombres" id="nombre" ><br>
+                
+                <input type="submit" name="accion" value="submit" class="btn btn-outline-success" id="botonEnviar">
+
+            </form>
+        </div> 
+    </center>
+</body>
+
 </html>

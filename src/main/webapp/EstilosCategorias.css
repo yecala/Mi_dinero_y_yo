@@ -18,3 +18,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     margin-left: 10px !important;
 }
 
+a {
+  color: #02a68a;
+  outline: none;
+  text-decoration: none;
+  padding: 2px 1px 0;
+  font-weight: bold;
+  font-family: arial;
+}
+
+a:link {
+  color: #265301;
+}
+
+a:visited {
+  color: #437A16;
+}
