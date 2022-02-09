@@ -1,4 +1,11 @@
-<!doctype html>
+<%-- 
+    Document   : registrarse
+    Created on : 9 feb. 2022, 12:20:36
+    Author     : Usuario
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <!-- Required meta tags -->
@@ -37,7 +44,7 @@
                             <a class="nav-link fw-bold fs-4" href="#">Reportes</a>
                         </li>
                     </ul>
-                    
+
 
                 </div>
             </div>
@@ -70,6 +77,17 @@
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
+
+                <%//                        
+                    // Si el nombre de usuario o password es invalido muestra el siguiente mensaje
+                    String usuarioExistente = (String) request.getAttribute("usuarioExistente");
+                    if (usuarioExistente.equalsIgnoreCase(usuarioExistente)) {
+                        out.print("<br/>");
+                        out.print("<center>");
+                        out.print("<span style='color:red'>El email ya esta registrado</span>");
+                        out.print("</center>");
+                    }
+                %>
             </form>
         </div>
 
@@ -78,3 +96,4 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
+

@@ -50,7 +50,7 @@ public class RegistroDAO {
      
       public Usuario obtenerUsuarioPorEmail(String email) throws SQLException, ClassNotFoundException {
         String sql = "SELECT ID_USUARIO,NOMBRE_USUARIO, CORREO,"
-                + " PASSWORD, PRESUPUESTO_TOTAL, BIT_ADMIN"
+                + " PASSWORD, PRESUPUESTO_TOTAL,ESTADO, BIT_ADMIN"
                 +" WHERE CORREO=? AND ESTADO=1";
 
         Connection conexion =  DBUtil.getConexion();
@@ -78,5 +78,7 @@ public class RegistroDAO {
 
         return null;
     }
+      
+      
     
 }
