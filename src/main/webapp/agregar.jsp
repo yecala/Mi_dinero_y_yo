@@ -96,6 +96,8 @@
                 <input type="text" name="txtpresupuesto"  class="form-control col-2" id="presupuesto"><br>
                 ESTADO:<br>
                 <input type="text" name="txtestado"  class="form-control col-2" id="estado"><br>
+                BIT ADMIN<br>
+                <input type="text" name="txtadmin"  class="form-control col-2" id="admin"><br>
 
                 <input type="submit" name="accion" value="submit" class="btn btn-outline-success" id="botonEnviar">
 
