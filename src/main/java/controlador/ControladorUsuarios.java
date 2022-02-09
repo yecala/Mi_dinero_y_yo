@@ -99,7 +99,7 @@ public class ControladorUsuarios extends HttpServlet {
                 String password1 = request.getParameter("txtcontrasena");
                 String presupuesto1 = request.getParameter("txtpresupuesto");
                 String estado1 = request.getParameter("txtestado");
-                String bit_admin1 = request.getParameter("txtbit_admin1");
+                String bit_admin1 = request.getParameter("txtadmin");
                 
 
                 int bit_admin2 = Integer.parseInt(bit_admin1);
@@ -113,6 +113,7 @@ public class ControladorUsuarios extends HttpServlet {
                 us.setPassword(password1);
                 us.setPresupuesto_total(presupuestlolong);
                 us.setEstado(estado2);
+                us.setBit_admin(bit_admin2);
                 dao.actualizar(us);
                 request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
                 break;
@@ -137,7 +138,7 @@ public class ControladorUsuarios extends HttpServlet {
                 String password = request.getParameter("txtpassword");
                 String presupuesto = request.getParameter("txtpresupuesto");
                 String estado = request.getParameter("txtestado");
-                String bit_admin = request.getParameter("txtbit_admin");
+                String bit_admin = request.getParameter("txtadmin");
                 
                 int bit_admin3 = Integer.parseInt(bit_admin);
                 int id4 = Integer.parseInt(id);

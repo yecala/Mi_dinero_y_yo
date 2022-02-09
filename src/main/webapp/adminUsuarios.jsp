@@ -99,6 +99,7 @@
                     <th scope="col">CONTRASENA</th>
                     <th scope="col">PRESUPUESTO TOTAL</th>
                     <th scope="col">ESTADO</th>
+                    <th scope="col">BIT ADMIN</th>
                     <th scope="col">ACCIONES</th>
                 </tr>
             </thead>
@@ -108,11 +109,12 @@
             <c:forEach var="dato" items="${datos}">
                 <tr>
                    <td>${dato.getId_usuario()}</td>
-                    <td>${dato.getNombre_completo()}</td>
+                    <td>${dato.getNombre_usuario()}</td>
                     <td>${dato.getCorreo()}</td>
                     <td>${dato.getPassword()}</td>
                     <td>${dato.getPresupuesto_total()}</td>
                     <td>${dato.getEstado()}</td>
+                    <td>${dato.getBit_admin()}</td>
                     
                 <td>
                     <form action="ControladorUsuarios" method="POST">

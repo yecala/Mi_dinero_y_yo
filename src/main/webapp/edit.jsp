@@ -85,15 +85,17 @@
                 ID USUARIO:<br>
                 <input type="text" name="txtid" value="${usuario.getId_usuario()}" class="form-control col-2" id="idUs" required><br>
                 Nombre:<br>
-                <input type="text" name="txtnom" value="${usuario.getNombre_completo()}" class="form-control col-2" id="nombre" required><br>
+                <input type="text" name="txtnom" value="${usuario.getNombre_usuario()}" class="form-control col-2" id="nombre" required><br>
                 Correo:<br>
                 <input type="email" name="txtcorreo" value="${usuario.getCorreo()}"  class="form-control col-2"id="correo"  required><br>
                 Contrasena:<br>
-                <input type="password" name="txtcontrasena" value="${usuario.getPassword()}"  class="form-control col-2" id="password" required><br>
+                <input type="text" name="txtcontrasena" value="${usuario.getPassword()}"  class="form-control col-2" id="password" required><br>
                 Presupuesto total:<br>
                 <input type="text" name="txtpresupuesto" value="${usuario.getPresupuesto_total()}"  class="form-control col-2" id="presupuesto" required><br><br>
                 Estado:<br>
                 <input type="text" name="txtestado" value="${usuario.getEstado()}"  class="form-control col-2" id="estado" required><br><br>
+                Bit admin<br>
+                <input type="text" name="txtadmin" value="${usuario.getBit_admin()}"  class="form-control col-2" id="bit_admin" required><br><br>
                 <input type="submit" name="accion" value="Actualizar" class="btn btn-outline-warning" id="botonEnviar">
             </form>
         </div>
