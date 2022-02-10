@@ -77,18 +77,20 @@
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-
+                </form>
                 <%//                        
                     // Si el nombre de usuario o password es invalido muestra el siguiente mensaje
-                    String usuarioExistente = (String) request.getAttribute("usuarioExistente");
-                    if (usuarioExistente.equalsIgnoreCase(usuarioExistente)) {
+                    String usuarioExistente="usuarioInexistente";
+                    usuarioExistente = (String)  session.getAttribute("usuarioExistente");
+                    
+                    if (usuarioExistente.equals("usuarioExistente")) {
                         out.print("<br/>");
                         out.print("<center>");
                         out.print("<span style='color:red'>El email ya esta registrado</span>");
                         out.print("</center>");
                     }
                 %>
-            </form>
+            
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
