@@ -24,6 +24,10 @@
         <servlet-name>ControladorReportes</servlet-name>
         <servlet-class>controlador.ControladorReportes</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControladorIndex</servlet-name>
+        <servlet-class>controlador.ControladorIndex</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControladorRegistros</servlet-name>
         <url-pattern>/ControladorRegistros</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>ControladorReportes</servlet-name>
         <url-pattern>/ControladorReportes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorIndex</servlet-name>
+        <url-pattern>/ControladorIndex</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

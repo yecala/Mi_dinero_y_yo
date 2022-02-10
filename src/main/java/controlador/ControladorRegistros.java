@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.DAO.RegistroDAO;
 import modelo.DAO.UsuarioDAO;
 import modelo.POJO.Registro;
@@ -21,7 +22,7 @@ public class ControladorRegistros extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -51,7 +52,10 @@ public class ControladorRegistros extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setAttribute("usuarioExistente", "usuarioInexistente");
+        
+        HttpSession session = request.getSession();
+        session.setAttribute("usuarioExistente", "usuarioInexistente");
+        
         Registro registro = new Registro();
 
         registro.setNombre((String) request.getParameter("Name"));
@@ -62,11 +66,11 @@ public class ControladorRegistros extends HttpServlet {
 
         registro.setPresupuesto((Long.parseLong(presupuesto)));
         UsuarioDAO usuario = new UsuarioDAO();
-        
+
         RegistroDAO registroU = new RegistroDAO();
-        
+
         Usuario usuario2 = new Usuario();
-        
+
         usuario2 = usuario.obtenerUsuarioPorEmail(registro.getCorreo());
 
         try {
@@ -81,7 +85,7 @@ public class ControladorRegistros extends HttpServlet {
                 }
 
             } else {
-                request.setAttribute("usuarioExistente", "usuarioExistente");
+                session.setAttribute("usuarioExistente", "usuarioExistente");
 
                 // Se invoca la página login.jsp
                 RequestDispatcher vista = request.getRequestDispatcher("/registrarse.jsp");
