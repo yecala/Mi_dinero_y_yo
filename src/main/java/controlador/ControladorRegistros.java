@@ -37,7 +37,8 @@ public class ControladorRegistros extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+      
+        
     }
 
     /**
@@ -69,7 +70,8 @@ public class ControladorRegistros extends HttpServlet {
 
         RegistroDAO registroU = new RegistroDAO();
 
-        Usuario usuario2 = new Usuario();
+        Usuario usuario2;
+        usuario2 = new Usuario();
 
         usuario2 = usuario.obtenerUsuarioPorEmail(registro.getCorreo());
 
@@ -84,12 +86,6 @@ public class ControladorRegistros extends HttpServlet {
 
                 }
 
-            } else {
-                session.setAttribute("usuarioExistente", "usuarioExistente");
-
-                // Se invoca la página login.jsp
-                RequestDispatcher vista = request.getRequestDispatcher("/registrarse.jsp");
-                vista.forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();

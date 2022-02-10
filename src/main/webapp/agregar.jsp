@@ -85,19 +85,19 @@
 
             <form action="ControladorUsuarios" method="POST">
                 ID:<br>
-                <input type="text" name="txtid"  class="form-control col-2" id="idUs"><br>
+                <input type="text" name="txtid"  class="form-control col-2" id="idUs" required="" ><br>
                 NOMBRES:<br>
-                <input type="text" name="txtnombres"  class="form-control col-2" id="nombre"><br>
+                <input type="text" name="txtnombres"  class="form-control col-2" id="nombre" required=""><br>
                 CORREO:<br>
-                <input type="email" name="txtcorreo"  class="form-control col-2" id="correo"><br>
+                <input type="email" name="txtcorreo"  class="form-control col-2" id="correo" required=""><br>
                 PASSWORD:<br>
-                <input type="password" name="txtpassword"  class="form-control col-2" id="password"><br>
+                <input type="password" name="txtpassword"  class="form-control col-2" id="password" required=""><br>
                 PRESUPUESTO:<br>
-                <input type="text" name="txtpresupuesto"  class="form-control col-2" id="presupuesto"><br>
+                <input type="text" name="txtpresupuesto"  class="form-control col-2" id="presupuesto" required=""><br>
                 ESTADO:<br>
-                <input type="text" name="txtestado"  class="form-control col-2" id="estado"><br>
+                <input type="text" name="txtestado"  class="form-control col-2" id="estado" required=""><br>
                 BIT ADMIN<br>
-                <input type="text" name="txtadmin"  class="form-control col-2" id="admin"><br>
+                <input type="text" name="txtadmin"  class="form-control col-2" id="admin" required=""><br>
 
                 <input type="submit" name="accion" value="submit" class="btn btn-outline-success" id="botonEnviar">
 

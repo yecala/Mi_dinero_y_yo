@@ -60,12 +60,8 @@
                                         // Se invoca el método get del ControladorLogin con el parámetro registrese
                                         
 
-                                        //out.print("  <a class='btn btn-dark margin-left b_color' href='ControladorIndex?accion=registrarse' role='button'>Registrar</a>");
-%>
+                                        out.print("  <a class='btn btn-dark margin-left b_color' href='registrarse.jsp' role='button'>Registrar</a>");
 
-                                        <a class='btn btn-dark margin-left b_color' href='ControladorIndex?accion=registrarse' role='button'>Registrar</a>
-
-<%
                                     } else {
                                         // El usuario que está navegando está registrado o es administrador
                                         String nombreUsuario = (String) session.getAttribute("nombreUsuario");
