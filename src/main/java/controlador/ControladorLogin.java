@@ -104,7 +104,7 @@ public class ControladorLogin extends HttpServlet {
 
             Usuario usuario = daoUsuario.obtenerUsuarioPorEmail(email);
 
-            if ((usuario != null) && usuario.getPassword().equals(pass)) {
+            if ((usuario != null) && usuario.getPassword().equals(pass) && usuario.getEstado()==1) {
                 // El usuario ya está registrado
                 // Crea la sesión para el usuario
                 HttpSession session = request.getSession();
