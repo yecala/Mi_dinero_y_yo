@@ -37,7 +37,7 @@
                             <a class="nav-link active fw-bold fs-4" aria-current="page" href="index.jsp">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="categorias.html">Categorias</a>
+                            <a class="nav-link fw-bold fs-4" href="categorias.html">Categorías</a>
 
                         </li>
                         <li class="nav-item">
@@ -53,7 +53,7 @@
         </nav>
         <div  id="login" >
             <div class="col-12 col-s-12">
-                <h3>Iniciar sesion</h3>
+                <h3>Iniciar sesión</h3>
             </div>
             <form id="login_form" action="ControladorLogin" method="POST">
                 <div class="field_container">

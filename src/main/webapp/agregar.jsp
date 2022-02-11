@@ -46,7 +46,7 @@
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorias</a>
+                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorías</a>
 
                         </li>
 
@@ -60,7 +60,7 @@
 
         <section id="caja" class="caja">     
             <ul>
-                <li> <button id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesion</button></li>
+                <li> <button id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesión</button></li>
                 <li><b>Nombre</b></li>
                 <li>Correo</li>
                 <li>  </li>
@@ -68,7 +68,7 @@
 
                 <li> Presupuesto mensual <img class="editar" src="Img_menu/editar.png" alt="Editar"/></li>
                 <li> </li>
-                <li>Mis categorias</li>
+                <li>Mis categorías</li>
 
             </ul>
         </section>
@@ -99,7 +99,7 @@
                 BIT ADMIN<br>
                 <input type="text" name="txtadmin"  class="form-control col-2" id="admin"><br>
 
-                <input type="submit" name="accion" value="submit" class="btn btn-outline-success" id="botonEnviar">
+                <input type="submit" name="accion" value="Enviar" class="btn btn-outline-success" id="botonEnviar">
 
             </form>
         </div> 

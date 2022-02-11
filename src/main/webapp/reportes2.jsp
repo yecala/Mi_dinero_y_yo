@@ -23,7 +23,7 @@
 
         %>
 
-        <h3>Para ver los reportes debes iniciar sesion</h3>
+        <h3>Para ver los reportes debes iniciar sesión</h3>
         <%        } else {
         %> 
 

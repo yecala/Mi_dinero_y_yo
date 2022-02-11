@@ -50,7 +50,7 @@
                             
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorias</a>
+                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorías</a>
                            
                         </li>
                         
@@ -66,7 +66,7 @@
             
             
             <ul>
-                <li> <button id="cerrarSesion" onclick="cerrarSesion() "  href='ControladorLogin?registreseOcrear=logout'>Cerrar sesion </button></li>
+                <li> <button id="cerrarSesion" onclick="cerrarSesion() "  href='ControladorLogin?registreseOcrear=logout'>Cerrar sesión </button></li>
                 <li><b>Nombre</b></li>
                 <li>Correo</li>
                 <li>  </li>
@@ -74,7 +74,7 @@
 
                 <li> Presupuesto mensual <img class="editar" src="Img_menu/editar.png" alt="Editar"/></li>
                 <li> </li>
-                <li>Mis categorias</li>
+                <li>Mis categorías</li>
 
             </ul>
         </section>
@@ -86,7 +86,7 @@
         <br/><br/>
         
     <center>    
-        <h1 style="color: rgb(12, 213, 172)">Administrar categorias</h1><br>
+        <h1 style="color: rgb(12, 213, 172)">Administrar categorías</h1><br>
         <form action="ControladorCategorias" method="POST">
             
             <input type="submit" name="accion" value="Listar" class="btn btn-outline-primary">
@@ -114,7 +114,7 @@
                     <form action="ControladorCategorias" method="POST">
                         <input type="hidden" name="id" value="${dato.getId_categoria()}">
                         <input type="submit" name="accion" value="Editar" class="btn btn-outline-warning">
-                        <input type="submit" name="accion" value="Delete" class="btn btn-outline-danger">
+                        <input type="submit" name="accion" value="Eliminar" class="btn btn-outline-danger">
                         
                     </form>
                 </td>
