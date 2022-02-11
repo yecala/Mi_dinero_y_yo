@@ -117,7 +117,7 @@ public class ControladorUsuarios extends HttpServlet {
                 dao.actualizar(us);
                 request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
                 break;
-            case "Delete":
+            case "Eliminar":
                 String id2 = request.getParameter("id");
                 int id3 = Integer.parseInt(id2);
                 us.setId_usuario(id3);

@@ -37,7 +37,7 @@
                             <a class="nav-link active fw-bold fs-4" aria-current="page" href="index.jsp">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="categorias.jsp">Categorias</a>
+                            <a class="nav-link fw-bold fs-4" href="categorias.jsp">Categorías</a>
 
                         </li>
                         <li class="nav-item">
@@ -75,7 +75,7 @@
                     <input type="number" class="form-control" id="budget" name="budget" placeholder="Presupuesto total" required="">
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
                 </form>
                

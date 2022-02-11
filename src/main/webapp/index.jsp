@@ -26,7 +26,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light p-3">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"> 
-                    <span class="color fs-2 fw-bold ">Menu</span>
+                    <span class="color fs-2 fw-bold ">Menú</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,7 +38,7 @@
                             <a class="nav-link active fw-bold fs-4" aria-current="page" href="index.jsp">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="categorias.jsp">Categorias</a>
+                            <a class="nav-link fw-bold fs-4" href="categorias.jsp">Categorías</a>
 
                         </li>
                         <li class="nav-item">
@@ -85,7 +85,7 @@
 
 
 
-        <div class="  w-100 float-sm-start text-center fw-bold "><h2 class="consejo"> Consejo</h2></div>
+        <div class="  w-100 float-sm-start text-center fw-bold "><h2 class="consejo">Consejo</h2></div>
         <div class="  w-100 float-sm-start text-center bg-light pt-5 pb-5">
             <h4 > Si nunca has establecido un presupuesto 
                 de ingresos y gastos,<br> ¡ahora es el momento para comenzar! </h4></div>
