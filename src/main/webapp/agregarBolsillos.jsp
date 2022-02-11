@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     </head>
 
     <body>
@@ -108,7 +109,7 @@
                             <td>
                                 <div class="p-4 col-xs-3">
                                     <label for="ex2">Gasto real</label>
-                                    <input name="txtgasto" class="form-control" id="ex2" type="text" required="">
+                                    <input name="txtgasto" class="form-control" id="ex2" type="text" data-bs-toggle="tooltip" title="Si no has tenido un gasto pon 0 (cero)" required="">
                                 </div>
                             </td>
 
@@ -134,5 +135,13 @@
             %>
         </form>
 
+        <script>
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        </script>
     </body>
+    
 </html>
