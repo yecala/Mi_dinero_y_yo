@@ -47,17 +47,6 @@
                 %>
 
             </main>
-            <aside class="col-3 col-s-12">
-                <p><b>¿Qué?</b></p>
-                <p>Hotel Playa Blanca queda ubicado en la playa Taganga </p>
-                <p><b>¿Dónde?</b></p>
-                <p>Taganga es una playa del oceano Atlantico ubicada a 40 minutos de Santa Marta, Colombia</p>
-                <p><b>¿Cómo?</b></p>
-                <p>Puedes viajar en avión hasta Santa Marta y luego tomas un carro</p>
-            </aside>
-        </div>
-        <footer>
-            <p>Todos los derechos reservados &copy; 2020</p>
-        </footer>
+            
     </body>
 </html>

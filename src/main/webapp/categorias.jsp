@@ -23,7 +23,7 @@
     <body>
         <%@include file="navegacion.jsp" %>
     <center>
-        <div class=" col-s-12 col-12"><h1 class="titulo-categorias">Categorias</h1></div>
+        <div class=" col-s-12 col-12"><h1 class="titulo-categorias">Categorías</h1></div>
     </center>
     <br>
 
@@ -46,7 +46,7 @@
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=3&nomCate=Alimentacion" id="Alimentacion">
                     <img src="Img_Catego/Alimentacion.png" alt=""/><br>
-                    Alimentacion
+                    Alimentación
                 </a>
             </td>
             <td></td>
@@ -122,7 +122,7 @@
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=13&nomCate=Educacion" id="Educacion">
                     <img src="Img_Catego/Educacion.png" alt=""/><br>
-                    Educacion
+                    Educación
                 </a>
             </td>
             <td></td>

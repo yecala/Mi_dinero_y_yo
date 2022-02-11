@@ -127,7 +127,7 @@
             <%
             } else {
             %>
-            <h3>Debe iniciar sesion para guardar un bolsillo</h3>
+            <h3>Debe iniciar sesión para guardar un bolsillo</h3>
             <%
                 }
 
