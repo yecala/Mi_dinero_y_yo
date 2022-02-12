@@ -1,4 +1,11 @@
-<!doctype html>
+<%-- 
+    Document   : registrarse
+    Created on : 9 feb. 2022, 12:20:36
+    Author     : Usuario
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <!-- Required meta tags -->
@@ -27,49 +34,60 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="index.html">Inicio</a>
+                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="index.jsp">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="categorias.html">Categorias</a>
+                            <a class="nav-link fw-bold fs-4" href="categorias.jsp">Categorías</a>
 
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fw-bold fs-4" href="#">Reportes</a>
                         </li>
                     </ul>
-                    
+
 
                 </div>
             </div>
         </nav>
-        <div class="container">
+        <div class="container col-3">
             <div class="text-center">
                 <h1>Registrarse</h1>
             </div>
             <form action="ControladorRegistros" method="POST">
                 <div class="form-group">
-                    <label for="Name">Name</label>
-                    <input type="text" class="form-control" id="Name" name="Name"  placeholder="Enter name">
+                    <label for="Name">Nombre de usuario</label>
+                    <input type="text" class="form-control" id="Name" name="Name"  placeholder="Nombre de usuario">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" name="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <label for="exampleInputEmail1">Correo</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" name="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" name="exampleInputPassword1" placeholder="Password">
+                    <label for="exampleInputPassword1">Contraseña</label>
+                    <input type="password" class="form-control " id="exampleInputPassword1" name="exampleInputPassword1" placeholder="Contraseña">
                 </div>
                 <div class="form-group">
-                    <label for="confirmPass">Password</label>
-                    <input type="password" class="form-control" id="confirmPass" name="confirmPass" placeholder="Confirm password">
+                    <label for="confirmPass">Contraseña</label>
+                    <input type="password" class="form-control" id="confirmPass" name="confirmPass" placeholder="Confirme Contraseña">
                 </div>
                 <div class="form-group">
-                    <label for="budget">Add your budget</label>
-                    <input type="number" class="form-control" id="budget" name="budget" placeholder="Add your budget">
+                    <label for="budget">Presupuesto total</label>
+                    <input type="number" class="form-control" id="budget" name="budget" placeholder="Presupuesto total">
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
+
+                <%//                        
+                    // Si el nombre de usuario o password es invalido muestra el siguiente mensaje
+                    String usuarioExistente = (String) request.getAttribute("usuarioExistente");
+                    if (usuarioExistente.equalsIgnoreCase(usuarioExistente)) {
+                        out.print("<br/>");
+                        out.print("<center>");
+                        out.print("<span style='color:red'>El email ya esta registrado</span>");
+                        out.print("</center>");
+                    }
+                %>
             </form>
         </div>
 
@@ -78,3 +96,4 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
+

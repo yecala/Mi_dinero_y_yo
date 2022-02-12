@@ -41,5 +41,7 @@ function Mostrar() {
         }
 
         function cerrarSesion() {
-            document.location.href = "index.html";
+            document.location.href = "index.jsp";
+            
+            
         }

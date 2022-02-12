@@ -20,6 +20,7 @@
         <title>Administrar categorias</title>
         <link href="EstilosMenu.css" rel="stylesheet" type="text/css"/>
         <script src="scripts.js" type="text/javascript"></script>
+        <script defer src="ScriptValidacionesUsuarios.js" type="text/javascript"></script>
     </head>
     <body>
         <!--------------------------barra de navegacion--------------------------------------->
@@ -41,11 +42,11 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="adminUsuarios.jsp">USUARIOS</a>
+                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="adminUsuarios.jsp">Administrar usuarios</a>
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">CATEGORIAS</a>
+                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorías</a>
 
                         </li>
 
@@ -59,7 +60,7 @@
 
         <section id="caja" class="caja">     
             <ul>
-                <li> <button id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesion</button></li>
+                <li> <button id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesión</button></li>
                 <li><b>Nombre</b></li>
                 <li>Correo</li>
                 <li>  </li>
@@ -67,7 +68,7 @@
 
                 <li> Presupuesto mensual <img class="editar" src="Img_menu/editar.png" alt="Editar"/></li>
                 <li> </li>
-                <li>Mis categorias</li>
+                <li>Mis categorías</li>
 
             </ul>
         </section>
@@ -84,17 +85,21 @@
 
             <form action="ControladorUsuarios" method="POST">
                 ID:<br>
-                <input type="text" name="txtid"><br>
+                <input type="text" name="txtid"  class="form-control col-2" id="idUs"><br>
                 NOMBRES:<br>
-                <input type="text" name="txtnombres"><br>
+                <input type="text" name="txtnombres"  class="form-control col-2" id="nombre"><br>
                 CORREO:<br>
-                <input type="email" name="txtcorreo"><br>
+                <input type="email" name="txtcorreo"  class="form-control col-2" id="correo"><br>
                 PASSWORD:<br>
-                <input type="password" name="txtpassword"><br>
+                <input type="password" name="txtpassword"  class="form-control col-2" id="password"><br>
                 PRESUPUESTO:<br>
-                <input type="text" name="txtpresupuesto"><br>
+                <input type="text" name="txtpresupuesto"  class="form-control col-2" id="presupuesto"><br>
+                ESTADO:<br>
+                <input type="text" name="txtestado"  class="form-control col-2" id="estado"><br>
+                BIT ADMIN<br>
+                <input type="text" name="txtadmin"  class="form-control col-2" id="admin"><br>
 
-                <input type="submit" name="accion" value="submit">
+                <input type="submit" name="accion" value="Enviar" class="btn btn-outline-success" id="botonEnviar">
 
             </form>
         </div> 

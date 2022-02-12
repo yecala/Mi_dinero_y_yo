@@ -1,24 +1,31 @@
+<%-- 
+    Document   : login
+    Created on : 28 ene. 2022, 16:19:57
+    Author     : Usuario
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Mi dinero y yo</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-         <link href="EstilosInicio.css" rel="stylesheet" type="text/css"/> 
+        <link href="EstilosMenu.css" rel="stylesheet" type="text/css"/>
+        <link href="EstilosInicio.css" rel="stylesheet" type="text/css"/> 
     </head>
     <body>
+        <header class="col-12 col-s-12">
+           
+        </header><!-- comment -->
         <nav class="navbar navbar-expand-lg navbar-light barra_color p-3">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"> 
                     <span class="T_color fs-2 fw-bold ">Mi dinero y yo </span>
-                    <img class="img-fluid col-3" src="mano.png" alt=""/>
-
+                    <img class="img-fluid col-3" src="Img_menu/mano.png" alt=""/>
+                    
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,10 +34,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="index.html">Inicio</a>
+                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="index.jsp">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="categorias.html">Categorias</a>
+                            <a class="nav-link fw-bold fs-4" href="categorias.html">Categorías</a>
 
                         </li>
                         <li class="nav-item">
@@ -40,31 +47,25 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
 
 
-                    <!-- Menu desplegable perfil -->
-
-
-                    <img class="icono" src="usuario-de-perfil.png" alt="icono perfil" onclick="Mostrar_Ocultar()"/>
-                    <img class="icono" src="notificacion.png" alt="icono notificaciones" onclick="Mostrar_Ocultar2()" />
-
-                    <!-- Fin Menu desplegable perfil -->
+                    
                 </div>
             </div>
         </nav>
         <div  id="login" >
             <div class="col-12 col-s-12">
-                <h3>Iniciar sesion</h3>
+                <h3>Iniciar sesión</h3>
             </div>
-            <form id="login_form">
+            <form id="login_form" action="ControladorLogin" method="POST">
                 <div class="field_container">
-                    <input type="email" placeholder="Correo Electronico" required>
+                    <input name="email" id="email" type="email" placeholder="Correo Electronico" required>
                 </div>
 
                 <div class="field_container">
-                    <input type="Password" placeholder="Password" required>
+                    <input  name="pass" id ="pass" type="Password" placeholder="Password" required>
                     
                 </div>
                 <div>
-                    <button id="sign_in_button">
+                    <button type="submit" value="Enviar" name="enviar" id="sign_in_button">
                         <span class="button_text">Ingresar</span>
                     </button>
                 </div>
@@ -75,9 +76,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     </a>
                 </div>
 
-                
+                <%//                        
+                        // Si el nombre de usuario o password es invalido muestra el siguiente mensaje
+                        String usuarioInvalido = (String) request.getAttribute("usuarioInvalido");
+                        if (usuarioInvalido != null) {
+                            out.print("<br/>");
+                            out.print("<center>");
+                            out.print("<span style='color:red'>Email o password incorrectos</span>");
+                            out.print("</center>");
+                        }
+                    %>
             </form>
         </div>
 
+        
     </body>
 </html>

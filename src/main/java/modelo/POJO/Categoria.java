@@ -13,7 +13,9 @@ public class Categoria {
     String nombre_categoria;
     long presupuesto_categoria;
     long gasto_categoria;
-
+    
+    
+    
     public Categoria(int id_categoria, String nombre_categoria, long presupuesto_categoria, long gasto_categoria) {
         this.id_categoria = id_categoria;
         this.nombre_categoria = nombre_categoria;
@@ -21,8 +23,33 @@ public class Categoria {
         this.gasto_categoria = gasto_categoria;
     }
 
+    public Categoria(int id_categoria, String nombre_categoria) {
+        this.id_categoria = id_categoria;
+        this.nombre_categoria = nombre_categoria;
+       
+    }
+
     public Categoria() {
     }
+
+    
+    public long getPresupuesto_categoria() {
+        return presupuesto_categoria;
+    }
+
+    public void setPresupuesto_categoria(long presupuesto_categoria) {
+        this.presupuesto_categoria = presupuesto_categoria;
+    }
+
+    public long getGasto_categoria() {
+        return gasto_categoria;
+    }
+
+    public void setGasto_categoria(long gasto_categoria) {
+        this.gasto_categoria = gasto_categoria;
+    }
+
+    
 
     public int getId_categoria() {
         return id_categoria;
@@ -40,20 +67,6 @@ public class Categoria {
         this.nombre_categoria = nombre_categoria;
     }
 
-    public long getPresupuesto_categoria() {
-        return presupuesto_categoria;
-    }
-
-    public void setPresupuesto_categoria(long presupuesto_categoria) {
-        this.presupuesto_categoria = presupuesto_categoria;
-    }
-
-    public long getGasto_categoria() {
-        return gasto_categoria;
-    }
-
-    public void setGasto_categoria(long gasto_categoria) {
-        this.gasto_categoria = gasto_categoria;
-    }
+  
     
 }
