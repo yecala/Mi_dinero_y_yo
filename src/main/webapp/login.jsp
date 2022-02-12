@@ -18,14 +18,14 @@
     </head>
     <body>
         <header class="col-12 col-s-12">
-           
+
         </header><!-- comment -->
         <nav class="navbar navbar-expand-lg navbar-light barra_color p-3">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"> 
                     <span class="T_color fs-2 fw-bold ">Mi dinero y yo </span>
                     <img class="img-fluid col-3" src="Img_menu/mano.png" alt=""/>
-                    
+
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@
 
 
 
-                    
+
                 </div>
             </div>
         </nav>
@@ -62,33 +62,34 @@
 
                 <div class="field_container">
                     <input  name="pass" id ="pass" type="Password" placeholder="Password" required>
-                    
+
                 </div>
                 <div>
                     <button type="submit" value="Enviar" name="enviar" id="sign_in_button">
                         <span class="button_text">Ingresar</span>
                     </button>
                 </div>
+                <!-- comment 
                 <div>
-                    <a class="recupe" href="recuperar contra.html" >
+                    <a class="recupe" href="recuperarcontra.html" >
                         <small>Recuperar contraseña</small>
                         
                     </a>
                 </div>
-
+                -->
                 <%//                        
-                        // Si el nombre de usuario o password es invalido muestra el siguiente mensaje
-                        String usuarioInvalido = (String) request.getAttribute("usuarioInvalido");
-                        if (usuarioInvalido != null) {
-                            out.print("<br/>");
-                            out.print("<center>");
-                            out.print("<span style='color:red'>Email o password incorrectos</span>");
-                            out.print("</center>");
-                        }
-                    %>
+                    // Si el nombre de usuario o password es invalido muestra el siguiente mensaje
+                    String usuarioInvalido = (String) request.getAttribute("usuarioInvalido");
+                    if (usuarioInvalido != null) {
+                        out.print("<br/>");
+                        out.print("<center>");
+                        out.print("<span style='color:red'>Email o password incorrectos</span>");
+                        out.print("</center>");
+                    }
+                %>
             </form>
         </div>
 
-        
+
     </body>
 </html>

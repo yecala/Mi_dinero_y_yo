@@ -56,39 +56,30 @@
             <form action="ControladorRegistros" method="POST">
                 <div class="form-group">
                     <label for="Name">Nombre de usuario</label>
-                    <input type="text" class="form-control" id="Name" name="Name"  placeholder="Nombre de usuario">
+                    <input type="text" class="form-control" id="Name" name="Name"  placeholder="Nombre de usuario" required="">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Correo</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" name="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo">
+                    <input type="email" class="form-control" id="exampleInputEmail1" name="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo" required="">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Contraseña</label>
-                    <input type="password" class="form-control " id="exampleInputPassword1" name="exampleInputPassword1" placeholder="Contraseña">
+                    <input type="password" class="form-control " id="exampleInputPassword1" name="exampleInputPassword1" placeholder="Contraseña" required="">
                 </div>
                 <div class="form-group">
                     <label for="confirmPass">Contraseña</label>
-                    <input type="password" class="form-control" id="confirmPass" name="confirmPass" placeholder="Confirme Contraseña">
+                    <input type="password" class="form-control" id="confirmPass" name="confirmPass" placeholder="Confirme Contraseña" required="">
                 </div>
                 <div class="form-group">
                     <label for="budget">Presupuesto total</label>
-                    <input type="number" class="form-control" id="budget" name="budget" placeholder="Presupuesto total">
+                    <input type="number" class="form-control" id="budget" name="budget" placeholder="Presupuesto total" required="">
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
-
-                <%//                        
-                    // Si el nombre de usuario o password es invalido muestra el siguiente mensaje
-                    String usuarioExistente = (String) request.getAttribute("usuarioExistente");
-                    if (usuarioExistente.equalsIgnoreCase(usuarioExistente)) {
-                        out.print("<br/>");
-                        out.print("<center>");
-                        out.print("<span style='color:red'>El email ya esta registrado</span>");
-                        out.print("</center>");
-                    }
-                %>
-            </form>
+                </form>
+               
+            
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
