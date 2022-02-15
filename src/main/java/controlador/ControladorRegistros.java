@@ -37,8 +37,7 @@ public class ControladorRegistros extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
-        
+
     }
 
     /**
@@ -53,44 +52,77 @@ public class ControladorRegistros extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-     
-        
+        boolean contraSegura = false;
+        contraSegura = esSegura((String) request.getParameter("exampleInputPassword1"));
+
+        if(contraSegura){
         Registro registro = new Registro();
 
-        registro.setNombre((String) request.getParameter("Name"));
-        registro.setCorreo((String) request.getParameter("exampleInputEmail1"));
-        registro.setContraseña((String) request.getParameter("exampleInputPassword1"));
-        registro.setConfirmarContraseña((String) request.getParameter("confirmPass"));
-        String presupuesto = request.getParameter("budget");
+            registro.setNombre((String) request.getParameter("Name"));
+            registro.setCorreo((String) request.getParameter("exampleInputEmail1"));
+            registro.setContraseña((String) request.getParameter("exampleInputPassword1"));
+            registro.setConfirmarContraseña((String) request.getParameter("confirmPass"));
+            String presupuesto = request.getParameter("budget");
 
-        registro.setPresupuesto((Long.parseLong(presupuesto)));
-        UsuarioDAO usuario = new UsuarioDAO();
+            registro.setPresupuesto((Long.parseLong(presupuesto)));
+            UsuarioDAO usuario = new UsuarioDAO();
 
-        RegistroDAO registroU = new RegistroDAO();
+            RegistroDAO registroU = new RegistroDAO();
 
-        Usuario usuario2;
-        usuario2 = new Usuario();
+            Usuario usuario2;
+            usuario2 = new Usuario();
 
-        usuario2 = usuario.obtenerUsuarioPorEmail(registro.getCorreo());
+            usuario2 = usuario.obtenerUsuarioPorEmail(registro.getCorreo());
 
-        try {
-            if (registro.getContraseña().equals(registro.getConfirmarContraseña()) && usuario2.getId_usuario() == 0) {
+            try {
+                if (registro.getContraseña().equals(registro.getConfirmarContraseña()) && usuario2.getId_usuario() == 0) {
 
-                try {
-                    registroU.guardarUsuario(registro);
-                    response.sendRedirect("login.jsp");
-                } catch (SQLException ex) {
-                    Logger.getLogger(ControladorRegistros.class.getName()).log(Level.SEVERE, null, ex);
+                    try {
+                        registroU.guardarUsuario(registro);
+                        response.sendRedirect("login.jsp");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ControladorRegistros.class.getName()).log(Level.SEVERE, null, ex);
+
+                    }
+
+                } else {
+                    request.setAttribute("usuarioExistente", "ERROR: El correo ya esta registrado");
+                    request.getRequestDispatcher("registrarse.jsp").forward(request, response);
 
                 }
-
-            }else{
-                request.setAttribute("usuarioExistente", "ERROR: El correo ya esta registrado");
-                request.getRequestDispatcher("registrarse.jsp").forward(request, response);
-            
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        }else{
+            request.setAttribute("contraSegura", "ERROR: la contraseña debe tener mas de 8 caracteres, al menos una mayuscula y al menos un numero");
+            request.getRequestDispatcher("registrarse.jsp").forward(request, response);
+        }
+    }
+
+    public static boolean esSegura(String password) {
+        if (password.length() > 8) {
+            boolean mayuscula = false;
+            boolean numero = false;
+            char c;
+            for (int i = 0; i < password.length(); i++) {
+                c = password.charAt(i);
+                if (Character.isDigit(c)) {
+                    numero = true;
+                }
+                if (Character.isUpperCase(c)) {
+                    mayuscula = true;
+                }
+
+            }
+            if (numero && mayuscula) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } else {
+            return false;
         }
     }
 
