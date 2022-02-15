@@ -53,9 +53,7 @@ public class ControladorRegistros extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        HttpSession session = request.getSession();
-        session.setAttribute("usuarioExistente", "usuarioInexistente");
+     
         
         Registro registro = new Registro();
 
@@ -86,6 +84,10 @@ public class ControladorRegistros extends HttpServlet {
 
                 }
 
+            }else{
+                request.setAttribute("usuarioExistente", "ERROR: El correo ya esta registrado");
+                request.getRequestDispatcher("registrarse.jsp").forward(request, response);
+            
             }
         } catch (Exception e) {
             e.printStackTrace();

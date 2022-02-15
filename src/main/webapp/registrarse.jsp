@@ -77,7 +77,10 @@
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
+                <h3 style="color: #e73122;">${usuarioExistente}</h3>
+                
                 </form>
+            
                
             
         </div>
