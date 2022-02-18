@@ -62,15 +62,17 @@
 
                 </div>  
                 <div class="col-2">
+
                     <span id="iconos" >       
-                        <img id="perfil" class="icono " src="Img_menu/usuario-de-perfil.png" alt="icono perfil" onclick="Mostrar_Ocultar()" />
+
+                        <img id="perfil" class="icono " src="Img_menu/usuario-de-perfil.png" alt="icono perfil"  onclick="Mostrar_Ocultar()" />
+
                         <img id="notificaciones" class="icono " src="Img_menu/notificacion.png" alt="icono notificaciones" onclick="Mostrar_Ocultar2()" />
                     </span> 
+
                 </div>
                 <%
                     }
-
-
                 %>    
 
 
@@ -95,27 +97,17 @@
                     </a>
                 </li>
                 <!--<li> <button type="submit" id="cerrarSesion" onclick="cerrarSesion()"  >Cerrar sesion</button></li>-->
-
-                <li><b>Nombre</b></li>
-                <li>Correo</li>
-                <li>  </li>
-                <li> Cambiar contraseña  <img class="editar" src="Img_menu/editar.png" alt="Editar"/> </li>
-
-                <li> Presupuesto mensual <img class="editar" src="Img_menu/editar.png" alt="Editar"/></li>
-                <li> </li>
-                <li>Mis categorías</li>
-
+                <li><a href="ControladorPerfil?accion=Listar">Ver Perfil<img class="editar" src="Img_menu/editar.png" alt="Editar"/></a> </li>
             </ul>
         </section>
         <!--</form>--->
 
         <section id="caja2" class="caja2"> 
-            
-            
+
+
             <h3 id="tituloNoti">Notificaciones</h3>
-            
-            <% 
-                String Notificacion=(String) session.getAttribute("Notificacion");
+
+            <%                String Notificacion = (String) session.getAttribute("Notificacion");
                 out.print(Notificacion);
             %>
         </section> 

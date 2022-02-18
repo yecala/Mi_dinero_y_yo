@@ -70,7 +70,9 @@
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=5&nomCate=Transporte" id="Transporte">
                     <img src="Img_Catego/Transporte.png" alt=""/><br>
-                    Transporte
+                    <span class="text-center" data-bs-toggle="tooltip" 
+                          title="Recuerda destinar el 55% de tu presupuesto para gastos 
+                          indispensables del hogar como facturas, comida, transporte etc."> Transporte </span>
                 </a>
             </td>
         </tr>
