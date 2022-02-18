@@ -185,6 +185,13 @@
 
 
     </table>
+    <br><!-- comment -->
+    <center>
+        <span style=" font-size: 10px">
+        Imagenes tomadas de: www.flaticon.es 
+        Para más información ver referencias del documento
+        </span>
+    </center>
     <script>
         // Initialize tooltips
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));

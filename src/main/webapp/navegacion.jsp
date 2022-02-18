@@ -104,17 +104,34 @@
 
         <section id="caja2" class="caja2"> 
 
+            <h3 id="tituloNoti"><span class="text-center" data-bs-toggle="tooltip" 
+                  title="Las notificaciones te diran si estas conservando tu presupuesto 
+                  o cuando hayas gastado de más, así podrás controlar tus gastos"> 
+                Notificaciones 
+            </span></h3>
 
-            <h3 id="tituloNoti">Notificaciones</h3>
 
-            <%                String Notificacion = (String) session.getAttribute("Notificacion");
-                out.print(Notificacion);
+            <%
+                String Notificacion = (String) session.getAttribute("Notificacion");
+
+                if (Notificacion == null) {
+                    out.println("No tienes notificaciones. ");
+                    out.println("Pd. Las notificaciones se activan cuando ves tus reportes");
+                } else {
+                    out.print(Notificacion);
+                }
             %>
         </section> 
 
 
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+        <script>
+                            // Initialize tooltips
+                            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                                return new bootstrap.Tooltip(tooltipTriggerEl);
+                            });
+        </script>
     </body>
 </html>
