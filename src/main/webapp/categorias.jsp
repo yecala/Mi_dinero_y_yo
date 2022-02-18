@@ -40,21 +40,30 @@
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=2&nomCate=Salud" id="Salud">
                     <img src="Img_Catego/Salud.png" alt=""/><br>
-                    Salud
+                    <span class="text-center" data-bs-toggle="tooltip" 
+                          title="Recuerda destinar el 10% de tu presupuesto a un bolsillo, puede ser un viaje, una casa, un coche 
+                          y practicamente sin enterarte estaras contruyendo tu fondo de emergencia"> Salud </span>
+                    
                 </a>
             </td>
             <td></td>
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=3&nomCate=Alimentacion" id="Alimentacion">
                     <img src="Img_Catego/Alimentacion.png" alt=""/><br>
-                    Alimentación
+                    <span class="text-center" data-bs-toggle="tooltip" 
+                          title="Recuerda destinar el 55% de tu presupuesto para gastos 
+                          indispensables del hogar como facturas, alimentacion, transporte etc."> Alimentación </span>
+                    
                 </a>
             </td>
             <td></td>
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=4&nomCate=Viajes" id="Viajes">
                     <img src="Img_Catego/Viajes.png" alt=""/><br>
-                    Viajes
+                    <span class="text-center" data-bs-toggle="tooltip" 
+                          title="debes destinar un 10% de tus ingresos para actividades de ocio o viajes,
+                          así no tendras que privarte de alguna salida con amigos o un viaje con tu familia"> Viajes </span>
+                    
                 </a>
             </td>
             <td></td>
@@ -70,35 +79,50 @@
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=6&nomCate=Cuidado" id="Cuidado">
                     <img src="Img_Catego/Cuidado personal.png" alt=""/><br>
-                    Cuidado
+                    <span class="text-center" data-bs-toggle="tooltip" 
+                          title="recuerda destinar un 10% de tus ingresos para tu cuidado y uso personal
+                          es sano consentirse te lo mereces"> Cuidado </span>
+                    
                 </a>
             </td>
             <td></td>
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=7&nomCate=Antojos" id="Antojos">
                     <img src="Img_Catego/Antojos.png" alt=""/><br>
-                    <span class="text-center"> Antojos </span>
+                    <span class="text-center" data-bs-toggle="tooltip" 
+                          title="Debes destinar un 10% de tus ingresos para el ocio
+                          con este dinero podras ir al cine, comer un helado, salir de fiesta etc."> Antojos </span>
                 </a>
             </td>
             <td></td>
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=8&nomCate=Hobbies" id="Hobbies">
                     <img src="Img_Catego/Hobbies.png" alt=""/><br>
-                    Hobbies
+                    <span class="text-center" data-bs-toggle="tooltip" 
+                          title="Recuerda destinar un 10% de tus ingresos para tus hoobies
+                          con este dinero puedes disfrutar de lo que te gusta sin gastar de mas etc."> Hobbies </span>
+                    
                 </a>
             </td>
             <td></td>
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=9&nomCate=Mascotas" id="Mascotas">
                     <img src="Img_Catego/Mascotas.png" alt=""/><br>
-                    Mascotas
+                    <span class="text-center" data-bs-toggle="tooltip" 
+                          title="Recuerda que es importante tener fondos adicionales para una emergencia 
+                          que pueda ocurrir con tu mascota."> Mascotas </span>
+                    
                 </a>
             </td>
             <td></td>
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=10&nomCate=Prestamos" id="Viajes">
                     <img src="Img_Catego/Prestamos.png" alt=""/><br>
-                    Prestamos
+                    <span class="text-center" data-bs-toggle="tooltip" 
+                          title="Guarda cada mes un 10 por ciento de tus ingresos 
+                          y cuando tengas una determinada cantidad,evalúa las diferentes opciones
+                          y escoge la que mejor se adecúe a tus necesidades"> Prestamos </span>
+                    
                 </a>
             </td>
             <td></td>
@@ -109,35 +133,49 @@
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=11&nomCate=Inversiones" id="Inversiones">
                     <img src="Img_Catego/Inversiones.png" alt=""/><br>
-                    Inversiones
+                    <span class="text-center" data-bs-toggle="tooltip" 
+                          title=" Es importante y se recomienda  poder sacar partido de tu dinero
+                          y que te vaya generando ingresos"> Inversiones </span>
+                    
                 </a>
             </td>
             <td></td>
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=12&nomCate=Regalos" id="Regalos">
                     <img src="Img_Catego/Regalos y donativos.png" alt=""/><br>
-                    <span class="text-center"> Regalos y donativos </span>
+                    <span class="text-center" data-bs-toggle="tooltip" 
+                          title="Recuerda destinar el 55% de tu presupuesto para gastos 
+                          indispensables del hogar como facturas, comida, transporte etc."> Regalos y donativos </span>
                 </a>
             </td>
             <td></td>
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=13&nomCate=Educacion" id="Educacion">
                     <img src="Img_Catego/Educacion.png" alt=""/><br>
-                    Educación
+                    <span class="text-center" data-bs-toggle="tooltip" 
+                          title="Recuerda destinar el 55% de tu presupuesto para gastos 
+                          indispensables del hogar como facturas, comida, transporte etc."> Educación </span>
+                    
                 </a>
             </td>
             <td></td>
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=14&nomCate=Imprevistos" id="Imprevistos">
                     <img src="Img_Catego/Imprevistos.png" alt=""/><br>
-                    Imprevistos
+                    <span class="text-center" data-bs-toggle="tooltip" 
+                          title="Recuerda destinar el 55% de tu presupuesto para gastos 
+                          indispensables del hogar como facturas, comida, transporte etc."> Imprevistos </span>
+                    
                 </a>
             </td>
             <td></td>
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=15&nomCate=Ahorros" id="Ahorros">
                     <img src="Img_Catego/Ahorros.png" alt=""/><br>
-                    Ahorros
+                    <span class="text-center" data-bs-toggle="tooltip" 
+                          title="Recuerda destinar el 55% de tu presupuesto para gastos 
+                          indispensables del hogar como facturas, comida, transporte etc."> Ahorros </span>
+                    
                 </a>
             </td>
             <td></td>
