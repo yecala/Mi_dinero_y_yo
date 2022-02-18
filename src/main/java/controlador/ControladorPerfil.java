@@ -106,7 +106,8 @@ public class ControladorPerfil extends HttpServlet {
                 }
                 
                 break;
-        
+                
+            
         }
     }
 
@@ -121,41 +122,25 @@ public class ControladorPerfil extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*HttpSession session = request.getSession();
-
+        HttpSession session = request.getSession();
+    /*
         String id_usuario = (String) session.getAttribute("idUsuario");
-        
+        */
         String accion = request.getParameter("accion");
         switch(accion){
-            case "Listar":
+            case "Recuperar":
+                String correo = request.getParameter("txtcorreo");
                 
-                Usuario u = dao.ListarId(id_usuario);
-                request.setAttribute("usuario", u);
-                request.getRequestDispatcher("navegacion.jsp").forward(request, response);
-                break;
-            case "Editar":
+                Usuario usuario=dao.obtenerUsuarioPorEmail(correo);
                 
-                Usuario usu = dao.ListarId(id_usuario);
-                request.setAttribute("usuario", usu);
-                request.getRequestDispatcher("perfil.jsp").forward(request, response);
-                break;
-
-            case "Actualizar":
+                String contra= usuario.getPassword();
                 
-                String nom = request.getParameter("txtnom");
-                String pass = request.getParameter("txtpass");
-                String presupuesto1 = request.getParameter("txtpresupuesto");
-               
-                us.setId_usuario(Integer.parseInt(id_usuario));
-                us.setNombre_usuario(nom);
-                us.setPassword(pass);
-                us.setPresupuesto_total(Long.parseLong(presupuesto1));
-               
-                dao.actualizarPerfil(us);
-                request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
+                request.setAttribute("usuario", usuario);
+                
+                request.getRequestDispatcher("recuperarContra.jsp").forward(request, response);
                 break;
         
-        }*/
+        }
     }
 
     /**
