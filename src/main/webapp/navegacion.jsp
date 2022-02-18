@@ -116,7 +116,7 @@
 
                 if (Notificacion == null) {
                     out.println("No tienes notificaciones. ");
-                    out.println("Pd. Las notificaciones se activan cuando ves tus reportes");
+                    out.println("Las notificaciones se activan cuando ves tus reportes");
                 } else {
                     out.print(Notificacion);
                 }
