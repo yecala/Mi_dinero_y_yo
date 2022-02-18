@@ -65,8 +65,7 @@
                                     } else {
                                         // El usuario que está navegando está registrado o es administrador
                                         String nombreUsuario = (String) session.getAttribute("nombreUsuario");
-
-                                        out.print("Hola " + nombreUsuario);
+                                        out.print("Bienvenido  " + nombreUsuario);
                                     }
 
                                 %>
