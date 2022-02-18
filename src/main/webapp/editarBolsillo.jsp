@@ -87,13 +87,13 @@
                                     <td>
                                         <div class=" p-4 col-xs-3">
                                             <label for="ex2">Presupuesto</label>
-                                            <input value="${Bolsillo.getPresupuesto_bolsillo()}" name="txtpresupuesto" class="form-control" id="ex2" type="text" required="">
+                                            <input value="${Bolsillo.getPresupuesto_bolsillo()}" name="txtpresupuesto" class="form-control" id="ex2" type="number" required="">
                                         </div>
                                     </td>
                                     <td>
                                         <div class="p-4 col-xs-3">
                                             <label for="ex2">Gasto real</label>
-                                            <input value="${Bolsillo.getGasto_bolsillo()}" name="txtgasto" class="form-control" id="ex2" type="text" required="">
+                                            <input value="${Bolsillo.getGasto_bolsillo()}" name="txtgasto" class="form-control" id="ex2" type="number" required="">
                                             
                                         </div>
                                     </td>

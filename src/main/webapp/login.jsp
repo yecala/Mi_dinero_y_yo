@@ -37,8 +37,7 @@
                             <a class="nav-link active fw-bold fs-4" aria-current="page" href="index.jsp">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="categorias.html">Categorías</a>
-
+                            <a class="nav-link fw-bold fs-4" href="categorias.jsp">Categorías</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fw-bold fs-4" href="#">Reportes</a>
