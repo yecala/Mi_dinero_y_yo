@@ -50,7 +50,7 @@
                             
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorias</a>
+                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorías</a>
                            
                         </li>
                         
@@ -64,7 +64,7 @@
 
         <section id="caja" class="caja">     
             <ul>
-                <li> <button id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesion</button></li>
+                <li> <button id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesión</button></li>
                 <li><b>Nombre</b></li>
                 <li>Correo</li>
                 <li>  </li>
@@ -72,7 +72,7 @@
 
                 <li> Presupuesto mensual <img class="editar" src="Img_menu/editar.png" alt="Editar"/></li>
                 <li> </li>
-                <li>Mis categorias</li>
+                <li>Mis categorías</li>
 
             </ul>
         </section>
@@ -99,6 +99,7 @@
                     <th scope="col">CONTRASENA</th>
                     <th scope="col">PRESUPUESTO TOTAL</th>
                     <th scope="col">ESTADO</th>
+                    <th scope="col">BIT ADMIN</th>
                     <th scope="col">ACCIONES</th>
                 </tr>
             </thead>
@@ -108,17 +109,18 @@
             <c:forEach var="dato" items="${datos}">
                 <tr>
                    <td>${dato.getId_usuario()}</td>
-                    <td>${dato.getNombre_completo()}</td>
+                    <td>${dato.getNombre_usuario()}</td>
                     <td>${dato.getCorreo()}</td>
                     <td>${dato.getPassword()}</td>
                     <td>${dato.getPresupuesto_total()}</td>
                     <td>${dato.getEstado()}</td>
+                    <td>${dato.getBit_admin()}</td>
                     
                 <td>
                     <form action="ControladorUsuarios" method="POST">
                         <input type="hidden" name="id" value="${dato.getId_usuario()}">
                         <input type="submit" name="accion" value="Editar" class="btn btn-outline-warning">
-                        <input type="submit" name="accion" value="Delete" class="btn btn-outline-danger">
+                        <input type="submit" name="accion" value="Eliminar" class="btn btn-outline-danger">
                         
                     </form>
                 </td>

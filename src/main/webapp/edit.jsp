@@ -44,7 +44,7 @@
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorias</a>
+                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorías</a>
 
                         </li>
 
@@ -58,7 +58,7 @@
 
         <section id="caja" class="caja">     
             <ul>
-                <li> <button id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesion</button></li>
+                <li> <button id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesión</button></li>
                 <li><b>Nombre</b></li>
                 <li>Correo</li>
                 <li>  </li>
@@ -66,7 +66,7 @@
 
                 <li> Presupuesto mensual <img class="editar" src="Img_menu/editar.png" alt="Editar"/></li>
                 <li> </li>
-                <li>Mis categorias</li>
+                <li>Mis categorías</li>
 
             </ul>
         </section>
@@ -83,17 +83,19 @@
         <div>
             <form action="ControladorUsuarios" method="POST" >
                 ID USUARIO:<br>
-                <input type="text" name="txtid" value="${usuario.getId_usuario()}" class="form-control col-2" id="idUs" required><br>
+                <input type="text" name="txtid" disabled="" value="${usuario.getId_usuario()}" class="form-control col-2" id="idUs" required><br>
                 Nombre:<br>
-                <input type="text" name="txtnom" value="${usuario.getNombre_completo()}" class="form-control col-2" id="nombre" required><br>
+                <input type="text" name="txtnom" value="${usuario.getNombre_usuario()}" class="form-control col-2" id="nombre" required><br>
                 Correo:<br>
                 <input type="email" name="txtcorreo" value="${usuario.getCorreo()}"  class="form-control col-2"id="correo"  required><br>
                 Contrasena:<br>
-                <input type="password" name="txtcontrasena" value="${usuario.getPassword()}"  class="form-control col-2" id="password" required><br>
+                <input type="text" name="txtcontrasena" value="${usuario.getPassword()}"  class="form-control col-2" id="password" required><br>
                 Presupuesto total:<br>
                 <input type="text" name="txtpresupuesto" value="${usuario.getPresupuesto_total()}"  class="form-control col-2" id="presupuesto" required><br><br>
                 Estado:<br>
                 <input type="text" name="txtestado" value="${usuario.getEstado()}"  class="form-control col-2" id="estado" required><br><br>
+                Bit admin<br>
+                <input type="text" name="txtadmin" value="${usuario.getBit_admin()}"  class="form-control col-2" id="bit_admin" required><br><br>
                 <input type="submit" name="accion" value="Actualizar" class="btn btn-outline-warning" id="botonEnviar">
             </form>
         </div>

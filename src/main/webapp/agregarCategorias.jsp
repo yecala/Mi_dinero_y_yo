@@ -45,7 +45,7 @@
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorias</a>
+                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorías</a>
 
                         </li>
 
@@ -59,7 +59,7 @@
 
         <section id="caja" class="caja">     
             <ul>
-                <li> <button id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesion</button></li>
+                <li> <button id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesión</button></li>
                 <li><b>Nombre</b></li>
                 <li>Correo</li>
                 <li>  </li>
@@ -84,11 +84,11 @@
 
             <form action="ControladorCategorias" method="POST">
                 ID:<br>
-                <input type="text" name="txtid" id="idcat"><br>
+                <input type="text" name="txtid" id="idcat" required=""><br>
                 NOMBRE:<br>
-                <input type="text" name="txtnombres" id="nombre" ><br>
+                <input type="text" name="txtnombres" id="nombre" required=""><br>
                 
-                <input type="submit" name="accion" value="submit" class="btn btn-outline-success" id="botonEnviar">
+                <input type="submit" name="accion" value="Enviar" class="btn btn-outline-success" id="botonEnviar">
 
             </form>
         </div> 

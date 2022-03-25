@@ -142,7 +142,7 @@ public class ControladorCategorias extends HttpServlet {
                 dao.actualizar(cate);
                 request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
                 break;
-            case "Delete":
+            case "Eliminar":
                 String id2 = request.getParameter("id");
                 int num_bolsillos = dao.num_bolsillos(id2);
                 if (num_bolsillos > 0) {
@@ -161,7 +161,7 @@ public class ControladorCategorias extends HttpServlet {
                 request.getRequestDispatcher("agregarCategorias.jsp").forward(request, response);
                 break;
 
-            case "submit":
+            case "Enviar":
 
                 String id = request.getParameter("txtid");
                 String nombres = request.getParameter("txtnombres");

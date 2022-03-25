@@ -39,7 +39,7 @@
 
         %>
 
-        <h3>Para ver los reportes debes iniciar sesion</h3>
+        <h3>Para ver los reportes debes iniciar sesión</h3>
         <%        } else {
         %> 
         <br>
@@ -50,9 +50,7 @@
 
             <input type="submit" name="accion" value="Listar" class="btn btn-outline-primary">
 
-            <a href="reportes2.jsp">
-                <input type="submit" name="accion" value="Ver detalles" class="btn btn-outline-primary">
-            </a>
+            
         </form> 
         <br/>
         <center>
