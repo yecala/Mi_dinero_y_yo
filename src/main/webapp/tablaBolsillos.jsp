@@ -115,13 +115,13 @@
                                 <td>
                                     <div class=" p-4 col-xs-3">
                                         <label for="ex2">Presupuesto</label>
-                                        <input name="txtpresupuesto" class="form-control" id="inputpresu" type="text" value="${dato.getPresupuesto_bolsillo()}" disabled="">
+                                        <input name="txtpresupuesto" class="form-control" id="inputpresu" type="number" value="${dato.getPresupuesto_bolsillo()}" disabled="">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="p-4 col-xs-3">
                                         <label for="ex2">Gasto real</label>
-                                        <input name="txtgasto" class="form-control" id="inputgasto" type="text" value="${dato.getGasto_bolsillo()}" disabled="">
+                                        <input name="txtgasto" class="form-control" id="inputgasto" type="number" value="${dato.getGasto_bolsillo()}" disabled="">
                                     </div>
                                 </td>
                                 <td>

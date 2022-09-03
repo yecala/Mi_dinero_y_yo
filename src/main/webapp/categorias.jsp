@@ -52,7 +52,7 @@
                     <img src="Img_Catego/Alimentacion.png" alt=""/><br>
                     <span class="text-center" data-bs-toggle="tooltip" 
                           title="Recuerda destinar el 55% de tu presupuesto para gastos 
-                          indispensables del hogar como facturas, alimentacion, transporte etc."> Alimentación </span>
+                          indispensables del hogar como facturas, alimentación, transporte etc."> Alimentación </span>
                     
                 </a>
             </td>
@@ -70,7 +70,9 @@
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=5&nomCate=Transporte" id="Transporte">
                     <img src="Img_Catego/Transporte.png" alt=""/><br>
-                    Transporte
+                    <span class="text-center" data-bs-toggle="tooltip" 
+                          title="Recuerda destinar el 55% de tu presupuesto para gastos 
+                          indispensables del hogar como facturas, comida, transporte etc."> Transporte </span>
                 </a>
             </td>
         </tr>
@@ -183,6 +185,13 @@
 
 
     </table>
+    <br><!-- comment -->
+    <center>
+        <span style=" font-size: 10px">
+        Imagenes tomadas de: www.flaticon.es 
+        Para más información ver referencias del documento
+        </span>
+    </center>
     <script>
         // Initialize tooltips
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
