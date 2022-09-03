@@ -68,14 +68,14 @@
                         <span class="button_text">Ingresar</span>
                     </button>
                 </div>
-                
+                <!-- comment 
                 <div>
                     <a class="recupe" href="recuperarContra.jsp" >
                         <small>Recuperar contraseña</small>
                         
                     </a>
                 </div>
-                
+                -->
                 <%//                        
                     // Si el nombre de usuario o password es invalido muestra el siguiente mensaje
                     String usuarioInvalido = (String) request.getAttribute("usuarioInvalido");
