@@ -83,7 +83,7 @@
         <div>
             <form action="ControladorUsuarios" method="POST" >
                 ID USUARIO:<br>
-                <input type="text" name="txtid"  value="${usuario.getId_usuario()}" class="form-control col-2" id="idUs" required><br>
+                <input type="text" name="txtid" disabled="" value="${usuario.getId_usuario()}" class="form-control col-2" id="idUs" required><br>
                 Nombre:<br>
                 <input type="text" name="txtnom" value="${usuario.getNombre_usuario()}" class="form-control col-2" id="nombre" required><br>
                 Correo:<br>

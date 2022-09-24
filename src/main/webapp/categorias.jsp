@@ -52,7 +52,7 @@
                     <img src="Img_Catego/Alimentacion.png" alt=""/><br>
                     <span class="text-center" data-bs-toggle="tooltip" 
                           title="Recuerda destinar el 55% de tu presupuesto para gastos 
-                          indispensables del hogar como facturas, alimentación, transporte etc."> Alimentación </span>
+                          indispensables del hogar como facturas, alimentacion, transporte etc."> Alimentación </span>
                     
                 </a>
             </td>
