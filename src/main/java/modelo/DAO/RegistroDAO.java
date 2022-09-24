@@ -30,7 +30,6 @@ public class RegistroDAO {
     }
     
      public void guardarUsuario(Registro usuario) throws SQLException {
-       
         try {
             String sql = "INSERT INTO US_DINERO.USUARIOS"
                     + "(ID_USUARIO,NOMBRE_USUARIO, CORREO, PASSWORD, PRESUPUESTO_TOTAL,ESTADO,BIT_ADMIN)"
