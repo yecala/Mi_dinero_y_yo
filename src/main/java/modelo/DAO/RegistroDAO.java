@@ -38,7 +38,6 @@ public class RegistroDAO {
 
             con = c.conectar();
             ps = con.prepareStatement(sql);
-            
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getCorreo());
             ps.setString(3, usuario.getContraseña());
