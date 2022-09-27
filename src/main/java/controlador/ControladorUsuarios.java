@@ -130,7 +130,7 @@ public class ControladorUsuarios extends HttpServlet {
                 break;
                 
                 
-            case "submit":
+            case "Enviar":
                 
                 String id = request.getParameter("txtid");
                 String nombres = request.getParameter("txtnombres");
