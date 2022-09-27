@@ -84,9 +84,9 @@
 
             <form action="ControladorCategorias" method="POST">
                 ID:<br>
-                <input type="text" name="txtid" id="idcat"><br>
+                <input type="text" name="txtid" id="idcat" required=""><br>
                 NOMBRE:<br>
-                <input type="text" name="txtnombres" id="nombre" ><br>
+                <input type="text" name="txtnombres" id="nombre" required=""><br>
                 
                 <input type="submit" name="accion" value="Enviar" class="btn btn-outline-success" id="botonEnviar">
 

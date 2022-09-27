@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.POJO.Registro;
 import modelo.POJO.Usuario;
+import modelo.utilidades.Conexion;
 import modelo.utilidades.DBUtil;
 
 /**
@@ -20,19 +21,22 @@ import modelo.utilidades.DBUtil;
  */
 public class RegistroDAO {
     //private Connection conexion;
- 
+    PreparedStatement ps;
+    ResultSet rs;
+    Conexion c = new Conexion();
+    Connection con;
 
     public RegistroDAO() {
     }
     
      public void guardarUsuario(Registro usuario) throws SQLException {
-       
         try {
             String sql = "INSERT INTO US_DINERO.USUARIOS"
                     + "(ID_USUARIO,NOMBRE_USUARIO, CORREO, PASSWORD, PRESUPUESTO_TOTAL,ESTADO,BIT_ADMIN)"
                     + "VALUES(1,?,?,?,?,1,0)";
-            Connection conexion =  DBUtil.getConexion();
-            PreparedStatement ps = conexion.prepareStatement(sql);
+
+            con = c.conectar();
+            ps = con.prepareStatement(sql);
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getCorreo());
             ps.setString(3, usuario.getContraseña());
@@ -42,7 +46,7 @@ public class RegistroDAO {
             System.out.println("inserto "+respuesta); //1 inserto 0 no inserto
             
             ps.close();
-            conexion.close();
+            con.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
