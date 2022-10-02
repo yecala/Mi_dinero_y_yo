@@ -85,6 +85,7 @@
 
             <form action="ControladorUsuarios" method="POST">
                 ID:<br>
+                <div class="field_container">
                 <input type="text" name="txtid"  class="form-control col-2" id="idUs" required="" ><br>
                 NOMBRES:<br>
                 <input type="text" name="txtnombres"  class="form-control col-2" id="nombre" required=""><br>
@@ -98,7 +99,7 @@
                 <input type="text" name="txtestado"  class="form-control col-2" id="estado" required=""><br>
                 BIT ADMIN<br>
                 <input type="text" name="txtadmin"  class="form-control col-2" id="admin" required=""><br>
-
+                </div>
                 <input type="submit" name="accion" value="Enviar" class="btn btn-outline-success" id="botonEnviar">
 
             </form>

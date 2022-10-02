@@ -83,11 +83,13 @@
             </div>
 
             <form action="ControladorCategorias" method="POST">
+                <div class="field_container">
                 ID:<br>
-                <input type="text" name="txtid" id="idcat" required=""><br>
-                NOMBRE:<br>
-                <input type="text" name="txtnombres" id="nombre" required=""><br>
+                <input type="text" name="txtid" id="idcat" class="form-control col-2"  required=""><br>
                 
+                NOMBRE:<br>
+                <input type="text" name="txtnombres" id="nombre"  class="form-control col-2" required=""><br>
+                </div>
                 <input type="submit" name="accion" value="Enviar" class="btn btn-outline-success" id="botonEnviar">
 
             </form>

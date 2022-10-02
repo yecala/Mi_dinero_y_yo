@@ -83,7 +83,9 @@
         <div>
             <form action="ControladorCategorias" method="POST" >
                 ID categoria:<br>
-                <input type="text" name="txtid" disabled="" value="${Categoria.getId_categoria()}" class="form-control col-2" id="idcat" required  ><br>
+                <div class="field_container">
+                <input type="text" name="txtid"  value="${Categoria.getId_categoria()}" class="form-control col-2" id="idcat" readonly  ><br>
+                </div>
                 Nombre:<br>
                 <input type="text" name="txtnom" value="${Categoria.getNombre_categoria()}" class="form-control col-2" id="nombre" required><br>
                 
