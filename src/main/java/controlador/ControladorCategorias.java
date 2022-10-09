@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import modelo.DAO.CategoriaDAO;
 import modelo.POJO.Categoria;
 import modelo.POJO.Usuario;
+//import org.json.JSONArray;
 
 /**
  *
@@ -143,13 +144,12 @@ public class ControladorCategorias extends HttpServlet {
                 request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
                 break;
             case "Eliminar":
+                response.setContentType( "text/html; charset=iso-8859-1" );
                 String id2 = request.getParameter("id");
+                
                 int num_bolsillos = dao.num_bolsillos(id2);
                 if (num_bolsillos > 0) {
-
-                    JOptionPane.showMessageDialog(null, "No se puede borrar debido a bolsillos asociados");
-                    System.out.println("No se puede borrar debido a bolsillos asociados");
-
+                    request.setAttribute("loginError", true);
                 } else {
                     dao.delete(id2);
                 }

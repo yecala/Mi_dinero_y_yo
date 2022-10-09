@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="java.util.List"%>
-
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -25,6 +25,12 @@
         <title>Administrar categorias</title>
         <link href="EstilosMenu.css" rel="stylesheet" type="text/css"/>
         <script src="scripts.js" type="text/javascript"></script>
+        <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">-->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>-->
+        <!--<link rel="stylesheet" type="text/css" href="sweetalert/sweetalert2.min.css">-->
+        <!--<script type="text/javascript" src="sweetalert/sweetalert2.min.js" ></script>-->
+        <script src="sweetalert2.all.min.js" type="text/javascript"></script>
+        <link href="sweetalert2.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <!--------------------------barra de navegacion--------------------------------------->
@@ -106,21 +112,37 @@
                 
             <c:forEach var="dato" items="${datos}">
                 <tr>
-                   <td >${dato.getId_categoria()}</td>
-                    <td>${dato.getNombre_categoria()}</td>
+                   <td id="idCat">${dato.getId_categoria()}</td>
+                    <td id="nomCat">${dato.getNombre_categoria()}</td>
                     
                     
                 <td>
                     <form action="ControladorCategorias" method="POST">
                         <input type="hidden" name="id" value="${dato.getId_categoria()}">
                         <input type="submit" name="accion" value="Editar" class="btn btn-outline-warning">
-                        <input type="submit" name="accion" value="Eliminar" class="btn btn-outline-danger" onclick="deletecat(${dato.getId_categoria()})">
+                        <input type="submit" name="accion" value="Eliminar" id="delete" class="btn btn-outline-danger" >
                         
                     </form>
                 </td>
                 </tr>
             </c:forEach>
-            
+            <c:if test="${loginError}">
+                <script>
+//                    alert('No se puede eliminar categoria debido a bolsillos asociados!');
+//                    const swalWithBootstrapButtons = Swal.mixin({
+//                        customClass: {
+//                          confirmButton: 'btn btn-success',
+//                         
+//                        },
+//                        buttonsStyling: false
+//                      });
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: 'No se puede eliminar categoria debido a bolsillos asociados!'
+                    });
+                </script>
+            </c:if>
       
 
 
@@ -128,7 +150,46 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
- 
+    <script src="adminCategorias.js" type="text/javascript"></script>
+    
+    <script>
+        function deleteCate(){
+            const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+              },
+              buttonsStyling: false
+            });
+
+            swalWithBootstrapButtons.fire({
+              title: 'Are you sure?',
+              text: "You won't be able to revert this!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Yes, delete it!',
+              cancelButtonText: 'No, cancel!',
+              reverseButtons: true
+            }).then((result) => {
+              if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire(
+                  'Deleted!',
+                  'Your file has been deleted.',
+                  'success'
+                );
+              } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+              ) {
+                swalWithBootstrapButtons.fire(
+                  'Cancelled',
+                  'Your imaginary file is safe :)',
+                  'error'
+                );
+              }
+            });
+        }
+    </script>
 </body>
 </html>
 
