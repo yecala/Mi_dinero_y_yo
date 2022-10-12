@@ -29,8 +29,14 @@ public class CategoriaDAO {
     public List listar() {
         List<Categoria> lista = new ArrayList<>();
         String sql = "select id_categoria, nombre_categoria from categorias order by id_categoria";
-        try {
-            con = c.conectar();
+        try{
+           con = c.conectar();  
+        }catch(Exception ex){
+             ex.getStackTrace();
+             System.out.println("Fallo al intentar conectar con base de datos");
+        }
+            
+        try {    
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {

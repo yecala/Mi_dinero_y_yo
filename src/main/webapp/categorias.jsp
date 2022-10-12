@@ -8,7 +8,7 @@
         
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!--<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">-->
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,29 +22,43 @@
         <title>Categorias</title>
         <link href="EstilosMenu.css" rel="stylesheet" type="text/css"/>
         <script src="scripts.js" type="text/javascript"></script>
+        <style>
+            .b_color{
+                background-color: rgb(12, 213, 172);
+                color:black;
+            }
+           
+        </style>
     </head>
     <body>
         <%@include file="navegacion.jsp" %>
     <center>
-        <div class=" col-s-12 col-12"><h1 class="titulo-categorias">Categorías</h1></div>
+        <div class=" col-s-12 col-12 mt-3"><h1 class="titulo-categorias">Categorías</h1></div>
     </center>
     <br>
-         <%--<c:forEach var="dato" items="${datos}">--%>
-<!--            <tr>
-                <td id="idCat">${dato.getId_categoria()}</td>
-                    <td id="nomCat">${dato.getNombre_categoria()}</td>
-                    
-                 <td class="col-1">
-                <a href="ControladorCategorias?idCategoria=${dato.getId_categoria()}&nomCate=${dato.getNombre_categoria()}" id="${dato.getNombre_categoria()}" >
-                    <img src="Img_Catego/folder.png" alt=""/>
+    
+    <div class="row mx-5">
+        <c:forEach var="dato" items="${datos}">
+            <div class="col-sm-1 ms-5 mb-5 px-1 text-center">
+              <div class="card ">
+                <div class="card-body ">
+                    <!--<input type="hidden" id="catId" name="catId" value="${dato.getId_categoria()}">-->
+                    <img src="Img_Catego/folder.png" class="card-img-top" alt=""/>
+                    <a href="ControladorCategorias?idCategoria=${dato.getId_categoria()}&nomCate=${dato.getNombre_categoria()}" id="${dato.getNombre_categoria()}" class="btn btn-outline-dark text-center mt-2 btn-sm" style=" background-color: rgb(12, 213, 172); color:black;">
                     <span class="text-center" data-bs-toggle="tooltip" 
                           title="Recuerda destinar el 55% de tu presupuesto para gastos 
-                          indispensables del hogar como facturas, comida, transporte etc."> Hogar </span>
-                
-            </td>
-            </tr>-->
-            <%--</c:forEach>--%>
-    <table class="text-dark">
+                          indispensables del hogar como facturas, comida, transporte etc.">
+                        ${dato.getNombre_categoria()}
+                    </span>
+                    </a>
+                </div>
+              </div>
+            </div>
+        </c:forEach>
+    </div>
+    
+  
+<!--    <table class="text-dark">
         <tr>
             <td class="col-1">
                 <a href="ControladorCategorias?idCategoria=1&nomCate=Hogar" id="hogar">
@@ -203,7 +217,7 @@
         </tr>
 
 
-    </table>
+    </table>-->
     <br><!-- comment -->
     <center>
         <span style=" font-size: 10px">

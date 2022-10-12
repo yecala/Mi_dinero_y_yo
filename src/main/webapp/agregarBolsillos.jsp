@@ -17,21 +17,21 @@
         <%@include file="navegacion.jsp"%>
 
         <!-------------------------- barra de PRESUPUESTO--------------------------------------->
-    <center>.
+    <center>
         <div class="p-1 mt-2 barraPresupuesto h-50" >
             <table >
                 <tr class=" table-active">
 
                     <td class="col-6" >
-                        <div class="col-xs-2">
-                            <label for="ex1">Presupuesto total</label>
+                        <div class="col-xs-2 me-3">
+                            <label for="ex1" class="mb-1">Presupuesto total</label>
                             <input class="form-control" id="ex1" type="text" value="${Usuario.getPresupuesto_total()}" disabled="">
                         </div>
 
                     </td>
                     <td class="col-6" >
-                        <div class="p-4 col-xs-4">
-                            Presupuesto disponible
+                        <div class="col-xs-2">
+                            <label for="ex1" class="mb-1"> Presupuesto disponible </label>
                             <input class="form-control" type="text" value="${Usuario.getPresupuesto_disponible()}" disabled="">
                         </div>
 
@@ -58,13 +58,14 @@
         <table >
             <tr class=" table-active">
 
-                <td class="col-6" >
-                    <div class="col-xs-2">
-                        <label for="ex1">Presupuesto 
+                <td class="col-6 " >
+                    <div class="col-xs-2 me-3">
+                        <label for="ex1" class="mb-1 ">Presupuesto 
                             <%            out.println(nomCate);
                             %> 
 
                         </label>
+                            <br/>
                         <form action="ControladorBolsillos" method="POST">   
                             <input class="form-control" id="ex1" type="text" value="${Categoria.getPresupuesto_categoria()}" disabled="">
                         </form> 
@@ -72,7 +73,7 @@
                 </td>
                 <td class="col-6" >
                     <div class="col-xs-2">
-                        <label for="ex1">Gasto 
+                        <label for="ex1" class="mb-1">Gasto 
                             <%            out.println(nomCate);
                             %> 
 
@@ -84,6 +85,7 @@
                 </td>
             </tr>
         </table>
+    </center>                 
         <br><!-- comment -->
         <br>
         <!--------------------------BOLSILLO------------------------------------->
@@ -93,8 +95,8 @@
                     <table id="tablaBolsillo" class="table-bordered bg-secondary  bg-opacity-10">
                         <tr class=" table-active">
 
-                            <td class="col-6" >
-                                <div class="p-4 col-xs-4">
+                            <td >
+                                <div class="p-4 col-xs-3">
                                     <label for="ex3">Nombre bolsillo</label>
                                     <input name="txtnombre" class="form-control" id="ex3" type="text" required="">
                                 </div>
@@ -112,28 +114,30 @@
                                     <input name="txtgasto" class="form-control" id="ex2" type="number" data-bs-toggle="tooltip" title="Si no has tenido un gasto pon 0 (cero)" required="">
                                 </div>
                             </td>
-
+                            <td>
+                                <div class="p-4 col-xs-3">
+                                <%        // Recupera el tipo de usuario de las variables de session
+                                    String tipoUsu = (String) session.getAttribute("tipoUsuario");
+                                    if (tipoUsu != null) {
+                                %>
+                                <button type="submit" name="accion" class="btn btn-outline-success" id="btnGuardar" value="Guardar">Guardar</button><!-- comment -->
+                                <%
+                                } else {
+                                %>
+                                <p>Debe iniciar sesión para guardar un bolsillo</p>
+                                <%
+                                    }
+                                %>  
+                                </div>
+                            </td>
                         </tr>
-
                     </table>
                 </div>
             </center>
+            </form>                
             <!--------------------------FIN BOLSILLO--------------------------------------->
-            <%        // Recupera el tipo de usuario de las variables de session
-                String tipoUsu = (String) session.getAttribute("tipoUsuario");
-
-                if (tipoUsu != null) {
-            %>
-            <button type="submit" name="accion" class="btn btn-outline-success" id="btnGuardar" value="Guardar">Guardar</button><!-- comment -->
-            <%
-            } else {
-            %>
-            <h3>Debe iniciar sesión para guardar un bolsillo</h3>
-            <%
-                }
-
-            %>
-        </form>
+            
+        
 
         <script>
             // Initialize tooltips
