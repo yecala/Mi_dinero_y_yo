@@ -26,7 +26,7 @@ public class UsuarioDAO {
 
     public List listar() {
         List<Usuario> lista = new ArrayList<>();
-        String sql = "select * from usuarios";
+        String sql = "select * from usuarios where estado=1";
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);

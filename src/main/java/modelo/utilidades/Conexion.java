@@ -21,6 +21,7 @@ public class Conexion {
     public Connection conectar(){
     
         try {
+            
             Class.forName("oracle.jdbc.driver.OracleDriver");
             con=DriverManager.getConnection(url,user,pass);
         } catch (ClassNotFoundException | SQLException e) {
