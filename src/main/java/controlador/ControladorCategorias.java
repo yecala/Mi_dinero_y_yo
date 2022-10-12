@@ -6,7 +6,13 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+import java.util.function.IntFunction;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -66,6 +72,7 @@ public class ControladorCategorias extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+              
         int id_categorias = Integer.parseInt(request.getParameter("idCategoria"));
         String nom_cate = request.getParameter("nomCate");
 
@@ -74,7 +81,12 @@ public class ControladorCategorias extends HttpServlet {
         session.setAttribute("nom_categoria", nom_cate);
 
         if (session.getAttribute("idUsuario") == null) {
-            response.sendRedirect("tablaBolsillos.jsp");
+            try{
+                response.sendRedirect("tablaBolsillos.jsp");
+            }catch(IllegalStateException ex){
+                System.err.println("IllegalStateException caught!");
+                ex.printStackTrace();
+            }
 
         } else {
 
@@ -97,9 +109,15 @@ public class ControladorCategorias extends HttpServlet {
 
             request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
 
+             try{
+                response.sendRedirect("tablaBolsillos.jsp");
+            }catch(IllegalStateException ex){
+                System.err.println("IllegalStateException caught!");
+                ex.printStackTrace();
+            }
         }
-
-        //response.sendRedirect("tablaBolsillos.jsp");
+       
+        
     }
 
     /**
@@ -116,6 +134,13 @@ public class ControladorCategorias extends HttpServlet {
 
         String accion = request.getParameter("accion");
         switch (accion) {
+             case "listarTodo":
+
+                List<Categoria> datoscat = dao.listar();
+                request.setAttribute("datos", datoscat);
+                request.getRequestDispatcher("categorias.jsp").forward(request, response);
+                break;
+            
             case "Listar":
 
                 List<Categoria> datos = dao.listar();
@@ -191,6 +216,4 @@ public class ControladorCategorias extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
-    	
 }
