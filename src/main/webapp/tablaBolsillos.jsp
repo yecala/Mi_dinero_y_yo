@@ -15,22 +15,21 @@
         <%@include file="navegacion.jsp" %>
 
         <!-------------------------- barra de PRESUPUESTO--------------------------------------->
-    <center>.
+      <center>
         <div class="p-1 mt-2 barraPresupuesto h-50" >
             <table >
                 <tr class=" table-active">
 
                     <td class="col-6" >
-                        <div class="col-xs-2">
-                            <label for="ex1">Presupuesto total</label>
-                            
+                        <div class="col-xs-2 me-3">
+                            <label for="ex1" class="mb-1">Presupuesto total</label>
                             <input class="form-control" id="ex1" type="text" value="${Usuario.getPresupuesto_total()}" disabled="">
                         </div>
 
                     </td>
                     <td class="col-6" >
-                        <div class="p-4 col-xs-4">
-                            Presupuesto disponible
+                        <div class="col-xs-2">
+                            <label for="ex1" class="mb-1"> Presupuesto disponible </label>
                             <input class="form-control" type="text" value="${Usuario.getPresupuesto_disponible()}" disabled="">
                         </div>
 
@@ -56,13 +55,14 @@
         <table >
             <tr class=" table-active">
 
-                <td class="col-6" >
-                    <div class="col-xs-2">
-                        <label for="ex1">Presupuesto 
+                <td class="col-6 " >
+                    <div class="col-xs-2 me-3">
+                        <label for="ex1" class="mb-1 ">Presupuesto 
                             <%            out.println(nomCate);
                             %> 
 
                         </label>
+                            <br/>
                         <form action="ControladorBolsillos" method="POST">   
                             <input class="form-control" id="ex1" type="text" value="${Categoria.getPresupuesto_categoria()}" disabled="">
                         </form> 
@@ -70,7 +70,7 @@
                 </td>
                 <td class="col-6" >
                     <div class="col-xs-2">
-                        <label for="ex1">Gasto 
+                        <label for="ex1" class="mb-1">Gasto 
                             <%            out.println(nomCate);
                             %> 
 
@@ -82,6 +82,7 @@
                 </td>
             </tr>
         </table>
+    </center>  
 
         <br/><br/>
 
@@ -90,11 +91,23 @@
     <!-------------------------------------------->
     <center>
         <form action="ControladorBolsillos" method="POST">
-            <button type="submit" name="accion" class="btn btn-outline-primary" id="btnListar" value="Listar">Ver mis bolsillos</button><!-- comment -->
+            <center>
+                <table >
+                    <tr class=" table-active">
+                        <td class="col-6 " >
+                            <div class="col-xs-2 me-3">
+                               <button type="submit" name="accion" class="btn btn-outline-primary" id="btnListar" value="Listar">Ver mis bolsillos</button><!-- comment -->
+                            </div>
+                        </td>
+                        <td class="col-6" >
+                            <div class="col-xs-2">
+                               <button type="submit" name="accion" class="btn btn-outline-primary" id="btnGuardar" value="Nuevo">Nuevo</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </center>  
             
-            <button type="submit" name="accion" class="btn btn-outline-primary" id="btnGuardar" value="Nuevo">Nuevo</button>
-            <br>
-            <br>
             <input class="col-5 text-center text-danger bg-white border-0" type="text" value="${error}" disabled="" ></input>
             <br>
             <br>
