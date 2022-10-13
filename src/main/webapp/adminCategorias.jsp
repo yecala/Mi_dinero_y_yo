@@ -117,29 +117,39 @@
                     
                     
                 <td>
-                    <form action="ControladorCategorias" method="POST">
+                 
+                    <form action="ControladorCategorias" method="POST" class="float-start pe-2 ">
                         <input type="hidden" name="id" value="${dato.getId_categoria()}">
+                       
                         <input type="submit" name="accion" value="Editar" class="btn btn-outline-warning">
-                        <input type="submit" name="accion" value="Eliminar" id="delete" class="btn btn-outline-danger" >
-                        
-                    </form>
+                       
+                    </form>  
+                    <form action="ControladorCategorias?accion=Eliminar" method="POST" class="deleteForm float-start " id="formDelete">   
+                        <input type="hidden" name="id" value="${dato.getId_categoria()}">
+                        <input type="submit" name="accion" value="Eliminar" id="deleteBtn" class="btn btn-outline-danger " >
+                    </form>     
+                  
                 </td>
                 </tr>
             </c:forEach>
             <c:if test="${loginError}">
                 <script>
-//                    alert('No se puede eliminar categoria debido a bolsillos asociados!');
-//                    const swalWithBootstrapButtons = Swal.mixin({
-//                        customClass: {
-//                          confirmButton: 'btn btn-success',
-//                         
-//                        },
-//                        buttonsStyling: false
-//                      });
+
                     Swal.fire({
                       icon: 'error',
                       title: 'Oops...',
-                      text: 'No se puede eliminar categoria debido a bolsillos asociados!'
+                      text: 'No se puede eliminar categoria debido a bolsillos asociados!',
+                      confirmButtonColor: '#0CD5AC'
+                    });
+                </script>
+            </c:if>
+            <c:if test="${success}">
+                <script>
+                    Swal.fire({
+                       icon: 'success',
+                       title: 'Eliminado!',
+                       text: 'La categoria fue eliminada correctamente.',
+                       confirmButtonColor: 'success'
                     });
                 </script>
             </c:if>
@@ -151,44 +161,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="adminCategorias.js" type="text/javascript"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script>
-        function deleteCate(){
-            const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-success',
-                cancelButton: 'btn btn-danger'
-              },
-              buttonsStyling: false
-            });
 
-            swalWithBootstrapButtons.fire({
-              title: 'Are you sure?',
-              text: "You won't be able to revert this!",
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonText: 'Yes, delete it!',
-              cancelButtonText: 'No, cancel!',
-              reverseButtons: true
+        $('.deleteForm').submit(function (e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "¡La categoria se eliminara definitivamente!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0CD5AC',
+                cancelButtonColor: '#DF2C2C',
+                confirmButtonText: '¡Sí, eliminar!',
+                cancelButtonText: 'Cancelar'
             }).then((result) => {
-              if (result.isConfirmed) {
-                swalWithBootstrapButtons.fire(
-                  'Deleted!',
-                  'Your file has been deleted.',
-                  'success'
-                );
-              } else if (
-                /* Read more about handling dismissals below */
-                result.dismiss === Swal.DismissReason.cancel
-              ) {
-                swalWithBootstrapButtons.fire(
-                  'Cancelled',
-                  'Your imaginary file is safe :)',
-                  'error'
-                );
-              }
+                if (result.isConfirmed) {
+                    this.submit();
+                    document.createElement('form').submit.call(document.getElementById(deleteBtn));
+                }
             });
-        }
+       });
     </script>
 </body>
 </html>
