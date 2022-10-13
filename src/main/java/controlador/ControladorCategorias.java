@@ -177,8 +177,9 @@ public class ControladorCategorias extends HttpServlet {
                     request.setAttribute("loginError", true);
                 } else {
                     dao.delete(id2);
+                    request.setAttribute("success", true);
                 }
-
+                
                 request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
                 break;
 
