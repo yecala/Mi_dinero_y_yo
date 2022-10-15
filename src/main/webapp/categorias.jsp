@@ -46,8 +46,7 @@
                     <img src="Img_Catego/folder.png" class="card-img-top" alt=""/>
                     <a href="ControladorCategorias?idCategoria=${dato.getId_categoria()}&nomCate=${dato.getNombre_categoria()}" id="${dato.getNombre_categoria()}" class="btn btn-outline-dark text-center mt-2 btn-sm" style=" background-color: rgb(12, 213, 172); color:black;">
                     <span class="text-center" data-bs-toggle="tooltip" 
-                          title="Recuerda destinar el 55% de tu presupuesto para gastos 
-                          indispensables del hogar como facturas, comida, transporte etc.">
+                          title="${dato.getConsejo()}">
                         ${dato.getNombre_categoria()}
                     </span>
                     </a>
