@@ -134,13 +134,7 @@ public class ControladorCategorias extends HttpServlet {
 
         String accion = request.getParameter("accion");
         switch (accion) {
-             case "listarTodo":
-
-                List<Categoria> datoscat = dao.listar();
-                request.setAttribute("datos", datoscat);
-                request.getRequestDispatcher("categorias.jsp").forward(request, response);
-                break;
-            
+           
             case "Listar":
 
                 List<Categoria> datos = dao.listar();
@@ -159,12 +153,13 @@ public class ControladorCategorias extends HttpServlet {
             case "Actualizar":
                 String id1 = request.getParameter("txtid");
                 String nom1 = request.getParameter("txtnom");
+                String consejo = request.getParameter("txtconsejo");
 
                 int idint = Integer.parseInt(id1);
 
                 cate.setId_categoria(idint);
                 cate.setNombre_categoria(nom1);
-
+                cate.setConsejo(consejo);
                 dao.actualizar(cate);
                 request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
                 break;
@@ -191,12 +186,13 @@ public class ControladorCategorias extends HttpServlet {
 
                 String id = request.getParameter("txtid");
                 String nombres = request.getParameter("txtnombres");
+                String consejo1 = request.getParameter("txtconsejo");
 
                 int id3 = Integer.parseInt(id);
 
                 cate.setId_categoria(id3);
                 cate.setNombre_categoria(nombres);
-
+                cate.setConsejo(consejo1);
                 dao.agregar(cate);
                 request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
 
