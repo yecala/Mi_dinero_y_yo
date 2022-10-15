@@ -104,6 +104,7 @@
                 <tr>
                     <th scope="col">ID CATEGORIAS</th>
                     <th scope="col">NOMBRE CATEGORIA</th>
+                    <th scope="col">CONSEJO</th>
                     <th scope="col">ACCIONES</th>
                 </tr>
             </thead>
@@ -114,7 +115,7 @@
                 <tr>
                    <td id="idCat">${dato.getId_categoria()}</td>
                     <td id="nomCat">${dato.getNombre_categoria()}</td>
-                    
+                    <td id="nomCat">${dato.getConsejo()}</td>
                     
                 <td>
                  
