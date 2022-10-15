@@ -88,6 +88,8 @@
                 </div>
                 Nombre:<br>
                 <input type="text" name="txtnom" value="${Categoria.getNombre_categoria()}" class="form-control col-2" id="nombre" required><br>
+                Consejo:<br>
+                <input type="text" name="txtconsejo" value="${Categoria.getConsejo()}" class="form-control col-2" id="consejo" required><br>
                 
 
                 <input type="submit" name="accion" value="Actualizar" class="btn btn-outline-warning" id="botonEnviar" >
