@@ -28,39 +28,8 @@
     </head>
     <body>
         <!--------------------------barra de navegacion--------------------------------------->
-        <nav class="navbar navbar-expand-lg navbar-light barra_color p-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#"> 
-                    <span class="T_color fs-2 fw-bold ">Mi dinero y yo </span>
-                    <img class="img-fluid col-3" src="Img_menu/mano.png" alt=""/>
-                </a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="administrador.html">INICIO</a>
-                           
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link active fw-bold fs-4" aria-current="page" href="adminUsuarios.jsp">Administrar usuarios</a>
-                            
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="adminCategorias.jsp">Administrar categorías</a>
-                           
-                        </li>
-                        
-                    </ul>
-
-                    
-                </div>
-            </div>
-        </nav>
-
+       
+        <%@include file="navegacionAdmin.jsp" %>
 
         <section id="caja" class="caja">     
             <ul>
@@ -86,10 +55,10 @@
     <center>    
         <h1 style="color: rgb(12, 213, 172)">Administrar usuarios</h1><br>
         <form action="ControladorUsuarios" method="POST">
-            <input type="submit" name="accion" value="Listar" class="btn btn-outline-primary">
             <input type="submit" name="accion" value="Nuevo" class="btn btn-outline-primary">
         </form>
         <br/>
+         <div class="container">
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -104,8 +73,6 @@
                 </tr>
             </thead>
             
-            
-                
             <c:forEach var="dato" items="${datos}">
                 <tr>
                    <td>${dato.getId_usuario()}</td>
@@ -127,7 +94,7 @@
                 </tr>
             </c:forEach>
             
-      
+       </div>
 
 
     </center>
