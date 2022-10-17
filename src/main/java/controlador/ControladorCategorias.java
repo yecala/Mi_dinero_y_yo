@@ -72,52 +72,21 @@ public class ControladorCategorias extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-              
-        int id_categorias = Integer.parseInt(request.getParameter("idCategoria"));
-        String nom_cate = request.getParameter("nomCate");
-
-        HttpSession session = request.getSession();
-        session.setAttribute("categoria_actual", id_categorias);
-        session.setAttribute("nom_categoria", nom_cate);
-
-        if (session.getAttribute("idUsuario") == null) {
-            try{
-                response.sendRedirect("tablaBolsillos.jsp");
-            }catch(IllegalStateException ex){
-                System.err.println("IllegalStateException caught!");
-                ex.printStackTrace();
-            }
-
-        } else {
-
-            int id_usuario = (int) session.getAttribute("idUsuario");
-            int id_categoria = (int) session.getAttribute("categoria_actual");
-
-            Categoria cat = new Categoria();
-            cat = dao.sumarPresupuestoGasto(id_usuario, id_categoria);
-
-            
-            Usuario usu = new Usuario();
-            usu = dao.presupuestoDisponible(id_usuario);
-
-            long presupuesto_disponible = usu.getPresupuesto_total() - usu.getPresupuesto_disponible();
-
-            usu.setPresupuesto_disponible(presupuesto_disponible);
-
-            request.setAttribute("Usuario", usu);
-            request.setAttribute("Categoria", cat);
-
-            request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
-
-             try{
-                response.sendRedirect("tablaBolsillos.jsp");
-            }catch(IllegalStateException ex){
-                System.err.println("IllegalStateException caught!");
-                ex.printStackTrace();
-            }
-        }
        
-        
+        String accion = request.getParameter("accion");
+        switch (accion) {
+           
+            case "Listar":
+
+                List<Categoria> datos = dao.listar();
+                request.setAttribute("datos", datos);
+                request.getRequestDispatcher("adminCategorias.jsp").forward(request, response);
+                break;
+
+           
+            default:
+                throw new AssertionError();
+        }
     }
 
     /**
@@ -131,7 +100,6 @@ public class ControladorCategorias extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String accion = request.getParameter("accion");
         switch (accion) {
            
@@ -200,6 +168,7 @@ public class ControladorCategorias extends HttpServlet {
             default:
                 throw new AssertionError();
         }
+       
 
     }
 

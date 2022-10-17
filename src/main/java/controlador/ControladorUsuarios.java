@@ -62,7 +62,18 @@ public class ControladorUsuarios extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         String accion = request.getParameter("accion");
+        switch (accion) {
+            case "Listar":
+                List<Usuario> datos = dao.listar();
+                request.setAttribute("datos", datos);
+                request.getRequestDispatcher("adminUsuarios.jsp").forward(request, response);
+                break;
+
+            default:
+                throw new AssertionError();
+        }
+
     }
 
     /**
