@@ -35,30 +35,8 @@
     <body>
         <!--------------------------barra de navegacion--------------------------------------->
        <%@include file="navegacionAdmin.jsp" %>
-
-
-        <section id="caja" class="caja">     
-            
-            
-            <ul>
-                <li> <button id="cerrarSesion" onclick="cerrarSesion() "  href='ControladorLogin?registreseOcrear=logout'>Cerrar sesión </button></li>
-                <li><b>Nombre</b></li>
-                <li>Correo</li>
-                <li>  </li>
-                <li> Cambiar contraseña  <img class="editar"  src="Img_menu/editar.png" alt="Editar"/> </li>
-
-                <li> Presupuesto mensual <img class="editar" src="Img_menu/editar.png" alt="Editar"/></li>
-                <li> </li>
-                <li>Mis categorías</li>
-
-            </ul>
-        </section>
-
-        <section id="caja2" class="caja2"> 
-            <h3 id="tituloNoti">Notificaciones</h3>
-        </section>   
         <!--------------------------FIN barra de navegacion--------------------------------------->
-        <br/><br/>
+       <br/><br/>
         
     <center>    
         <h1 style="color: rgb(12, 213, 172)">Administrar categorías</h1><br>
@@ -66,70 +44,59 @@
             <input type="submit" name="accion" value="Nuevo" class="btn btn-outline-primary">
         </form>
         <br/>
-       <div class="container">
-  <!-- Content here -->
+        <div class="container">
+            <table class="table ">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID CATEGORIAS</th>
+                        <th scope="col">NOMBRE CATEGORIA</th>
+                        <th scope="col">CONSEJO</th>
+                        <th scope="col">ACCIONES</th>
+                    </tr>
+                </thead>
 
-	
-        <table class="table ">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">ID CATEGORIAS</th>
-                    <th scope="col">NOMBRE CATEGORIA</th>
-                    <th scope="col">CONSEJO</th>
-                    <th scope="col">ACCIONES</th>
-                </tr>
-            </thead>
-            
-            
-                
-            <c:forEach var="dato" items="${datos}">
-                <tr>
-                    <td id="idCat">${dato.getId_categoria()}</td>
-                    <td id="nomCat">${dato.getNombre_categoria()}</td>
-                    <td id="nomCat">${dato.getConsejo()}</td>
-                <td>
-                 
-                    <form action="ControladorCategorias" method="POST" class="float-start pe-2 ">
-                        <input type="hidden" name="id" value="${dato.getId_categoria()}">
-                       
-                        <input type="submit" name="accion" value="Editar" class="btn btn-outline-warning">
-                       
-                    </form>  
-                    <form action="ControladorCategorias?accion=Eliminar" method="POST" class="deleteForm float-start " id="formDelete">   
-                        <input type="hidden" name="id" value="${dato.getId_categoria()}">
-                        <input type="submit" name="accion" value="Eliminar" id="deleteBtn" class="btn btn-outline-danger " >
-                    </form>     
-                  
-                </td>
-                </tr>
-            
-        </div>       
-            </c:forEach>
-            <c:if test="${loginError}">
-                <script>
-
-                    Swal.fire({
-                      icon: 'error',
-                      title: 'Oops...',
-                      text: 'No se puede eliminar categoria debido a bolsillos asociados!',
-                      confirmButtonColor: '#0CD5AC'
-                    });
-                </script>
-            </c:if>
-            <c:if test="${success}">
-                <script>
-                    Swal.fire({
-                       icon: 'success',
-                       title: 'Eliminado!',
-                       text: 'La categoria fue eliminada correctamente.',
-                       confirmButtonColor: 'success'
-                    });
-                </script>
-            </c:if>
-      
-
-
+                <c:forEach var="dato" items="${datos}">
+                    <tr>
+                        <td id="idCat">${dato.getId_categoria()}</td>
+                        <td id="nomCat">${dato.getNombre_categoria()}</td>
+                        <td id="nomCat">${dato.getConsejo()}</td>
+                    <td>
+                        <form action="ControladorCategorias" method="POST" class="float-start pe-2 ">
+                            <input type="hidden" name="id" value="${dato.getId_categoria()}">
+                            <input type="submit" name="accion" value="Editar" class="btn btn-outline-warning">
+                        </form>  
+                        <form action="ControladorCategorias?accion=Eliminar" method="POST" class="deleteForm float-start " id="formDelete">   
+                            <input type="hidden" name="id" value="${dato.getId_categoria()}">
+                            <input type="submit" name="accion" value="Eliminar" id="deleteBtn" class="btn btn-outline-danger " >
+                        </form>  
+                    </td>
+                    </tr>
+                </c:forEach>
+            </table>        
+        </div>
     </center>
+    <c:if test="${loginError}">
+        <script>
+
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'No se puede eliminar categoria debido a bolsillos asociados!',
+              confirmButtonColor: '#0CD5AC'
+            });
+        </script>
+    </c:if>
+    <c:if test="${success}">
+        <script>
+            Swal.fire({
+               icon: 'success',
+               title: 'Eliminado!',
+               text: 'La categoria fue eliminada correctamente.',
+               confirmButtonColor: 'success'
+            });
+        </script>
+    </c:if>
+      
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
