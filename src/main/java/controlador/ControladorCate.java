@@ -12,6 +12,8 @@ import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -68,11 +70,11 @@ public class ControladorCate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+            
         String accion = request.getParameter("accion");
         switch (accion) {
-             case "listarTodo":
-                  List<Categoria> datoscat=null;
+            case "listarTodo":
+                List<Categoria> datoscat=null;
                 try{
                  datoscat=dao.listar();
                 }catch(Exception ex){
@@ -83,11 +85,15 @@ public class ControladorCate extends HttpServlet {
                 request.setAttribute("datos", datoscat);
                 request.getRequestDispatcher("categorias.jsp").forward(request, response);
                 break;
-
-
+            case "bolsillo" :
+                verBolsillo(request, response);
+                break;
+                
         default:
                 throw new AssertionError();
         }
+        
+        
     }
 
     /**
@@ -114,4 +120,47 @@ public class ControladorCate extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public void verBolsillo(HttpServletRequest request, HttpServletResponse response){
+        int id_categorias = Integer.parseInt(request.getParameter("idCategoria"));
+        String nom_cate = request.getParameter("nomCate");
+        HttpSession session = request.getSession();
+        session.setAttribute("categoria_actual", id_categorias);
+        session.setAttribute("nom_categoria", nom_cate);
+
+        //valida si es ususario anonimo o registrado
+        if (session.getAttribute("idUsuario") == null) {
+           
+            try {
+               response.sendRedirect("tablaBolsillos.jsp");
+            } catch (IOException ex) {
+                Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            //si es usuario registrado envia info para ver bolsillos
+            int id_usuario = (int) session.getAttribute("idUsuario");
+            int id_categoria = (int) session.getAttribute("categoria_actual");
+
+            Categoria cat = new Categoria();
+            cat = dao.sumarPresupuestoGasto(id_usuario, id_categoria);
+
+            Usuario usu = new Usuario();
+            usu = dao.presupuestoDisponible(id_usuario);
+            
+            //realiza calculo de presupuesto disponible de la categoria
+            long presupuesto_disponible = usu.getPresupuesto_total() - usu.getPresupuesto_disponible();
+            usu.setPresupuesto_disponible(presupuesto_disponible);
+
+            request.setAttribute("Usuario", usu);
+            request.setAttribute("Categoria", cat);
+            
+            try {
+                request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
+        
+            } catch (ServletException | IOException ex) {
+                Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }  
+    
+    }
 }
