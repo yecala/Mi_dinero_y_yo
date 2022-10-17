@@ -7,6 +7,8 @@ package controlador;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -62,7 +64,18 @@ public class ControladorUsuarios extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         String accion = request.getParameter("accion");
+        switch (accion) {
+            case "Listar":
+                List<Usuario> datos = dao.listar();
+                request.setAttribute("datos", datos);
+                request.getRequestDispatcher("adminUsuarios.jsp").forward(request, response);
+                break;
+
+            default:
+                throw new AssertionError();
+        }
+
     }
 
     /**
@@ -79,83 +92,29 @@ public class ControladorUsuarios extends HttpServlet {
         String accion = request.getParameter("accion");
         switch (accion) {
             case "Listar":
-
-                List<Usuario> datos = dao.listar();
-                request.setAttribute("datos", datos);
-                request.getRequestDispatcher("adminUsuarios.jsp").forward(request, response);
+                listar(request,response,0,0);
                 break;
 
             case "Editar":
-                String ide = request.getParameter("id");
-                Usuario u = dao.ListarId(ide);
-                request.setAttribute("usuario", u);
-                request.getRequestDispatcher("edit.jsp").forward(request, response);
+                editar(request,response);
                 break;
 
             case "Actualizar":
-                String id1 = request.getParameter("txtid");
-                String nom1 = request.getParameter("txtnom");
-                String correo1 = request.getParameter("txtcorreo");
-                String password1 = request.getParameter("txtcontrasena");
-                String presupuesto1 = request.getParameter("txtpresupuesto");
-                String estado1 = request.getParameter("txtestado");
-                String bit_admin1 = request.getParameter("txtadmin");
-                
-
-                int bit_admin2 = Integer.parseInt(bit_admin1);
-                int idint = Integer.parseInt(id1);
-                long presupuestlolong = Long.parseLong(presupuesto1);
-                int estado2 = Integer.parseInt(estado1);
-
-                us.setId_usuario(idint);
-                us.setNombre_usuario(nom1);
-                us.setCorreo(correo1);
-                us.setPassword(password1);
-                us.setPresupuesto_total(presupuestlolong);
-                us.setEstado(estado2);
-                us.setBit_admin(bit_admin2);
-                dao.actualizar(us);
-                request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
+                actualizar(request,response);
                 break;
+                
             case "Eliminar":
-                String id2 = request.getParameter("id");
-                int id3 = Integer.parseInt(id2);
-                us.setId_usuario(id3);
-                dao.delete(us);
-                request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
+                eliminar(request,response);
                 break;
 
             case "Nuevo":
                 request.getRequestDispatcher("agregar.jsp").forward(request, response);
                 break;
                 
-                
             case "Enviar":
-                
-                String id = request.getParameter("txtid");
-                String nombres = request.getParameter("txtnombres");
-                String correo = request.getParameter("txtcorreo");
-                String password = request.getParameter("txtpassword");
-                String presupuesto = request.getParameter("txtpresupuesto");
-                String estado = request.getParameter("txtestado");
-                String bit_admin = request.getParameter("txtadmin");
-                
-                int bit_admin3 = Integer.parseInt(bit_admin);
-                int id4 = Integer.parseInt(id);
-                long presupuesto3 = Long.parseLong(presupuesto);
-                int estado3 = Integer.parseInt(estado);
-                
-                us.setId_usuario(id4);
-                us.setNombre_usuario(nombres);
-                us.setCorreo(correo);
-                us.setPassword(password);
-                us.setPresupuesto_total(presupuesto3);
-                us.setEstado(estado3);
-                us.setBit_admin(bit_admin3);
-                dao.agregar(us);
-                request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
-                
+                enviar(request,response);
                 break;
+                
             default:
                 throw new AssertionError();
         }
@@ -171,5 +130,134 @@ public class ControladorUsuarios extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    /**
+     * Lista los usuarios en el administrador
+     * @param request
+     * @param response 
+     */
+    public void listar(HttpServletRequest request, HttpServletResponse response, int successCreate, int successUpdate){
+        List<Usuario> datos = dao.listar();
+        request.setAttribute("datos", datos);
+        boolean created=false;
+        boolean updated=false;
+        if(successCreate==1){
+            created=true;
+        }
+        if(successUpdate==1){
+            updated=true;
+        }
+        request.setAttribute("successCreate", created);
+        request.setAttribute("successUpdate", updated);
+        try {
+            request.getRequestDispatcher("adminUsuarios.jsp").forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+        }      
+        
+    }
+    
+    /**
+     * Obtiene los datos del usuario seleccionada para enviarlos al formulario de editar
+     * @param request
+     * @param response 
+     */
+    public void editar(HttpServletRequest request, HttpServletResponse response){
+        String ide = request.getParameter("id");
+        Usuario u = dao.ListarId(ide);
+        request.setAttribute("usuario", u);       
+        try {
+            request.getRequestDispatcher("edit.jsp").forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+    }
+    
+    /**
+     * Envia datos nuevos al metodo que actualiza en base de datos los usuarios
+     * @param request
+     * @param response 
+     */
+    public void actualizar(HttpServletRequest request, HttpServletResponse response){
+        String id1 = request.getParameter("txtid");
+        String nom1 = request.getParameter("txtnom");
+        String correo1 = request.getParameter("txtcorreo");
+        String password1 = request.getParameter("txtcontrasena");
+        String presupuesto1 = request.getParameter("txtpresupuesto");
+        String estado1 = request.getParameter("txtestado");
+        String bit_admin1 = request.getParameter("txtadmin");
+        int bit_admin2 = Integer.parseInt(bit_admin1);
+        int idint = Integer.parseInt(id1);
+        long presupuestlolong = Long.parseLong(presupuesto1);
+        int estado2 = Integer.parseInt(estado1);
 
+        us.setId_usuario(idint);
+        us.setNombre_usuario(nom1);
+        us.setCorreo(correo1);
+        us.setPassword(password1);
+        us.setPresupuesto_total(presupuestlolong);
+        us.setEstado(estado2);
+        us.setBit_admin(bit_admin2);
+        dao.actualizar(us);
+        
+        try {
+            request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+    }
+    
+    /**
+     * Envia el Id del ussuario que se desea eliminar al metodo que elimina en base de datos
+     * @param request
+     * @param response 
+     */
+    public void eliminar(HttpServletRequest request, HttpServletResponse response){
+        String id2 = request.getParameter("id");
+        int id3 = Integer.parseInt(id2);
+        us.setId_usuario(id3);
+        dao.delete(us);
+        try {
+            request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);    
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+    }
+    
+    /**
+     * Envia los datos nuevos al metodo que agrega usuarios en base de datos
+     * @param request
+     * @param response 
+     */
+    public void enviar(HttpServletRequest request, HttpServletResponse response){
+        String id = request.getParameter("txtid");
+        String nombres = request.getParameter("txtnombres");
+        String correo = request.getParameter("txtcorreo");
+        String password = request.getParameter("txtpassword");
+        String presupuesto = request.getParameter("txtpresupuesto");
+        String estado = request.getParameter("txtestado");
+        String bit_admin = request.getParameter("txtadmin");
+        int bit_admin3 = Integer.parseInt(bit_admin);
+        int id4 = Integer.parseInt(id);
+        long presupuesto3 = Long.parseLong(presupuesto);
+        int estado3 = Integer.parseInt(estado);
+
+        us.setId_usuario(id4);
+        us.setNombre_usuario(nombres);
+        us.setCorreo(correo);
+        us.setPassword(password);
+        us.setPresupuesto_total(presupuesto3);
+        us.setEstado(estado3);
+        us.setBit_admin(bit_admin3);
+        int success=0;
+        success=dao.agregar(us);
+        
+//        try {
+//            request.setAttribute("successCreate", success);
+//            request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
+            listar(request,response, success,0);
+//        } catch (ServletException | IOException ex) {
+//            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+//        }       
+    }
 }

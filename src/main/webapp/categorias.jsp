@@ -44,7 +44,7 @@
                 <div class="card-body ">
                     <!--<input type="hidden" id="catId" name="catId" value="${dato.getId_categoria()}">-->
                     <img src="Img_Catego/folder.png" class="card-img-top" alt=""/>
-                    <a href="ControladorCategorias?idCategoria=${dato.getId_categoria()}&nomCate=${dato.getNombre_categoria()}" id="${dato.getNombre_categoria()}" class="btn btn-outline-dark text-center mt-2 btn-sm" style=" background-color: rgb(12, 213, 172); color:black;">
+                    <a href="ControladorCate?accion=bolsillo&idCategoria=${dato.getId_categoria()}&nomCate=${dato.getNombre_categoria()}" id="${dato.getNombre_categoria()}" class="btn btn-outline-dark text-center mt-2 btn-sm" style=" background-color: rgb(12, 213, 172); color:black;">
                     <span class="text-center" data-bs-toggle="tooltip" 
                           title="${dato.getConsejo()}">
                         ${dato.getNombre_categoria()}
