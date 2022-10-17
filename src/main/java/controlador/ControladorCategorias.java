@@ -12,6 +12,8 @@ import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -72,17 +74,12 @@ public class ControladorCategorias extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-       
         String accion = request.getParameter("accion");
         switch (accion) {
            
             case "Listar":
-
-                List<Categoria> datos = dao.listar();
-                request.setAttribute("datos", datos);
-                request.getRequestDispatcher("adminCategorias.jsp").forward(request, response);
+                listar(request,response);
                 break;
-
            
             default:
                 throw new AssertionError();
@@ -104,67 +101,33 @@ public class ControladorCategorias extends HttpServlet {
         switch (accion) {
            
             case "Listar":
-
-                List<Categoria> datos = dao.listar();
-                request.setAttribute("datos", datos);
-                request.getRequestDispatcher("adminCategorias.jsp").forward(request, response);
+                listar(request,response);
                 break;
 
             case "Editar":
-                String ide = request.getParameter("id");
-                Categoria cat = dao.ListarId(ide);
-
-                request.setAttribute("Categoria", cat);
-                request.getRequestDispatcher("editCategoria.jsp").forward(request, response);
+                editar(request,response);
                 break;
 
             case "Actualizar":
-                String id1 = request.getParameter("txtid");
-                String nom1 = request.getParameter("txtnom");
-                String consejo = request.getParameter("txtconsejo");
-
-                int idint = Integer.parseInt(id1);
-
-                cate.setId_categoria(idint);
-                cate.setNombre_categoria(nom1);
-                cate.setConsejo(consejo);
-                dao.actualizar(cate);
-                request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
+                actualizar(request,response);
                 break;
+                
             case "Eliminar":
-                response.setContentType( "text/html; charset=iso-8859-1" );
-                String id2 = request.getParameter("id");
-                
-                int num_bolsillos = dao.num_bolsillos(id2);
-                if (num_bolsillos > 0) {
-                    request.setAttribute("loginError", true);
-                } else {
-                    dao.delete(id2);
-                    request.setAttribute("success", true);
-                }
-                
-                request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
+                eliminar(request,response);
                 break;
 
             case "Nuevo":
-                request.getRequestDispatcher("agregarCategorias.jsp").forward(request, response);
+                try {
+                    request.getRequestDispatcher("agregarCategorias.jsp").forward(request, response);
+                } catch (ServletException | IOException ex) {
+                      Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
 
             case "Enviar":
-
-                String id = request.getParameter("txtid");
-                String nombres = request.getParameter("txtnombres");
-                String consejo1 = request.getParameter("txtconsejo");
-
-                int id3 = Integer.parseInt(id);
-
-                cate.setId_categoria(id3);
-                cate.setNombre_categoria(nombres);
-                cate.setConsejo(consejo1);
-                dao.agregar(cate);
-                request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
-
+                enviar(request,response);
                 break;
+                
             default:
                 throw new AssertionError();
         }
@@ -182,4 +145,105 @@ public class ControladorCategorias extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    /**
+     * Lista las categorias en el administrador
+     * @param request
+     * @param response 
+     */
+    public void listar(HttpServletRequest request, HttpServletResponse response){
+        List<Categoria> datos = dao.listar();
+        request.setAttribute("datos", datos);
+        try {
+            request.getRequestDispatcher("adminCategorias.jsp").forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Obtiene los datos de la categoria seleccionada para enviarlos al formulario de editar
+     * @param request
+     * @param response 
+     */
+    public void editar(HttpServletRequest request, HttpServletResponse response){
+        String ide = request.getParameter("id");
+        Categoria cat = dao.ListarId(ide);
+        request.setAttribute("Categoria", cat); 
+        try {
+           request.getRequestDispatcher("editCategoria.jsp").forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Envia datos nuevos al metodo que actualiza en base de datos las categorias
+     * @param request
+     * @param response 
+     */
+    public void actualizar(HttpServletRequest request, HttpServletResponse response){
+        String id1 = request.getParameter("txtid");
+        String nom1 = request.getParameter("txtnom");
+        String consejo = request.getParameter("txtconsejo");
+        int idint = Integer.parseInt(id1);
+
+        cate.setId_categoria(idint);
+        cate.setNombre_categoria(nom1);
+        cate.setConsejo(consejo);
+        dao.actualizar(cate);
+                
+        try {
+           request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Envia el Id de la categoria que se desea eliminar al metodo que elimina en base de datos
+     * @param request
+     * @param response 
+     */
+    public void eliminar(HttpServletRequest request, HttpServletResponse response){
+        response.setContentType( "text/html; charset=iso-8859-1" );
+        String id2 = request.getParameter("id");
+
+        int num_bolsillos = dao.num_bolsillos(id2);
+        if (num_bolsillos > 0) {
+            request.setAttribute("loginError", true);
+        } else {
+            dao.delete(id2);
+            request.setAttribute("success", true);
+        }
+                   
+        try {
+           request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);   
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Envia los datos nuevos al metodo que agrega categorias en base de datos
+     * @param request
+     * @param response 
+     */
+    public void enviar(HttpServletRequest request, HttpServletResponse response){
+        String id = request.getParameter("txtid");
+        String nombres = request.getParameter("txtnombres");
+        String consejo1 = request.getParameter("txtconsejo");
+        int id3 = Integer.parseInt(id);
+
+        cate.setId_categoria(id3);
+        cate.setNombre_categoria(nombres);
+        cate.setConsejo(consejo1);
+        dao.agregar(cate);
+                
+        try {
+           request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }
