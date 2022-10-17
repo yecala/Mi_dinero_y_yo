@@ -92,7 +92,7 @@ public class ControladorUsuarios extends HttpServlet {
         String accion = request.getParameter("accion");
         switch (accion) {
             case "Listar":
-                listar(request,response);
+                listar(request,response,0,0);
                 break;
 
             case "Editar":
@@ -131,16 +131,37 @@ public class ControladorUsuarios extends HttpServlet {
         return "Short description";
     }// </editor-fold>
     
-    public void listar(HttpServletRequest request, HttpServletResponse response){
+    /**
+     * Lista los usuarios en el administrador
+     * @param request
+     * @param response 
+     */
+    public void listar(HttpServletRequest request, HttpServletResponse response, int successCreate, int successUpdate){
         List<Usuario> datos = dao.listar();
         request.setAttribute("datos", datos);
+        boolean created=false;
+        boolean updated=false;
+        if(successCreate==1){
+            created=true;
+        }
+        if(successUpdate==1){
+            updated=true;
+        }
+        request.setAttribute("successCreate", created);
+        request.setAttribute("successUpdate", updated);
         try {
             request.getRequestDispatcher("adminUsuarios.jsp").forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
-        }       
+        }      
+        
     }
     
+    /**
+     * Obtiene los datos del usuario seleccionada para enviarlos al formulario de editar
+     * @param request
+     * @param response 
+     */
     public void editar(HttpServletRequest request, HttpServletResponse response){
         String ide = request.getParameter("id");
         Usuario u = dao.ListarId(ide);
@@ -152,6 +173,11 @@ public class ControladorUsuarios extends HttpServlet {
         }       
     }
     
+    /**
+     * Envia datos nuevos al metodo que actualiza en base de datos los usuarios
+     * @param request
+     * @param response 
+     */
     public void actualizar(HttpServletRequest request, HttpServletResponse response){
         String id1 = request.getParameter("txtid");
         String nom1 = request.getParameter("txtnom");
@@ -181,6 +207,11 @@ public class ControladorUsuarios extends HttpServlet {
         }       
     }
     
+    /**
+     * Envia el Id del ussuario que se desea eliminar al metodo que elimina en base de datos
+     * @param request
+     * @param response 
+     */
     public void eliminar(HttpServletRequest request, HttpServletResponse response){
         String id2 = request.getParameter("id");
         int id3 = Integer.parseInt(id2);
@@ -193,6 +224,11 @@ public class ControladorUsuarios extends HttpServlet {
         }       
     }
     
+    /**
+     * Envia los datos nuevos al metodo que agrega usuarios en base de datos
+     * @param request
+     * @param response 
+     */
     public void enviar(HttpServletRequest request, HttpServletResponse response){
         String id = request.getParameter("txtid");
         String nombres = request.getParameter("txtnombres");
@@ -213,11 +249,15 @@ public class ControladorUsuarios extends HttpServlet {
         us.setPresupuesto_total(presupuesto3);
         us.setEstado(estado3);
         us.setBit_admin(bit_admin3);
-        dao.agregar(us);
-        try {
-            request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
-        } catch (ServletException | IOException ex) {
-            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
-        }       
+        int success=0;
+        success=dao.agregar(us);
+        
+//        try {
+//            request.setAttribute("successCreate", success);
+//            request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
+            listar(request,response, success,0);
+//        } catch (ServletException | IOException ex) {
+//            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+//        }       
     }
 }
