@@ -21,7 +21,7 @@
         <script src="scripts.js" type="text/javascript"></script>
     </head>
     <body>
-         <nav class="navbar navbar-expand-lg navbar-light barra_color p-3">
+        <nav class="navbar navbar-expand-lg navbar-light barra_color p-3">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"> 
                     <span class="T_color fs-2 fw-bold ">Mi dinero y yo </span>
@@ -35,21 +35,27 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active fw-bold fs-4" aria-current="page" href="administrador.jsp">Inicio</a>
-                           
+
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link active fw-bold fs-4"  aria-current="page" href="ControladorUsuarios?accion=Listar">Administrar usuarios</a>
-                            
+
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active fw-bold fs-4"  aria-current="page" href="ControladorCategorias?accion=Listar">Administrar categorías</a>
-                           
+
                         </li>
-                        
+                        <br>
+                        <br>
+                        <li class="nav-item"><a class="nav-link active fw-bold fs-5"  href='ControladorLogin?registreseOcrear=logout'>
+                                <button  id="cerrarSesion" onclick="cerrarSesion()"  >Cerrar sesión</button>
+                            </a>
+                        </li>
+
                     </ul>
 
-                    
+
                 </div>
             </div>
         </nav>

@@ -168,7 +168,8 @@ public class ControladorCategorias extends HttpServlet {
     public void editar(HttpServletRequest request, HttpServletResponse response){
         String ide = request.getParameter("id");
         Categoria cat = dao.ListarId(ide);
-        request.setAttribute("Categoria", cat); 
+        request.setAttribute("Categoria", cat);
+        
         try {
            request.getRequestDispatcher("editCategoria.jsp").forward(request, response);
         } catch (ServletException | IOException ex) {
@@ -191,6 +192,7 @@ public class ControladorCategorias extends HttpServlet {
         cate.setNombre_categoria(nom1);
         cate.setConsejo(consejo);
         dao.actualizar(cate);
+        request.setAttribute("successActualizar", true);
                 
         try {
            request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
@@ -238,6 +240,7 @@ public class ControladorCategorias extends HttpServlet {
         cate.setNombre_categoria(nombres);
         cate.setConsejo(consejo1);
         dao.agregar(cate);
+        request.setAttribute("successNuevo", true);
                 
         try {
            request.getRequestDispatcher("ControladorCategorias?accion=Listar").forward(request, response);
