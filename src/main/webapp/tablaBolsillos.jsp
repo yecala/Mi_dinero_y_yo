@@ -219,16 +219,19 @@
             });
         </script>
     </c:if> 
+    
+    
+        
         
     <c:if test="${successBolsillos}">
-       <!--  <script>
-            Swal.fire({
-               icon: 'success',
-               title: 'Bolsillos!',
-               text: 'No hay bolsillos disponibles para mostrar.',
-               confirmButtonColor: 'success'
-            });
-        </script>  -->
+        <script>
+             Swal.fire({
+                icon: 'success',
+                title: 'Bolsillos!',
+                text: 'No hay bolsillos disponibles para mostrar.',
+                confirmButtonColor: 'success'
+             });
+        </script>
     </c:if>     
 </body>
 </html>

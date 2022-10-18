@@ -41,8 +41,8 @@
                 Nombre:<br>
                 <input type="text" name="txtnombres" id="nombre"  class="form-control col-2" required=""><br>
                 Consejo<br>
-                <input type="text" name="txtconsejo" id="consejo"  class="form-control col-2" required=""><br>
-                
+                <textarea type="text" name="txtconsejo" id="consejo"  class="form-control col-2 mb-3" required="">
+                </textarea>
                 
                 </div>
                 <input type="submit" name="accion" value="Enviar" class="btn btn-outline-success mb-5" id="botonEnviar">
