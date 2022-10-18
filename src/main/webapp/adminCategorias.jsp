@@ -61,18 +61,20 @@
                         <td id="nomCat">${dato.getNombre_categoria()}</td>
                         <td id="nomCat">${dato.getConsejo()}</td>
                     <td>
+                        
                         <form action="ControladorCategorias" method="POST" class="float-start pe-2 ">
                             <input type="hidden" name="id" value="${dato.getId_categoria()}">
                             <input type="submit" name="accion" value="Editar" class="btn btn-outline-warning">
-                        </form>  
+                        </form> 
                         <form action="ControladorCategorias?accion=Eliminar" method="POST" class="deleteForm float-start " id="formDelete">   
                             <input type="hidden" name="id" value="${dato.getId_categoria()}">
                             <input type="submit" name="accion" value="Eliminar" id="deleteBtn" class="btn btn-outline-danger " >
-                        </form>  
+                        </form>
+                        
                     </td>
                     </tr>
                 </c:forEach>
-            </table>        
+              </table>
         </div>
     </center>
    
