@@ -151,8 +151,15 @@ public class ControladorBolsillos extends HttpServlet {
                     request.setAttribute("Usuario", usu);
                     request.setAttribute("Categoria", cat);
                     request.setAttribute("datos", datos);
-
+                    
+//                    if(!datos.isEmpty()){
+//                        request.setAttribute("successBolsillos", true);
+//                    }else{
+//                        request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
+//                    }
                     request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
+
+                    
                 } else {
 
                     String error = "Debe registrarse para crear y ver bolsillos";
@@ -204,6 +211,7 @@ public class ControladorBolsillos extends HttpServlet {
                 bol.setId_usuario(id_usuario);
 
                 dao.agregar(bol);
+                request.setAttribute("successNew", true);
 
                 request.getRequestDispatcher("ControladorBolsillos?accion=Listar").forward(request, response);
 
@@ -238,6 +246,7 @@ public class ControladorBolsillos extends HttpServlet {
                 bol.setId_usuario(id_usuario);
 
                 dao.actualizar(bol);
+                request.setAttribute("successUpdate", true);
                 request.getRequestDispatcher("ControladorBolsillos?accion=Listar").forward(request, response);
                 break;
 
@@ -246,6 +255,7 @@ public class ControladorBolsillos extends HttpServlet {
                 int id3 = Integer.parseInt(id2);
 
                 dao.delete(id3);
+                request.setAttribute("successDelete", true);
                 request.getRequestDispatcher("ControladorBolsillos?accion=Listar").forward(request, response);
                 break;
             default:
@@ -262,5 +272,7 @@ public class ControladorBolsillos extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+   
 
 }
