@@ -94,8 +94,8 @@ public class BolsilloDAO {
                 r = 0;
             }
 
-        } catch (Exception e) {
-
+        } catch (SQLException e) {
+            e.toString();
         }
         return r;
     }
