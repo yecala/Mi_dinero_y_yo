@@ -20,6 +20,7 @@
         <header class="col-12 col-s-12">
 
         </header><!-- comment -->
+        
         <nav class="navbar navbar-expand-lg navbar-light barra_color p-3">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"> 
@@ -37,10 +38,10 @@
                             <a class="nav-link active fw-bold fs-4" aria-current="page" href="index.jsp">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="categorias.jsp">Categorías</a>
+                            <a class="nav-link fw-bold fs-4" href='ControladorCate?accion=listarTodo' >Categorías</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-4" href="#">Reportes</a>
+                            <a class="nav-link fw-bold fs-4" href="Reportes.jsp">Reportes</a>
                         </li>
                     </ul>
 
@@ -65,11 +66,11 @@
                 </div>
                 <div>
                     <button type="submit" value="Enviar" name="enviar" id="sign_in_button">
-                        <span class="button_text">Ingresar</span>
+                        <span class="button_text ">Ingresar</span>
                     </button>
                 </div>
                 
-                <div>
+                <div class="mt-3">
                     <a class="recupe" href="recuperarContra.jsp" >
                         <small>Recuperar contraseña</small>
                         

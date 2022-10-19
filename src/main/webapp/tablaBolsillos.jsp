@@ -108,7 +108,12 @@
                 </table>
             </center>  
             
-            <input class="col-5 text-center text-danger bg-white border-0" type="text" value="${error}" disabled="" ></input>
+            <c:if test="${error != null}">
+                <div class="alert alert-danger text-center mt-3" role="alert">    
+                    ${error}
+                </div>
+            </c:if>
+            
             <br>
             <br>
             <br><!-- comment -->
@@ -138,15 +143,17 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <form action="ControladorBolsillos" method="POST">
+                                    <form>
+                                    </form>
+                                    <form action="ControladorBolsillos" method="POST" class="float-start pe-2 ms-2">
                                         <input type="hidden" name="id" value="${dato.getId_bolsillo()}">
                                         <input type="submit" name="accion" value="Editar" class="btn btn-outline-warning">                                  
                                     </form>
-                                     
-                                    <form action="ControladorBolsillos?accion=Delete" method="POST" class="deleteFormU " id="formDelete">
+                                    <form action="ControladorBolsillos?accion=Delete" method="POST" class="deleteFormU float-start me-2" id="formDelete">
                                         <input type="hidden" name="id" value="${dato.getId_bolsillo()}">
                                         <input type="submit" name="accion" value="Delete" id="deleteBt" class="btn btn-outline-danger">
                                     </form>
+                                   
                                 </td>
 
                             </tr>

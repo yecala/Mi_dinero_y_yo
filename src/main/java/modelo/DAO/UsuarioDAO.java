@@ -104,7 +104,7 @@ public class UsuarioDAO {
 
     }
 
-    public void delete(Usuario u) {
+    public int delete(Usuario u) {
 
         int r = 0;
         String sql = "update usuarios set estado=? where id_usuario=?";
@@ -128,7 +128,7 @@ public class UsuarioDAO {
             e.toString();
 
         }
-
+        return r; 
     }
 
     public int agregar(Usuario p) {
