@@ -92,7 +92,7 @@ public class ControladorUsuarios extends HttpServlet {
         String accion = request.getParameter("accion");
         switch (accion) {
             case "Listar":
-                listar(request,response,0,0);
+                listar(request,response,0,0,0);
                 break;
 
             case "Editar":
@@ -136,19 +136,25 @@ public class ControladorUsuarios extends HttpServlet {
      * @param request
      * @param response 
      */
-    public void listar(HttpServletRequest request, HttpServletResponse response, int successCreate, int successUpdate){
+    public void listar(HttpServletRequest request, HttpServletResponse response, int successCreate, int successUpdate, int successDelete){
         List<Usuario> datos = dao.listar();
         request.setAttribute("datos", datos);
         boolean created=false;
         boolean updated=false;
+        boolean delete=false;
         if(successCreate==1){
             created=true;
         }
         if(successUpdate==1){
             updated=true;
         }
+        
+        if(successDelete==1){
+            delete=true;
+        }
         request.setAttribute("successCreate", created);
         request.setAttribute("successUpdate", updated);
+        request.setAttribute("successDelete", delete);
         try {
             request.getRequestDispatcher("adminUsuarios.jsp").forward(request, response);
         } catch (ServletException | IOException ex) {
@@ -198,13 +204,9 @@ public class ControladorUsuarios extends HttpServlet {
         us.setPresupuesto_total(presupuestlolong);
         us.setEstado(estado2);
         us.setBit_admin(bit_admin2);
-        dao.actualizar(us);
-        
-        try {
-            request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
-        } catch (ServletException | IOException ex) {
-            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
-        }       
+        int success=0;
+        success=dao.actualizar(us);
+        listar(request,response, 0,success,0);      
     }
     
     /**
@@ -216,12 +218,9 @@ public class ControladorUsuarios extends HttpServlet {
         String id2 = request.getParameter("id");
         int id3 = Integer.parseInt(id2);
         us.setId_usuario(id3);
-        dao.delete(us);
-        try {
-            request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);    
-        } catch (ServletException | IOException ex) {
-            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
-        }       
+        int success=0;
+        success=dao.delete(us);
+        listar(request,response, 0,0,success);    
     }
     
     /**
@@ -251,13 +250,6 @@ public class ControladorUsuarios extends HttpServlet {
         us.setBit_admin(bit_admin3);
         int success=0;
         success=dao.agregar(us);
-        
-//        try {
-//            request.setAttribute("successCreate", success);
-//            request.getRequestDispatcher("ControladorUsuarios?accion=Listar").forward(request, response);
-            listar(request,response, success,0);
-//        } catch (ServletException | IOException ex) {
-//            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
-//        }       
+        listar(request,response, success,0,0);
     }
 }

@@ -46,7 +46,7 @@
                 <input type="text" name="txtestado" value="${usuario.getEstado()}"  class="form-control col-2" id="estado" required><br><br>
                 Bit admin<br>
                 <input type="text" name="txtadmin" value="${usuario.getBit_admin()}"  class="form-control col-2" id="bit_admin" required><br><br>
-                <input type="submit" name="accion" value="Actualizar" class="btn btn-outline-warning" id="botonEnviar">
+                <input type="submit" name="accion" value="Actualizar" class="btn btn-outline-warning mb-5" id="botonEnviar">
             </form>
         </div>
     </center>

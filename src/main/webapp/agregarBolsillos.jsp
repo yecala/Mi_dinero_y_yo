@@ -114,25 +114,32 @@
                                     <input name="txtgasto" class="form-control" id="ex2" type="number" data-bs-toggle="tooltip" title="Si no has tenido un gasto pon 0 (cero)" required="">
                                 </div>
                             </td>
-                            <td>
-                                <div class="p-4 col-xs-3">
+                            
                                 <%        // Recupera el tipo de usuario de las variables de session
                                     String tipoUsu = (String) session.getAttribute("tipoUsuario");
                                     if (tipoUsu != null) {
                                 %>
-                                <button type="submit" name="accion" class="btn btn-outline-success" id="btnGuardar" value="Guardar">Guardar</button><!-- comment -->
-                                <%
-                                } else {
-                                %>
-                                <p>Debe iniciar sesión para guardar un bolsillo</p>
-                                <%
-                                    }
-                                %>  
+                            <td>
+                                <div class="p-4 col-xs-3">
+                                    <button type="submit" name="accion" class="btn btn-outline-success" id="btnGuardar" value="Guardar">Guardar</button><!-- comment -->
                                 </div>
                             </td>
+                                <%
+                                } 
+                                %> 
                         </tr>
                     </table>
                 </div>
+                <%        // Recupera el tipo de usuario de las variables de session
+                    String tipoUsu1 = (String) session.getAttribute("tipoUsuario");
+                    if (tipoUsu1 == null) {
+                %>                
+                <div class="alert alert-danger text-center" role="alert">
+                     Para guardar bolsillos debes iniciar sesión
+                </div> 
+                <%
+                    }   
+                %>             
             </center>
             </form>                
             <!--------------------------FIN BOLSILLO--------------------------------------->
