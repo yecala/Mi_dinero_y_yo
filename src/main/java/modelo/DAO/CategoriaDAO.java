@@ -114,16 +114,22 @@ public class CategoriaDAO {
 
     }
 
-    public void delete(String id) {
-
+    public int delete(String id) {
+        int r = 0;
         String sql = "delete from categorias where id_categoria=" + id;
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
-            ps.executeUpdate();
-
+            r = ps.executeUpdate();
+            if (r == 1) {
+                r = 1;
+            } else {
+                r = 0;
+            }
         } catch (Exception e) {
+            
         }
+        return r;
     }
 
     public int agregar(Categoria cat) {

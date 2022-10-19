@@ -29,8 +29,9 @@ public class RegistroDAO {
     public RegistroDAO() {
     }
     
-     public void guardarUsuario(Registro usuario) throws SQLException {
-        try {
+     public int guardarUsuario(Registro usuario) throws SQLException {
+       int respuesta=0;
+         try {
             String sql = "INSERT INTO US_DINERO.USUARIOS"
                     + "(ID_USUARIO,NOMBRE_USUARIO, CORREO, PASSWORD, PRESUPUESTO_TOTAL,ESTADO,BIT_ADMIN)"
                     + "VALUES(1,?,?,?,?,1,0)";
@@ -42,7 +43,7 @@ public class RegistroDAO {
             ps.setString(3, usuario.getContraseña());
             ps.setLong(4, usuario.getPresupuesto());
             
-            int respuesta=ps.executeUpdate();
+            respuesta=ps.executeUpdate();
             System.out.println("inserto "+respuesta); //1 inserto 0 no inserto
             
             ps.close();
@@ -50,6 +51,7 @@ public class RegistroDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        return respuesta;
     }
      
       public Usuario obtenerUsuarioPorEmail(String email) throws SQLException, ClassNotFoundException {
