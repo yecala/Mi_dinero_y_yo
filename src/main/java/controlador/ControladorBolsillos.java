@@ -285,11 +285,21 @@ public class ControladorBolsillos extends HttpServlet {
     
     public void editar(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
-        
         int id_usuario = 0;
         int id_categoria = 0;
         Categoria cat = new Categoria();
         Usuario usu = new Usuario();
+        if (session.getAttribute("idUsuario") != null) {
+            id_usuario = (int) session.getAttribute("idUsuario");
+            id_categoria = (int) session.getAttribute("categoria_actual");
+
+            cat = daoCAT.sumarPresupuestoGasto(id_usuario, id_categoria);
+            usu = daoCAT.presupuestoDisponible(id_usuario);
+            long presupuesto_disponible = usu.getPresupuesto_total() - usu.getPresupuesto_disponible();
+            usu.setPresupuesto_disponible(presupuesto_disponible);
+
+            List<Bolsillo> datos = dao.listar(id_usuario, id_categoria);
+        }
 
         String ide = request.getParameter("id");
         Bolsillo bolsi = dao.ListarId(ide);

@@ -62,70 +62,71 @@ public class BolsilloDAOTest {
         System.out.println("RESULTADO ESPERADO / RESULTADO OBTENIDO");
         List result = instance.listar(id_usuario, id_categoria);
         assertTrue("El numero de bolsillos debe ser igual a " + expResult, result.size()==expResult);
-       // assertEquals(expResult , result.size());
-        
-        //assertEquals("El resultado esperado son " + expResult + "bolsillos --> ", result.size());
-        
     }
 
-//    /**
-//     * Test of ListarId method, of class BolsilloDAO.
-//     */
-//    @Test
-//    public void testListarId() {
-//        System.out.println("ListarId");
-//        String id = "";
-//        BolsilloDAO instance = new BolsilloDAO();
-//        Bolsillo expResult = null;
-//        Bolsillo result = instance.ListarId(id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of agregar method, of class BolsilloDAO.
-//     */
-//    @Test
-//    public void testAgregar() {
-//        System.out.println("agregar");
-//        Bolsillo bol = null;
-//        BolsilloDAO instance = new BolsilloDAO();
-//        int expResult = 0;
-//        int result = instance.agregar(bol);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of actualizar method, of class BolsilloDAO.
-//     */
-//    @Test
-//    public void testActualizar() {
-//        System.out.println("actualizar");
-//        Bolsillo bol = null;
-//        BolsilloDAO instance = new BolsilloDAO();
-//        int expResult = 0;
-//        int result = instance.actualizar(bol);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of delete method, of class BolsilloDAO.
-//     */
-//    @Test
-//    public void testDelete() {
-//        System.out.println("delete");
-//        int id = 0;
-//        BolsilloDAO instance = new BolsilloDAO();
-//        int expResult = 0;
-//        int result = instance.delete(id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+
+    /**
+     * Test of ListarId method, of class BolsilloDAO.
+     */
+    @Test
+    public void testListarId() {
+        System.out.println("ListarId");
+        String id = "7";
+        BolsilloDAO instance = new BolsilloDAO();
+        String expeResult="bus";
+        Bolsillo result = instance.ListarId(id);
+        assertTrue("Probando nombre del bolsillo", result.getNombre_bolsillo().equals(expeResult));
+    }
+
+    /**
+     * Test of agregar method, of class BolsilloDAO.
+     */
+    @Test
+    public void testAgregar() {
+        System.out.println("agregar");
+        Bolsillo bol = new Bolsillo();
+        bol.setId_bolsillo(0);
+        bol.setNombre_bolsillo("tesito");
+        bol.setPresupuesto_bolsillo(600000);
+        bol.setGasto_bolsillo(400000);
+        bol.setId_categoria(5);
+        bol.setId_usuario(181);
+        BolsilloDAO instance = new BolsilloDAO();
+        int expResult = 1;
+        int result = instance.agregar(bol);
+        assertEquals(expResult, result, "Se agrego el bolsillo correctamente ");
+    }
+
+    /**
+     * Test of actualizar method, of class BolsilloDAO.
+     */
+    @Test
+    public void testActualizar() {
+        System.out.println("actualizar");
+        Bolsillo bol = new Bolsillo();
+        bol.setId_bolsillo(146);
+        bol.setNombre_bolsillo("tesito funciona3");
+        bol.setPresupuesto_bolsillo(600001);
+        bol.setGasto_bolsillo(400001);
+        bol.setId_categoria(5);
+        bol.setId_usuario(181); //el usuario no existe 
+        BolsilloDAO instance = new BolsilloDAO();
+        int expResult = 1; //como el ususario no existe el resultado esperado es 0 es decir, no actualiza
+        int result = instance.actualizar(bol);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of delete method, of class BolsilloDAO.
+     */
+    @Test
+    public void testDelete() {
+        System.out.println("delete");
+        int id = 147;
+        BolsilloDAO instance = new BolsilloDAO();
+        int expResult = 1;
+        int result = instance.delete(id);
+        assertEquals(expResult, result);
+    }
     
 }
