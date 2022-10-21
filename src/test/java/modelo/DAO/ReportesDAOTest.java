@@ -52,6 +52,20 @@ public class ReportesDAOTest {
         assertTrue("El presupuesto de la categoria debe ser " +expResult , result.get(0).getPresupuesto_categoria()==expResult);
         
     }
+    
+    /**
+     * Test of listar method, of class ReportesDAO. CON FALLA
+     */
+    @Test
+    public void testListarFalla() {
+        System.out.println("Listar con falla: se envia un usuario inexistente");
+        int id_usuario = 1;
+        ReportesDAO instance = new ReportesDAO();
+        List<Categoria>  result = instance.listar(id_usuario);
+        int expResult=80678; // La suma del presupuesto de todos los bolsillos de la categoria de menor id que tenga el usuario
+        assertTrue("El presupuesto de la categoria debe ser " +expResult , result.get(0).getPresupuesto_categoria()==expResult);
+        
+    }
 
     /**
      * Test of PresupuestoTotal method, of class ReportesDAO.
@@ -60,6 +74,19 @@ public class ReportesDAOTest {
     public void testPresupuestoTotal() {
         System.out.println("PresupuestoTotal");
         int id_usuario = 161;
+        ReportesDAO instance = new ReportesDAO();
+        long expResult = 1000000;
+        long result = instance.PresupuestoTotal(id_usuario);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of PresupuestoTotal method, of class ReportesDAO. CON FALLA
+     */
+    @Test
+    public void testPresupuestoTotalFalla() {
+        System.out.println("Presupuesto Total con falla: se envia un usuario inexistente ");
+        int id_usuario = 2;
         ReportesDAO instance = new ReportesDAO();
         long expResult = 1000000;
         long result = instance.PresupuestoTotal(id_usuario);
