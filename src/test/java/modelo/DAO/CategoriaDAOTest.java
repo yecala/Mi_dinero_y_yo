@@ -46,14 +46,13 @@ public class CategoriaDAOTest {
     @Test
     public void testListar() {
         System.out.println("listar categorias: se envian datos de una categoria existente");
-        int id_categoria =4;
         CategoriaDAO instance = new CategoriaDAO();
         Categoria cat = new Categoria();
         String expResult = "Viajes";
         List result = instance.listar();
-        cat = (Categoria) result.get(2);
+        cat = (Categoria) result.get(3);
         String result1 = cat.getNombre_categoria();
-        assertEquals(expResult, result);
+        assertEquals(expResult, result1);
     }
     
      @Test
@@ -102,7 +101,7 @@ public class CategoriaDAOTest {
         System.out.println("actualizar categoria: se envian los datos correctos de una categoria");
         Categoria categ = new Categoria();
         categ.setNombre_categoria("Salud");
-        categ.setConsejo("Deber invertir bien");
+        categ.setConsejo("Invertir es lo mejor que puedes hacer");
         categ.setId_categoria(2);
         CategoriaDAO instance = new CategoriaDAO();
         int expResult = 1;
@@ -127,10 +126,10 @@ public class CategoriaDAOTest {
      */
     @Test
     public void testNum_bolsillos() {
-        System.out.println("id del primero bolsillo de la categoria");
-        String id_categoria ="4";
+        System.out.println("id del ultimo bolsillo de la categoria");
+        String id_categoria ="2";
         CategoriaDAO instance = new CategoriaDAO();
-        int expResult = 158;
+        int expResult = 151;
         int result = instance.num_bolsillos(id_categoria);
         assertEquals(expResult, result);
     }
@@ -155,7 +154,7 @@ public class CategoriaDAOTest {
     @Test
     public void testDelete() {
         System.out.println("Eliminar una categoria existente");
-        String id_categoria = "11";
+        String id_categoria = "10";
         CategoriaDAO instance = new CategoriaDAO();
         int expResult = 1;
         int result = instance.delete(id_categoria);
@@ -183,9 +182,9 @@ public class CategoriaDAOTest {
     public void testAgregar() {
         System.out.println("agregar categoria");
         Categoria cat = new Categoria();
-        cat.setId_categoria(7);
-        cat.setNombre_categoria("Imprevistos");
-        cat.setConsejo("Debes ahorrar un poco para gastos imprevistos");
+        cat.setId_categoria(6);
+        cat.setNombre_categoria("Test");
+        cat.setConsejo("Debes ahorrar el 20% de tu sueldo");
         CategoriaDAO instance = new CategoriaDAO();
         int expResult = 1;
         int result = instance.agregar(cat);
@@ -213,13 +212,34 @@ public class CategoriaDAOTest {
      */
     @Test
     public void testSumarPresupuestoGasto() {
-        System.out.println("sumarPresupuestoGasto");
-        int id_usuario = 0;
-        int id_categoria = 0;
+        System.out.println("Suma del presupuesto y gasto de la categoria");
+        int id_usuario = 81;
+        int id_categoria=2;
         CategoriaDAO instance = new CategoriaDAO();
-        Categoria expResult = null;
-        Categoria result = instance.sumarPresupuestoGasto(id_usuario, id_categoria);
-        assertEquals(expResult, result);
+        Categoria expResult = new Categoria();
+        expResult.setId_categoria(2);
+        expResult.setNombre_categoria("Salud");
+        expResult.setPresupuesto_categoria(150000);
+        expResult.setGasto_categoria(178000);
+        Categoria result = instance.sumarPresupuestoGasto(id_usuario,id_categoria);
+        assertEquals(expResult.getPresupuesto_categoria(), expResult.getPresupuesto_categoria());
+       
+    }
+    
+    @Test
+    public void testSumarPresupuestoGastoFalla() {
+        System.out.println("Suma del presupuesto y gasto de la categoria con valores errados");
+        int id_usuario = 90;
+        int id_categoria=8;
+        CategoriaDAO instance = new CategoriaDAO();
+        Categoria expResult = new Categoria();
+        expResult.setId_categoria(8);
+        expResult.setNombre_categoria("Hola");
+        expResult.setPresupuesto_categoria(180000);
+        expResult.setGasto_categoria(168000);
+        Categoria result = instance.sumarPresupuestoGasto(id_usuario,id_categoria);
+        assertEquals(expResult.getPresupuesto_categoria(), result.getPresupuesto_categoria());
+       
     }
 
     /**
@@ -231,9 +251,9 @@ public class CategoriaDAOTest {
         int id_usuario = 81;
         CategoriaDAO instance = new CategoriaDAO();
         Usuario expResult = new Usuario();
-        expResult.setId_usuario(222);
-        expResult.setPresupuesto_total(360000);
-        expResult.setPresupuesto_disponible(368000);
+        expResult.setId_usuario(81);
+        expResult.setPresupuesto_total(150000);
+        expResult.setPresupuesto_disponible(360000);
         Usuario result = instance.presupuestoDisponible(id_usuario);
         assertEquals(expResult.getPresupuesto_disponible(), result.getPresupuesto_disponible());
     }
