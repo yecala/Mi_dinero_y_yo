@@ -54,37 +54,5 @@ public class RegistroDAO {
         return respuesta;
     }
      
-      public Usuario obtenerUsuarioPorEmail(String email) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT ID_USUARIO,NOMBRE_USUARIO, CORREO,"
-                + " PASSWORD, PRESUPUESTO_TOTAL,ESTADO, BIT_ADMIN"
-                +" WHERE CORREO=? AND ESTADO=1";
-
-        Connection conexion =  DBUtil.getConexion();
-        // Se asigna el parámetro email a instrucción de SQL
-        PreparedStatement ps = conexion.prepareStatement(sql);
-        ps.setString(1, email);
-
-        // El resultado de la consulta queda en una tabla en memoria conocida
-        // como ResultSet
-        ResultSet rs = ps.executeQuery();
-
-        // El método next hace avanzar el cursor del ResultSet al siguiente registro
-        if (rs.next()) {
-            int id_usuario = rs.getInt("id_usuario");
-            String nombre_usuario = rs.getString("nombre_usuario");
-            String correo = rs.getString("correo");
-            String password = rs.getString("password");
-            long presupuesto_total = rs.getLong("presupuesto_total");
-            int bit_admin = rs.getInt("bit_admin");
-            int estado=1;
-            
-            Usuario u = new Usuario(id_usuario, nombre_usuario, correo, password, presupuesto_total,estado,bit_admin);
-            return u;
-        }
-
-        return null;
-    }
-      
-      
-    
+  
 }
