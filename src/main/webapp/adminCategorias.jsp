@@ -152,6 +152,16 @@
             });
         </script>
     </c:if>
+    <c:if test="${successVacio}">
+        <script>
+            Swal.fire({
+               icon: 'error',
+               title: 'No enviado!',
+               text: 'Campos obligatorios vacios.',
+               confirmButtonColor: 'success'
+            });
+        </script>
+    </c:if>
 </body>
 </html>
 
