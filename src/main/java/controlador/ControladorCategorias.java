@@ -233,6 +233,10 @@ public class ControladorCategorias extends HttpServlet {
     public void enviar(HttpServletRequest request, HttpServletResponse response){
         String id = request.getParameter("txtid");
         String nombres = request.getParameter("txtnombres");
+        nombres=nombres.trim();
+        if(nombres.equals("")){
+            request.setAttribute("successVacio", true);
+        }
         String consejo1 = request.getParameter("txtconsejo");
         int id3 = Integer.parseInt(id);
 

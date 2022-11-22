@@ -36,7 +36,7 @@
                 <div class="field_container">
                 <label class="mt-3">ID:</label>
                 <br>
-                <input type="text" name="txtid" id="idcat" class="form-control col-2"  required=""><br>
+                <input type="number" name="txtid" id="idcat" class="form-control col-2"  required=""><br>
                 
                 Nombre:<br>
                 <input type="text" name="txtnombres" id="nombre"  class="form-control col-2" required=""><br>
