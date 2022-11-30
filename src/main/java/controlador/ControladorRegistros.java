@@ -82,13 +82,11 @@ public class ControladorRegistros extends HttpServlet {
                         response.sendRedirect("login.jsp");
                     } catch (SQLException ex) {
                         Logger.getLogger(ControladorRegistros.class.getName()).log(Level.SEVERE, null, ex);
-
                     }
 
                 } else {
                     request.setAttribute("usuarioExistente", "ERROR: El correo ya esta registrado");
                     request.getRequestDispatcher("registrarse.jsp").forward(request, response);
-
                 }
             } catch (Exception e) {
                 e.printStackTrace();

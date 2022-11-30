@@ -149,9 +149,9 @@
                                         <input type="hidden" name="id" value="${dato.getId_bolsillo()}">
                                         <input type="submit" name="accion" value="Editar" class="btn btn-outline-warning">                                  
                                     </form>
-                                    <form action="ControladorBolsillos?accion=Delete" method="POST" class="deleteFormU float-start me-2" id="formDelete">
+                                    <form action="ControladorBolsillos?accion=Eliminar" method="POST" class="deleteFormU float-start me-2" id="formDelete">
                                         <input type="hidden" name="id" value="${dato.getId_bolsillo()}">
-                                        <input type="submit" name="accion" value="Delete" id="deleteBt" class="btn btn-outline-danger">
+                                        <input type="submit" name="accion" value="Eliminar" id="deleteBt" class="btn btn-outline-danger">
                                     </form>
                                    
                                 </td>
@@ -227,9 +227,6 @@
         </script>
     </c:if> 
     
-    
-        
-        
     <c:if test="${successBolsillos}">
         <script>
              Swal.fire({
@@ -238,6 +235,17 @@
                 text: 'No hay bolsillos disponibles para mostrar.',
                 confirmButtonColor: 'success'
              });
+        </script>
+    </c:if>
+        
+    <c:if test="${saveError}">
+        <script>
+            Swal.fire({
+               icon: 'error',
+               title: 'Oops!',
+               text: 'Ha ocurrido un error, por favor intentelo de nuevo',
+               confirmButtonColor: 'error'
+            });
         </script>
     </c:if>     
 </body>
