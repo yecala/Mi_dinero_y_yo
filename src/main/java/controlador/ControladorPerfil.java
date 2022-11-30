@@ -25,7 +25,7 @@ import modelo.POJO.Usuario;
 public class ControladorPerfil extends HttpServlet {
     UsuarioDAO dao = new UsuarioDAO();
     Usuario us = new Usuario();
-
+    int id_usuario;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -66,16 +66,14 @@ public class ControladorPerfil extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        int id_usuario = (int) session.getAttribute("idUsuario");
+        id_usuario = (int) session.getAttribute("idUsuario");
         
         String accion = request.getParameter("accion");
        String id = String.valueOf(id_usuario);
         switch(accion){
             case "Listar":
                 
-                Usuario u = dao.ListarId(id);
-                request.setAttribute("usuario", u);
-                request.getRequestDispatcher("perfil.jsp").forward(request, response);
+                listar(request,response,null);
                 break;
             case "Editar":
                 
@@ -85,26 +83,39 @@ public class ControladorPerfil extends HttpServlet {
                 break;
 
             case "Actualizar":
-                
+                boolean success=false;
                 String nom = request.getParameter("txtnom");
                 String pass = request.getParameter("txtpass");
                 String presupuesto1 = request.getParameter("txtpresupuesto");
-               
-                us.setId_usuario(id_usuario);
-                us.setNombre_usuario(nom);
-                us.setPassword(pass);
-                us.setPresupuesto_total(Long.parseLong(presupuesto1));
-               
-                int r=dao.actualizarPerfil(us);
+                nom=nom.trim();
+                pass=pass.trim();
                 
-                if(r==1){
-                    session.setAttribute("nombreUsuario", us.getNombre_usuario());
-                    request.getRequestDispatcher("ControladorPerfil?accion=Listar").forward(request, response);
+                if(!nom.equals("") && !pass.equals("")){
+                   
+                    us.setId_usuario(id_usuario);
+                    us.setNombre_usuario(nom);
+                    us.setPassword(pass);
+                    us.setPresupuesto_total(Long.parseLong(presupuesto1));
+
+                    boolean contraSegura = false;
+                    contraSegura = esSegura(pass);
+
+                    int r=0;
+                    if(contraSegura){
+                       r=dao.actualizarPerfil(us);
+                    }
+                    if(r==1){
+                        session.setAttribute("nombreUsuario", us.getNombre_usuario());
+                        success=true;
+                    }else{
+                        request.setAttribute("error", "Ocurrio un error al actualizar, intenta de nuevo");
+                        success=false;
+                    }
                 }else{
-                    request.setAttribute("error", "Ocurrio un error al actualizar, intenta de nuevo");
-                    request.getRequestDispatcher("editarPerfil.jsp").forward(request, response);
+                    success=false;
                 }
                 
+                listar(request,response,String.valueOf(success));
                 break;
                 
             
@@ -135,6 +146,7 @@ public class ControladorPerfil extends HttpServlet {
                 
                 String contra= usuario.getPassword();
                 
+               
                 request.setAttribute("usuario", usuario);
                 
                 request.getRequestDispatcher("recuperarContra.jsp").forward(request, response);
@@ -153,4 +165,53 @@ public class ControladorPerfil extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public static boolean esSegura(String password) {
+        if (password.length() > 8) {
+            boolean mayuscula = false;
+            boolean numero = false;
+            char c;
+            for (int i = 0; i < password.length(); i++) {
+                c = password.charAt(i);
+                if (Character.isDigit(c)) {
+                    numero = true;
+                }
+                if (Character.isUpperCase(c)) {
+                    mayuscula = true;
+                }
+
+            }
+            if (numero && mayuscula) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+    }
+    
+    public void listar(HttpServletRequest request, HttpServletResponse response, String editar){
+        try {
+            String id = String.valueOf(id_usuario);
+            Usuario u = dao.ListarId(id);
+            request.setAttribute("usuario", u);
+            if(editar!=null){
+                if(editar.equals("false")){
+                    request.setAttribute("camposVacios", true);
+                }else{
+                    request.setAttribute("successEdit", true);
+                }
+            }else{
+                 request.setAttribute("camposVacios", false);
+                 request.setAttribute("successEdit", false);
+            }
+            request.getRequestDispatcher("perfil.jsp").forward(request, response);
+        } catch (ServletException ex) {
+            Logger.getLogger(ControladorPerfil.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ControladorPerfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
 }

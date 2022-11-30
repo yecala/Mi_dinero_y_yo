@@ -101,8 +101,7 @@
             </ul>
         </section>
         <!--</form>--->
-
-        <section id="caja2" class="caja2"> 
+        <section id="caja2" class="caja2 px-3"> 
 
             <h3 id="tituloNoti"><span class="text-center" data-bs-toggle="tooltip" 
                   title="Las notificaciones te diran si estas conservando tu presupuesto 
@@ -122,7 +121,7 @@
                 }
             %>
         </section> 
-
+        
 
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

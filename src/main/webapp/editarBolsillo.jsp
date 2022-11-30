@@ -124,7 +124,8 @@
                         </div>
                     </center>
                     <input type="hidden" name="id" value="${Bolsillo.getId_bolsillo()}">
-                    <input type="submit" name="accion" value="Actualizar" class="btn btn-outline-warning" id="botonEnviar" >
+                    <input type="submit" name="accion" value="Actualizar" class="btn btn-outline-warning mb-5" id="botonEnviar" >
+                    
                 </form>
             </div>
         </center>

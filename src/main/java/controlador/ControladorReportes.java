@@ -114,6 +114,8 @@ public class ControladorReportes extends HttpServlet {
     public void listar(HttpServletRequest request, HttpServletResponse response, int id_usuario) throws ServletException {
         HttpSession session = request.getSession();
         List<Categoria> datos = new ArrayList<>();
+        
+        
         datos = dao.listar(id_usuario);
 
         long totalPresu = 0;
@@ -126,25 +128,36 @@ public class ControladorReportes extends HttpServlet {
         long presuTotal = dao.PresupuestoTotal(id_usuario);
         long ahorroEsperado = presuTotal - totalPresu;
         long ahorroReal = presuTotal - totalGasto;
+        try{
+            if (ahorroReal < 0) {
+                String NotificacionMala = "Has gastado mas de lo que abarca tu presupuesto!";
+                session.setAttribute("Notificacion", NotificacionMala);
 
-        if (ahorroEsperado < 0) {
-            String NotificacionMala = "Tu presupuesto esta bajo ceros";
+            }
+            if (ahorroReal > 0){
+                String NotificacionBuena = "Felicidades! Estas ahorrando mucho sigue asi!";
+                session.setAttribute("Notificacion", NotificacionBuena);
+
+            }
+            if(ahorroReal == 0 && ahorroEsperado < 0){
+                String NotificacionMala = "Alerta! Tu presupuesto esta bajo ceros";
+                session.setAttribute("Notificacion", NotificacionMala);
+
+            }
+            if(ahorroReal == 0 && ahorroEsperado > 0){
+                String NotificacionBuena = "Esta planeando buenos ahorros, sigue asi!";
+                session.setAttribute("Notificacion", NotificacionBuena);
+
+            }
+            if(ahorroEsperado == 0){
+                String NotificacionMala = "No tienes saldo en tus bolsillos, por favor crea bolsillos con presupuesto o gasto diferente de cero!";
+                session.setAttribute("Notificacion", NotificacionMala);
+
+            }
+        }catch(Exception e){
+            String NotificacionMala = "Ha ocurrido un error, por favor comunicate con soporte tecnico";
             session.setAttribute("Notificacion", NotificacionMala);
-
-        } else {
-            String NotificacionBuena = "Esta planeando ahorros sigue asi";
-            session.setAttribute("Notificacion", NotificacionBuena);
-
-        }
-        if (ahorroReal < 0) {
-            String NotificacionMala = "Has gastado mas de lo que abarca tu presupuesto!";
-            session.setAttribute("Notificacion", NotificacionMala);
-
-        } else {
-            String NotificacionBuena = "Estas ahorrando mucho sigue asi!";
-            session.setAttribute("Notificacion", NotificacionBuena);
-
-        }
+        }   
 
         request.setAttribute("datos", datos);
         request.setAttribute("totalPresu", totalPresu);

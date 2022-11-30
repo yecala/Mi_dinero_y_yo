@@ -158,7 +158,7 @@ public class ControladorBolsillos extends HttpServlet {
                 actualizar(request,response,id_usuario,id_categoria);
                 break;
 
-            case "Delete":
+            case "Eliminar":
                 delete(request,response);
                 break;
             default:
@@ -258,23 +258,21 @@ public class ControladorBolsillos extends HttpServlet {
         String presu = request.getParameter("txtpresupuesto");
         String gasto = request.getParameter("txtgasto");
 
-        long presupuesto = Long.parseLong(presu);
-        long gastoReal = Long.parseLong(gasto);
+        try{
+            long presupuesto = Long.parseLong(presu);
+            long gastoReal = Long.parseLong(gasto);
+            
+            bol.setNombre_bolsillo(nombres);
+            bol.setPresupuesto_bolsillo(presupuesto);
+            bol.setGasto_bolsillo(gastoReal);
+            bol.setId_categoria(id_categoria);
+            bol.setId_usuario(id_usuario);
 
-        bol.setNombre_bolsillo(nombres);
-        bol.setPresupuesto_bolsillo(presupuesto);
-        bol.setGasto_bolsillo(gastoReal);
-        bol.setId_categoria(id_categoria);
-        bol.setId_usuario(id_usuario);
-
-        success = dao.agregar(bol);
-        request.setAttribute("successNew", true);
-        
-//        if(success ==1){
-//           request.setAttribute("successNew", true);
-//        }else{
-//           request.setAttribute("successNew", false);
-//        }
+            success = dao.agregar(bol);
+            request.setAttribute("successNew", true);
+        }catch(NumberFormatException e){
+            request.setAttribute("saveError", true);
+        }
         
         try {
             request.getRequestDispatcher("ControladorBolsillos?accion=Listar").forward(request, response);
@@ -321,20 +319,24 @@ public class ControladorBolsillos extends HttpServlet {
         String presu1 = request.getParameter("txtpresupuesto");
         String gasto1 = request.getParameter("txtgasto");
         String idBolsi = request.getParameter("id");
-        int idbol = Integer.parseInt(idBolsi);
-        long presupuesto1 = Long.parseLong(presu1);
-        long gastoReal1 = Long.parseLong(gasto1);
+        try{
+        
+            int idbol = Integer.parseInt(idBolsi);
+            long presupuesto1 = Long.parseLong(presu1);
+            long gastoReal1 = Long.parseLong(gasto1);
 
-        bol.setId_bolsillo(idbol);
-        bol.setNombre_bolsillo(nombres1);
-        bol.setPresupuesto_bolsillo(presupuesto1);
-        bol.setGasto_bolsillo(gastoReal1);
-        bol.setId_categoria(id_categoria);
-        bol.setId_usuario(id_usuario);
+            bol.setId_bolsillo(idbol);
+            bol.setNombre_bolsillo(nombres1);
+            bol.setPresupuesto_bolsillo(presupuesto1);
+            bol.setGasto_bolsillo(gastoReal1);
+            bol.setId_categoria(id_categoria);
+            bol.setId_usuario(id_usuario);
 
-        dao.actualizar(bol);
-        request.setAttribute("successUpdate", true);
-
+            dao.actualizar(bol);
+            request.setAttribute("successUpdate", true);
+        }catch(NumberFormatException e){
+            request.setAttribute("saveError", true);
+        }
         try {
             request.getRequestDispatcher("ControladorBolsillos?accion=Listar").forward(request, response);
         } catch (ServletException | IOException ex) {
