@@ -27,17 +27,23 @@ public class CategoriaDAO {
 
 //select id_categoria,sum(presupuesto_bolsillo) total from bolsillos where id_usuario=44 AND id_categoria=1 group by id_categoria;
     public List listar() {
-        List<Categoria> lista = new ArrayList<>();
-        String sql = "select id_categoria, nombre_categoria from categorias order by id_categoria";
-        try {
-            con = c.conectar();
+            List<Categoria> lista = new ArrayList<>();
+        String sql = "select * from categorias order by id_categoria";
+        try{
+           con = c.conectar();  
+        }catch(Exception ex){
+             ex.getStackTrace();
+             System.out.println("Fallo al intentar conectar con base de datos");
+        }
+            
+        try {    
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Categoria cat = new Categoria();
                 cat.setId_categoria(rs.getInt(1));
                 cat.setNombre_categoria(rs.getString(2));
-
+                cat.setConsejo(rs.getString(3));
                 lista.add(cat);
             }
 
@@ -48,7 +54,7 @@ public class CategoriaDAO {
     }
 
     public Categoria ListarId(String id) {
-        String sql = "select id_categoria, nombre_categoria from categorias where id_categoria=" + id;
+        String sql = "select id_categoria, nombre_categoria, consejo from categorias where id_categoria=" + id;
         Categoria cat = new Categoria();
 
         try {
@@ -58,7 +64,7 @@ public class CategoriaDAO {
             while (rs.next()) {
                 cat.setId_categoria(rs.getInt(1));
                 cat.setNombre_categoria(rs.getString(2));
-
+                cat.setConsejo(rs.getString(3));
             }
         } catch (SQLException e) {
         }
@@ -68,15 +74,12 @@ public class CategoriaDAO {
     public int actualizar(Categoria cat) {
 
         int r = 0;
-        String sql = "update categorias set nombre_categoria=? where id_categoria=?";
+        String sql = "update categorias set nombre_categoria='" + cat.getNombre_categoria() + "' , consejo='" + cat.getConsejo() +"' where id_categoria=" + cat.getId_categoria();
+        
         try {
 
             con = c.conectar();
             ps = con.prepareStatement(sql);
-
-            ps.setString(1, cat.getNombre_categoria());
-
-            ps.setInt(2, cat.getId_categoria());
 
             r = ps.executeUpdate();
             if (r == 1) {
@@ -111,28 +114,34 @@ public class CategoriaDAO {
 
     }
 
-    public void delete(String id) {
-
+    public int delete(String id) {
+        int r = 0;
         String sql = "delete from categorias where id_categoria=" + id;
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
-            ps.executeUpdate();
-
+            r = ps.executeUpdate();
+            if (r == 1) {
+                r = 1;
+            } else {
+                r = 0;
+            }
         } catch (Exception e) {
+            
         }
+        return r;
     }
 
     public int agregar(Categoria cat) {
         int r = 0;
-        String sql = "insert into categorias (id_categoria,nombre_categoria) values(?,?)";
+        String sql = "insert into categorias (id_categoria,nombre_categoria,consejo) values(?,?,?)";
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
 
             ps.setInt(1, cat.getId_categoria());
             ps.setString(2, cat.getNombre_categoria());
-
+            ps.setString(3, cat.getConsejo());
             r = ps.executeUpdate();
 
             if (r == 1) {
@@ -200,4 +209,5 @@ public class CategoriaDAO {
 
     }
 
+    
 }

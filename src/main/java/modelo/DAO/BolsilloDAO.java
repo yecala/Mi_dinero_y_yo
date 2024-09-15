@@ -94,8 +94,8 @@ public class BolsilloDAO {
                 r = 0;
             }
 
-        } catch (Exception e) {
-
+        } catch (SQLException e) {
+            e.toString();
         }
         return r;
     }
@@ -129,7 +129,7 @@ public class BolsilloDAO {
 
     }
     
-     public void delete(int id) {
+     public int delete(int id) {
 
         int r = 0;
         String sql = "DELETE FROM bolsillos WHERE id_bolsillo="+id;
@@ -148,7 +148,7 @@ public class BolsilloDAO {
             e.toString();
 
         }
-
+        return r;
     }
 
    

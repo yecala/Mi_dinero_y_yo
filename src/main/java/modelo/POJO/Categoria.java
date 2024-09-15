@@ -13,8 +13,15 @@ public class Categoria {
     String nombre_categoria;
     long presupuesto_categoria;
     long gasto_categoria;
+    String consejo;
     
-    
+    public Categoria(int id_categoria, String nombre_categoria, long presupuesto_categoria, long gasto_categoria, String consejo) {
+        this.id_categoria = id_categoria;
+        this.nombre_categoria = nombre_categoria;
+        this.presupuesto_categoria = presupuesto_categoria;
+        this.gasto_categoria = gasto_categoria;
+        this.consejo = consejo;
+    }
     
     public Categoria(int id_categoria, String nombre_categoria, long presupuesto_categoria, long gasto_categoria) {
         this.id_categoria = id_categoria;
@@ -67,6 +74,12 @@ public class Categoria {
         this.nombre_categoria = nombre_categoria;
     }
 
-  
-    
+    public String getConsejo() {
+        return consejo;
+    }
+
+    public void setConsejo(String consejo) {
+        this.consejo = consejo;
+    }
+
 }

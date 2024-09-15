@@ -46,6 +46,7 @@ html{
     position: absolute;
     right: 0px;
     display: none;
+    z-index: 100
 }
 .caja2{
     width:300px;
@@ -54,6 +55,7 @@ html{
     position: absolute;
     right: 0px;
     display: none;
+    z-index: 100;
 }
 li{
     list-style:none;

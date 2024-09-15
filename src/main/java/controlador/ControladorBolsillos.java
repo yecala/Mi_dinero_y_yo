@@ -7,6 +7,8 @@ package controlador;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +30,7 @@ public class ControladorBolsillos extends HttpServlet {
     BolsilloDAO dao = new BolsilloDAO();
     CategoriaDAO daoCAT = new CategoriaDAO();
     Bolsillo bol = new Bolsillo();
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -136,117 +139,27 @@ public class ControladorBolsillos extends HttpServlet {
         String accion = request.getParameter("accion");
         switch (accion) {
             case "Listar":
-
-                if (session.getAttribute("idUsuario") != null) {
-                    id_usuario = (int) session.getAttribute("idUsuario");
-                    id_categoria = (int) session.getAttribute("categoria_actual");
-
-                    cat = daoCAT.sumarPresupuestoGasto(id_usuario, id_categoria);
-                    usu = daoCAT.presupuestoDisponible(id_usuario);
-                    long presupuesto_disponible = usu.getPresupuesto_total() - usu.getPresupuesto_disponible();
-                    usu.setPresupuesto_disponible(presupuesto_disponible);
-
-                    List<Bolsillo> datos = dao.listar(id_usuario, id_categoria);
-
-                    request.setAttribute("Usuario", usu);
-                    request.setAttribute("Categoria", cat);
-                    request.setAttribute("datos", datos);
-
-                    request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
-                } else {
-
-                    String error = "Debe registrarse para crear y ver bolsillos";
-                    request.setAttribute("error", error);
-                    request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
-
-                }
-
+                listar(request,response);
                 break;
 
             case "Nuevo":
-
-                if (session.getAttribute("idUsuario") != null) {
-                    id_usuario = (int) session.getAttribute("idUsuario");
-                    id_categoria = (int) session.getAttribute("categoria_actual");
-
-                    cat = daoCAT.sumarPresupuestoGasto(id_usuario, id_categoria);
-                    usu = daoCAT.presupuestoDisponible(id_usuario);
-                    long presupuesto_disponible = usu.getPresupuesto_total() - usu.getPresupuesto_disponible();
-                    usu.setPresupuesto_disponible(presupuesto_disponible);
-
-                    List<Bolsillo> datos = dao.listar(id_usuario, id_categoria);
-
-                    request.setAttribute("Usuario", usu);
-                    request.setAttribute("Categoria", cat);
-                    
-
-                     request.getRequestDispatcher("agregarBolsillos.jsp").forward(request, response);
-                } else {
-                    request.setAttribute("Usuario", usu);
-                    request.setAttribute("Categoria", cat);
-                    request.getRequestDispatcher("agregarBolsillos.jsp").forward(request, response);
-                }
+                nuevo(request,response);
                 break;
 
             case "Guardar":
-
-                String nombres = request.getParameter("txtnombre");
-                String presu = request.getParameter("txtpresupuesto");
-                String gasto = request.getParameter("txtgasto");
-
-                long presupuesto = Long.parseLong(presu);
-                long gastoReal = Long.parseLong(gasto);
-
-                bol.setNombre_bolsillo(nombres);
-                bol.setPresupuesto_bolsillo(presupuesto);
-                bol.setGasto_bolsillo(gastoReal);
-                bol.setId_categoria(id_categoria);
-                bol.setId_usuario(id_usuario);
-
-                dao.agregar(bol);
-
-                request.getRequestDispatcher("ControladorBolsillos?accion=Listar").forward(request, response);
-
+                guardar(request,response,id_usuario,id_categoria);
                 break;
 
             case "Editar":
-                String ide = request.getParameter("id");
-                Bolsillo bolsi = dao.ListarId(ide);
-
-                request.setAttribute("Bolsillo", bolsi);
-                request.setAttribute("Usuario", usu);
-                request.setAttribute("Categoria", cat);
-
-                request.getRequestDispatcher("editarBolsillo.jsp").forward(request, response);
+                editar(request,response);
                 break;
 
             case "Actualizar":
-
-                String nombres1 = request.getParameter("txtnombre");
-                String presu1 = request.getParameter("txtpresupuesto");
-                String gasto1 = request.getParameter("txtgasto");
-                String idBolsi = request.getParameter("id");
-                int idbol = Integer.parseInt(idBolsi);
-                long presupuesto1 = Long.parseLong(presu1);
-                long gastoReal1 = Long.parseLong(gasto1);
-
-                bol.setId_bolsillo(idbol);
-                bol.setNombre_bolsillo(nombres1);
-                bol.setPresupuesto_bolsillo(presupuesto1);
-                bol.setGasto_bolsillo(gastoReal1);
-                bol.setId_categoria(id_categoria);
-                bol.setId_usuario(id_usuario);
-
-                dao.actualizar(bol);
-                request.getRequestDispatcher("ControladorBolsillos?accion=Listar").forward(request, response);
+                actualizar(request,response,id_usuario,id_categoria);
                 break;
 
-            case "Delete":
-                String id2 = request.getParameter("id");
-                int id3 = Integer.parseInt(id2);
-
-                dao.delete(id3);
-                request.getRequestDispatcher("ControladorBolsillos?accion=Listar").forward(request, response);
+            case "Eliminar":
+                delete(request,response);
                 break;
             default:
                 throw new AssertionError();
@@ -262,5 +175,191 @@ public class ControladorBolsillos extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+   public void listar(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        
+        int id_usuario = 0;
+        int id_categoria = 0;
+        Categoria cat = new Categoria();
+        Usuario usu = new Usuario();
+        
+        if (session.getAttribute("idUsuario") != null) {
+            id_usuario = (int) session.getAttribute("idUsuario");
+            id_categoria = (int) session.getAttribute("categoria_actual");
 
-}
+            cat = daoCAT.sumarPresupuestoGasto(id_usuario, id_categoria);
+            usu = daoCAT.presupuestoDisponible(id_usuario);
+            long presupuesto_disponible = usu.getPresupuesto_total() - usu.getPresupuesto_disponible();
+            usu.setPresupuesto_disponible(presupuesto_disponible);
+
+            List<Bolsillo> datos = dao.listar(id_usuario, id_categoria);
+
+            request.setAttribute("Usuario", usu);
+            request.setAttribute("Categoria", cat);
+            request.setAttribute("datos", datos);
+
+            if (datos.size() <= 0) {
+                request.setAttribute("successBolsillos", true);
+            }
+        } else {
+            String error = "Debe registrarse para crear y ver bolsillos";
+            request.setAttribute("error", error);
+        }
+         try {
+            request.getRequestDispatcher("tablaBolsillos.jsp").forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+   
+    public void nuevo(HttpServletRequest request, HttpServletResponse response){
+         HttpSession session = request.getSession();
+         
+        int id_usuario = 0;
+        int id_categoria = 0;
+        Categoria cat = new Categoria();
+        Usuario usu = new Usuario();
+        
+         if (session.getAttribute("idUsuario") != null) {
+            id_usuario = (int) session.getAttribute("idUsuario");
+            id_categoria = (int) session.getAttribute("categoria_actual");
+
+            cat = daoCAT.sumarPresupuestoGasto(id_usuario, id_categoria);
+            usu = daoCAT.presupuestoDisponible(id_usuario);
+            long presupuesto_disponible = usu.getPresupuesto_total() - usu.getPresupuesto_disponible();
+            usu.setPresupuesto_disponible(presupuesto_disponible);
+
+            List<Bolsillo> datos = dao.listar(id_usuario, id_categoria);
+
+            request.setAttribute("Usuario", usu);
+            request.setAttribute("Categoria", cat);
+
+        } else {
+            request.setAttribute("Usuario", usu);
+            request.setAttribute("Categoria", cat);
+        }
+        try {
+            request.getRequestDispatcher("agregarBolsillos.jsp").forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void guardar(HttpServletRequest request, HttpServletResponse response, int id_usuario,int id_categoria){
+        HttpSession session = request.getSession();
+         
+        Categoria cat = new Categoria();
+        Usuario usu = new Usuario();
+        int success = 0;
+        
+        String nombres = request.getParameter("txtnombre");
+        String presu = request.getParameter("txtpresupuesto");
+        String gasto = request.getParameter("txtgasto");
+
+        try{
+            long presupuesto = Long.parseLong(presu);
+            long gastoReal = Long.parseLong(gasto);
+            
+            bol.setNombre_bolsillo(nombres);
+            bol.setPresupuesto_bolsillo(presupuesto);
+            bol.setGasto_bolsillo(gastoReal);
+            bol.setId_categoria(id_categoria);
+            bol.setId_usuario(id_usuario);
+
+            success = dao.agregar(bol);
+            request.setAttribute("successNew", true);
+        }catch(NumberFormatException e){
+            request.setAttribute("saveError", true);
+        }
+        
+        try {
+            request.getRequestDispatcher("ControladorBolsillos?accion=Listar").forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void editar(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        int id_usuario = 0;
+        int id_categoria = 0;
+        Categoria cat = new Categoria();
+        Usuario usu = new Usuario();
+        if (session.getAttribute("idUsuario") != null) {
+            id_usuario = (int) session.getAttribute("idUsuario");
+            id_categoria = (int) session.getAttribute("categoria_actual");
+
+            cat = daoCAT.sumarPresupuestoGasto(id_usuario, id_categoria);
+            usu = daoCAT.presupuestoDisponible(id_usuario);
+            long presupuesto_disponible = usu.getPresupuesto_total() - usu.getPresupuesto_disponible();
+            usu.setPresupuesto_disponible(presupuesto_disponible);
+
+            List<Bolsillo> datos = dao.listar(id_usuario, id_categoria);
+        }
+
+        String ide = request.getParameter("id");
+        Bolsillo bolsi = dao.ListarId(ide);
+
+        request.setAttribute("Bolsillo", bolsi);
+        request.setAttribute("Usuario", usu);
+        request.setAttribute("Categoria", cat);
+
+        try {
+            request.getRequestDispatcher("editarBolsillo.jsp").forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void actualizar(HttpServletRequest request, HttpServletResponse response,int id_usuario, int id_categoria){
+       
+        String nombres1 = request.getParameter("txtnombre");
+        String presu1 = request.getParameter("txtpresupuesto");
+        String gasto1 = request.getParameter("txtgasto");
+        String idBolsi = request.getParameter("id");
+        try{
+        
+            int idbol = Integer.parseInt(idBolsi);
+            long presupuesto1 = Long.parseLong(presu1);
+            long gastoReal1 = Long.parseLong(gasto1);
+
+            bol.setId_bolsillo(idbol);
+            bol.setNombre_bolsillo(nombres1);
+            bol.setPresupuesto_bolsillo(presupuesto1);
+            bol.setGasto_bolsillo(gastoReal1);
+            bol.setId_categoria(id_categoria);
+            bol.setId_usuario(id_usuario);
+
+            dao.actualizar(bol);
+            request.setAttribute("successUpdate", true);
+        }catch(NumberFormatException e){
+            request.setAttribute("saveError", true);
+        }
+        try {
+            request.getRequestDispatcher("ControladorBolsillos?accion=Listar").forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+       public void delete(HttpServletRequest request, HttpServletResponse response){
+           String id2 = request.getParameter("id");
+           int id3 = Integer.parseInt(id2);
+
+           dao.delete(id3);
+           request.setAttribute("successDelete", true);
+
+           try {
+               request.getRequestDispatcher("ControladorBolsillos?accion=Listar").forward(request, response);
+           } catch (ServletException | IOException ex) {
+               Logger.getLogger(ControladorCategorias.class.getName()).log(Level.SEVERE, null, ex);
+           }
+       }       
+      
+    }
+    
+    
+    
+

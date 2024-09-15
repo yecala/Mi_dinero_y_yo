@@ -16,11 +16,12 @@ public class Conexion {
     Connection con;
     String url="jdbc:oracle:thin:@localhost:1521:xe";
     String user="us_dinero";
-    String pass="123";
+    String pass="1234";
     
     public Connection conectar(){
     
         try {
+            
             Class.forName("oracle.jdbc.driver.OracleDriver");
             con=DriverManager.getConnection(url,user,pass);
         } catch (ClassNotFoundException | SQLException e) {

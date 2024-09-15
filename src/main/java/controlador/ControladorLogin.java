@@ -117,7 +117,7 @@ public class ControladorLogin extends HttpServlet {
                 
                 if (session.getAttribute("tipoUsuario").equals("administrador")) {
 
-                    response.sendRedirect("administrador.html");
+                    response.sendRedirect("administrador.jsp");
 
                 } else {
                     // invoca la página index.jsp

@@ -38,22 +38,22 @@
             if (tipoUsuario == null) {
 
         %>
-
-        <h3>Para ver los reportes debes iniciar sesión</h3>
-        <%        } else {
+        <div class="alert alert-danger text-center mt-3" role="alert">
+              Para ver los reportes debes iniciar sesión
+        </div>
+        <%    
+            } else {
         %> 
         <br>
     <center>    
         <h1 style="color: rgb(12, 213, 172)">Reporte de gastos</h1><br>
 
-        <form action="ControladorReportes" method="POST">
+<!--        <form action="ControladorReportes" method="POST">
 
             <input type="submit" name="accion" value="Listar" class="btn btn-outline-primary">
 
-            <a href="reportes2.jsp">
-                <input type="submit" name="accion" value="Ver detalles" class="btn btn-outline-primary">
-            </a>
-        </form> 
+            
+        </form> -->
         <br/>
         <center>
             <table class="table col-8" style="border-collapse: separate;">

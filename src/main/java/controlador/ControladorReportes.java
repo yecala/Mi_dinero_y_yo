@@ -8,12 +8,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import modelo.DAO.CategoriaDAO;
 import modelo.DAO.ReportesDAO;
 import modelo.POJO.Categoria;
 
@@ -64,7 +65,25 @@ public class ControladorReportes extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        int id_usuario = session.getAttribute("idUsuario") != null ? Integer.parseInt(session.getAttribute("idUsuario").toString()) : 0;
+         
+        String accion = request.getParameter("accion");
+        switch (accion) {
+            case "Listar":
+                if(id_usuario != 0){
+                    listar(request, response, id_usuario);
+                }else{
+                    try {
+                        request.getRequestDispatcher("Reportes.jsp").forward(request, response);
+                    } catch (IOException ex) {
+                        Logger.getLogger(ControladorReportes.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                
+                break;
+
+        }
     }
 
     /**
@@ -79,57 +98,7 @@ public class ControladorReportes extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
-        int id_usuario = (int) session.getAttribute("idUsuario");
-
-        String accion = request.getParameter("accion");
-        switch (accion) {
-            case "Listar":
-                List<Categoria> datos = new ArrayList<>();
-                datos = dao.listar(id_usuario);
-
-                long totalPresu = 0;
-                long totalGasto = 0;
-                for (Categoria presu : datos) {
-                    totalPresu = totalPresu + presu.getPresupuesto_categoria();
-                    totalGasto = totalGasto + presu.getGasto_categoria();
-                }
-
-                long presuTotal = dao.PresupuestoTotal(id_usuario);
-                long ahorroEsperado = presuTotal - totalPresu;
-                long ahorroReal = presuTotal - totalGasto;
-
-                if (ahorroEsperado < 0) {
-                    String NotificacionMala="Tu presupuesto esta bajo ceros";
-                    session.setAttribute("Notificacion",NotificacionMala);
-
-                }else{
-                    String NotificacionBuena="Esta planeando ahorros sigue asi";
-                    session.setAttribute("Notificacion",NotificacionBuena);
-                
-                }
-                if (ahorroReal < 0) {
-                    String NotificacionMala="Has gastado mas de lo que abarca tu presupuesto!";
-                    session.setAttribute("Notificacion",NotificacionMala);
-
-                }else{
-                    String NotificacionBuena="Estas ahorrando mucho sigue asi!";
-                    session.setAttribute("Notificacion",NotificacionBuena);
-                
-                }
-                
-
-                request.setAttribute("datos", datos);
-                request.setAttribute("totalPresu", totalPresu);
-                request.setAttribute("totalGasto", totalGasto);
-                request.setAttribute("presuTotal", presuTotal);
-                request.setAttribute("ahorroEsperado", ahorroEsperado);
-                request.setAttribute("ahorroReal", ahorroReal);
-
-                request.getRequestDispatcher("Reportes.jsp").forward(request, response);
-                break;
-
-        }
+        
     }
 
     /**
@@ -142,4 +111,65 @@ public class ControladorReportes extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public void listar(HttpServletRequest request, HttpServletResponse response, int id_usuario) throws ServletException {
+        HttpSession session = request.getSession();
+        List<Categoria> datos = new ArrayList<>();
+        
+        
+        datos = dao.listar(id_usuario);
+
+        long totalPresu = 0;
+        long totalGasto = 0;
+        for (Categoria presu : datos) {
+            totalPresu = totalPresu + presu.getPresupuesto_categoria();
+            totalGasto = totalGasto + presu.getGasto_categoria();
+        }
+
+        long presuTotal = dao.PresupuestoTotal(id_usuario);
+        long ahorroEsperado = presuTotal - totalPresu;
+        long ahorroReal = presuTotal - totalGasto;
+        try{
+            if (ahorroReal < 0) {
+                String NotificacionMala = "Has gastado mas de lo que abarca tu presupuesto!";
+                session.setAttribute("Notificacion", NotificacionMala);
+
+            }
+            if (ahorroReal > 0){
+                String NotificacionBuena = "Felicidades! Estas ahorrando mucho sigue asi!";
+                session.setAttribute("Notificacion", NotificacionBuena);
+
+            }
+            if(ahorroReal == 0 && ahorroEsperado < 0){
+                String NotificacionMala = "Alerta! Tu presupuesto esta bajo ceros";
+                session.setAttribute("Notificacion", NotificacionMala);
+
+            }
+            if(ahorroReal == 0 && ahorroEsperado > 0){
+                String NotificacionBuena = "Esta planeando buenos ahorros, sigue asi!";
+                session.setAttribute("Notificacion", NotificacionBuena);
+
+            }
+            if(ahorroEsperado == 0){
+                String NotificacionMala = "No tienes saldo en tus bolsillos, por favor crea bolsillos con presupuesto o gasto diferente de cero!";
+                session.setAttribute("Notificacion", NotificacionMala);
+
+            }
+        }catch(Exception e){
+            String NotificacionMala = "Ha ocurrido un error, por favor comunicate con soporte tecnico";
+            session.setAttribute("Notificacion", NotificacionMala);
+        }   
+
+        request.setAttribute("datos", datos);
+        request.setAttribute("totalPresu", totalPresu);
+        request.setAttribute("totalGasto", totalGasto);
+        request.setAttribute("presuTotal", presuTotal);
+        request.setAttribute("ahorroEsperado", ahorroEsperado);
+        request.setAttribute("ahorroReal", ahorroReal);
+        
+        try {
+            request.getRequestDispatcher("Reportes.jsp").forward(request, response);
+        } catch (IOException ex) {
+            Logger.getLogger(ControladorReportes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

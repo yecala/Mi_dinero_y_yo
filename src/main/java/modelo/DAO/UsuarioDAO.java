@@ -104,7 +104,7 @@ public class UsuarioDAO {
 
     }
 
-    public void delete(Usuario u) {
+    public int delete(Usuario u) {
 
         int r = 0;
         String sql = "update usuarios set estado=? where id_usuario=?";
@@ -128,7 +128,7 @@ public class UsuarioDAO {
             e.toString();
 
         }
-
+        return r; 
     }
 
     public int agregar(Usuario p) {
@@ -186,4 +186,35 @@ public class UsuarioDAO {
         }
         return u;
     }
+    
+    public int actualizarPerfil(Usuario u) {
+
+        int r = 0;
+        String sql = "update usuarios set nombre_usuario=?, password=?, presupuesto_total=? where id_usuario=?";
+        try {
+
+            con = c.conectar();
+            ps = con.prepareStatement(sql);
+
+            ps.setString(1, u.getNombre_usuario());
+            ps.setString(2, u.getPassword());
+            ps.setLong(3, u.getPresupuesto_total());
+            ps.setInt(4, u.getId_usuario());
+
+            r = ps.executeUpdate();
+            if (r == 1) {
+                r = 1;
+            } else {
+                r = 0;
+            }
+
+        } catch (SQLException e) {
+            e.toString();
+
+        }
+        return r;
+
+    }
+    
+
 }
